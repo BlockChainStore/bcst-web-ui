@@ -10,7 +10,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import NavTopBar from './header'
 import MenuList from './menu-list'
 
-const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
@@ -23,7 +22,7 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: drawerWidth,
+    width: theme.custom.drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,

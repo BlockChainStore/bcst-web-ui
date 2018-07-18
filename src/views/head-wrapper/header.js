@@ -9,8 +9,6 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
 
 
-const drawerWidth = 240;
-
 const styles = theme => ({
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -20,8 +18,8 @@ const styles = theme => ({
         }),
     },
     appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: theme.custom.drawerWidth,
+        width: `calc(100% - ${theme.custom.drawerWidth}px)`,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
