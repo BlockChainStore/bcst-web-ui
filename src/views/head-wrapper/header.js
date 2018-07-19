@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -38,8 +39,10 @@ const styles = theme => ({
 const NavTopBar = ({
     classes,
     handleDrawerOpen, 
-    isDrawerOpen
+    isDrawerOpen,
+    router
 }) => {
+    const path = router.location.pathname.replace('/', '> ')
     return (
         <AppBar
             position="absolute"
@@ -57,7 +60,7 @@ const NavTopBar = ({
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="title" color="inherit" noWrap>
-                    BCST
+                    BCST {path}
                 </Typography>
             </Toolbar>
         </AppBar>
@@ -70,5 +73,15 @@ NavTopBar.propTypes = {
     handleDrawerOpen: PropTypes.func.isRequired,
     isDrawerOpen: PropTypes.bool.isRequired
 }
+
+const mapStateToProps = state => {
+    debugger
+    return {
+        router : state.router
+    }
+}
   
-export default withStyles(styles, { withTheme: true })(NavTopBar)
+export default connect(
+    mapStateToProps,
+    null
+)(withStyles(styles, { withTheme: true })(NavTopBar))
