@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,13 +9,17 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-const CustomTableCell = withStyles(theme => ({
+const CustomTableCell = withStyles(theme => (
+  
+  {
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: theme.palette.primary.light,
     color: theme.palette.common.white,
+    textAlign: 'center',
   },
   body: {
     fontSize: 14,
+    textAlign: 'center',
   },
 }))(TableCell);
 
@@ -32,54 +37,75 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.default,
     },
   },
+  cell: {
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.common.white,
+  },
 });
 
 let id = 0;
-function createData(name, calories, fat, carbs, protein) {
+function createData(name, BCST10001, BCST50001, BCST300000, BCST500000, BCST800000, BCST1000000) {
   id += 1;
-  return { id, name, calories, fat, carbs, protein };
+  return { id, name, BCST10001, BCST50001, BCST300000, BCST500000, BCST800000, BCST1000000 };
 }
 
 const data = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('30 Days', '0.5% annualized', '1.5% annualized', '-', '-', '-', '-'),
+  createData('60 Days', '1.5% annualized', '2.5% annualized', '4% annualized', '8% annualized', '12% annualized', '16% annualized',),
+  createData('90 Days', '2.5% annualized', '4.5% annualized', '6% annualized', '10% annualized', '14% annualized', '18% annualized',),
 ];
 
-function CustomizedTable(props) {
+ const CustomizedTable = (props) => {
   const { classes } = props;
 
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <CustomTableCell>Dessert (100g serving)</CustomTableCell>
-            <CustomTableCell numeric>Calories</CustomTableCell>
-            <CustomTableCell numeric>Fat (g)</CustomTableCell>
-            <CustomTableCell numeric>Carbs (g)</CustomTableCell>
-            <CustomTableCell numeric>Protein (g)</CustomTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map(n => {
-            return (
-              <TableRow className={classes.row} key={n.id}>
-                <CustomTableCell component="th" scope="row">
-                  {n.name}
-                </CustomTableCell>
-                <CustomTableCell numeric>{n.calories}</CustomTableCell>
-                <CustomTableCell numeric>{n.fat}</CustomTableCell>
-                <CustomTableCell numeric>{n.carbs}</CustomTableCell>
-                <CustomTableCell numeric>{n.protein}</CustomTableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
+    <div>
+      <div>
+        <Typography variant="headline" gutterBottom>
+        <br/>
+        BCST locked up plan
+        <br/>
+        </Typography>
+        <Typography variant="subheading" gutterBottom>
+        Blockchain should be pragmatic - BCS Mall
+        In order to give back to the majority of BCST holders, we
+        made a special event for personal and community which
+        is locked up plan as follows:
+        </Typography>
+      </div>
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <CustomTableCell></CustomTableCell>
+              <CustomTableCell numeric>10001 BCST</CustomTableCell>
+              <CustomTableCell numeric>50001 BCST</CustomTableCell>
+              <CustomTableCell numeric>300000 BCST</CustomTableCell>
+              <CustomTableCell numeric>500000 BCST</CustomTableCell>
+              <CustomTableCell numeric>800000 BCST</CustomTableCell>
+              <CustomTableCell numeric>1000000 BCST</CustomTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map(n => {
+              return (
+                <TableRow className={classes.row} key={n.id}>
+                  <CustomTableCell className={classes.cell} component="th" scope="row">
+                    {n.name}
+                  </CustomTableCell>
+                  <CustomTableCell numeric>{n.BCST10001}</CustomTableCell>
+                  <CustomTableCell numeric>{n.BCST50001}</CustomTableCell>
+                  <CustomTableCell numeric>{n.BCST300000}</CustomTableCell>
+                  <CustomTableCell numeric>{n.BCST500000}</CustomTableCell>
+                  <CustomTableCell numeric>{n.BCST800000}</CustomTableCell>
+                  <CustomTableCell numeric>{n.BCST1000000}</CustomTableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    </div>
   );
 }
 

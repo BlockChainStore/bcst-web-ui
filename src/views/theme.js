@@ -4,7 +4,9 @@ import blue from '@material-ui/core/colors/blue'
 
 export default createMuiTheme({
     palette: {
-        primary: blue
+        primary: {
+            main: '#0088cc'
+        }
     },
     custom: {
         drawerWidth: 240

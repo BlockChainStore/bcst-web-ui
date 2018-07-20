@@ -8,7 +8,8 @@ import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
-
+import Button from '@material-ui/core/Button'
+import SimpleModalWrapped from './unlock-walltet' 
 
 const styles = theme => ({
     appBar: {
@@ -30,6 +31,9 @@ const styles = theme => ({
         marginLeft: 12,
         marginRight: 36,
     },
+    flex: {
+        flexGrow: 1,
+    },
     hide: {
         display: 'none',
     },
@@ -44,7 +48,7 @@ const NavTopBar = ({
 }) => {
     const path = router.location.pathname.replace('/', '> ')
     return (
-        <AppBar
+        <AppBar 
             position="absolute"
             className={classNames(
                 classes.appBar, 
@@ -59,9 +63,10 @@ const NavTopBar = ({
                         isDrawerOpen && classes.hide)}>
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="title" color="inherit" noWrap>
+                <Typography color="inherit" className={classes.flex}>
                     BCST {path}
                 </Typography>
+                <SimpleModalWrapped/>
             </Toolbar>
         </AppBar>
     )
