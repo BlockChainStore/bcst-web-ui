@@ -10,4 +10,5 @@ export const user = {
 
 export const saga = {
     UNLOCK_WALLET: 'saga/UNLOCK_WALLET',
+    LOGOUT_WALLET: 'saga/LOGOUT_WALLET',
 }

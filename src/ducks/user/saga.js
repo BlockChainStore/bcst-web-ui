@@ -33,6 +33,13 @@ function *unlockWallet() {
     }
 }
 
+function *unlockWallet() {
+    while(true) {
+        yield take(saga.LOGOUT_WALLET)
+        localStorage.clear()
+    }
+}
+
 export default function* userSaga() {
     yield [
         unlockWallet(),
