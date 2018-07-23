@@ -7,17 +7,17 @@ import { abi, contractAddress } from './config'
 const contract = new eth.Contract(abi, contractAddress)
 const cm = contract.methods
 
-export const getBalance = (address) => cm.balanceOf(address).call()
+const getBalance = (address) => cm.balanceOf(address).call()
 
-export const totalSupply = () => cm.totalSupply().call()
+const totalSupply = () => cm.totalSupply().call()
 
-export const symbol = () => cm.symbol().call()
+const symbol = () => cm.symbol().call()
 
-export const name = () => cm.name().call()
+const name = () => cm.name().call()
 
-export const allowance = (address1, address2) => cm.allowance(address1, address2).call()
+const allowance = (address1, address2) => cm.allowance(address1, address2).call()
 
-export const transfer = async (
+const transfer = async (
     { fromAddress, privateKey }, 
     { toAddress, amount },
     { gasPrice, gasLimit }
@@ -29,4 +29,9 @@ export const transfer = async (
         { gasPrice, gasLimit }
     )
     return res
+}
+
+
+export default {
+    getBalance,
 }
