@@ -1,7 +1,7 @@
 import { saga } from '../types'
 
 
-let actions
+let actions = {}
 
 actions.onUnlockWallet = (address, privateKey) => ({
     type: saga.UNLOCK_WALLET,
