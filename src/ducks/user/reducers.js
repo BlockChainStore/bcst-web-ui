@@ -13,7 +13,7 @@ import { user } from '../types'
 }
 */
 
-const infoReducer = (state = { address: null, privateKey: null}, action) => {
+export const infoReducer = (state = { address: null, privateKey: null}, action) => {
     switch(action.type) {
         case user.UPDATE_INFO:
             return { 
@@ -25,7 +25,7 @@ const infoReducer = (state = { address: null, privateKey: null}, action) => {
     }
 }
 
-const ethReducer = (state = null, action) => {
+export const ethReducer = (state = null, action) => {
     switch(action.type) {
         case user.UPDATE_ETH:
             return action.payload
@@ -34,7 +34,7 @@ const ethReducer = (state = null, action) => {
     }
 }
 
-const bcstReducer = (state = null, action) => {
+export const bcstReducer = (state = null, action) => {
     switch(action.type) {
         case user.UPDATE_BCST:
             return action.payload
@@ -48,5 +48,5 @@ const reducers = combineReducers({
     eth: ethReducer,
     bcst: bcstReducer
 })
-
+ 
 export default reducers

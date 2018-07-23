@@ -9,6 +9,5 @@ export const user = {
 }
 
 export const saga = {
-    GET_BCST: 'saga/get-bcst',
-    GET_ETH: 'saga/get-eth',
+    UNLOCK_WALLET: 'saga/UNLOCK_WALLET',
 }
