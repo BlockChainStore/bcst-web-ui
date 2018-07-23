@@ -50,9 +50,9 @@ function createData(name, BCST10001, BCST50001, BCST300000, BCST500000, BCST8000
 }
 
 const data = [
-  createData('30 Days', '0.5% annualized', '1.5% annualized', '-', '-', '-', '-'),
-  createData('60 Days', '1.5% annualized', '2.5% annualized', '4% annualized', '8% annualized', '12% annualized', '16% annualized',),
-  createData('90 Days', '2.5% annualized', '4.5% annualized', '6% annualized', '10% annualized', '14% annualized', '18% annualized',),
+  createData('30 Days', '0.5% annualized return', '1.5% annualized return', '-', '-', '-', '-'),
+  createData('60 Days', '1.5% annualized return', '2.5% annualized return', '4% annualized return', '8% annualized return', '12% annualized return', '16% annualized return',),
+  createData('90 Days', '2.5% annualized return', '4.5% annualized return', '6% annualized return', '10% annualized return', '14% annualized return', '18% annualized return',),
 ];
 
  const CustomizedTable = (props) => {
@@ -78,12 +78,12 @@ const data = [
           <TableHead>
             <TableRow>
               <CustomTableCell></CustomTableCell>
-              <CustomTableCell numeric>10001 BCST</CustomTableCell>
-              <CustomTableCell numeric>50001 BCST</CustomTableCell>
-              <CustomTableCell numeric>300000 BCST</CustomTableCell>
-              <CustomTableCell numeric>500000 BCST</CustomTableCell>
-              <CustomTableCell numeric>800000 BCST</CustomTableCell>
-              <CustomTableCell numeric>1000000 BCST</CustomTableCell>
+              <CustomTableCell numeric>10,001 BCST</CustomTableCell>
+              <CustomTableCell numeric>50,001 BCST</CustomTableCell>
+              <CustomTableCell numeric>300,000 BCST</CustomTableCell>
+              <CustomTableCell numeric>500,000 BCST</CustomTableCell>
+              <CustomTableCell numeric>800,000 BCST</CustomTableCell>
+              <CustomTableCell numeric>1,000,000 BCST</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>

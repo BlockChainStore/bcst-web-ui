@@ -67,9 +67,9 @@ class SimpleModal extends React.Component {
               Please Enter Your Private Key
             </Typography>
             <TextField
-              id="with-placeholder"
-              label="With placeholder"
-              placeholder="Placeholder"
+              id="pk"
+              label="Your private key"
+              placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
               margin="normal"
               fullWidth
             />
