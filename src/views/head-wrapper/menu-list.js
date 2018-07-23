@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 import Home from '@material-ui/icons/Home'
 import Dashboard from '@material-ui/icons/Dashboard'
-import Money from '@material-ui/icons/AssignmentReturned'
+import Investment from '@material-ui/icons/BusinessCenter'
 
 
 const styles = theme => ({
@@ -34,7 +34,7 @@ const MenuList = ({classes}) => {
             </Link>
             <Link to='/investment' className={classes.link}>
                 <ListItem button>
-                    <ListItemIcon><Money /></ListItemIcon>
+                    <ListItemIcon><Investment /></ListItemIcon>
                     <ListItemText primary="Investment" />
                 </ListItem>
             </Link>
