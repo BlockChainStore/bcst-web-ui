@@ -79,12 +79,9 @@ NavTopBar.propTypes = {
     isDrawerOpen: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = state => {
-    debugger
-    return {
-        router : state.router
-    }
-}
+const mapStateToProps = state => ({
+    router : state.router
+})
   
 export default connect(
     mapStateToProps,

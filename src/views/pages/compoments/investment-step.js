@@ -7,18 +7,19 @@ import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
+
 const styles = theme => ({
-  root: {
-    width: '90%',
-  },
-  backButton: {
-    marginRight: theme.spacing.unit,
-  },
-  instructions: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
-  },
-});
+    root: {
+        width: '90%',
+    },
+    backButton: {
+        marginRight: theme.spacing.unit,
+    },
+    instructions: {
+        marginTop: theme.spacing.unit,
+        marginBottom: theme.spacing.unit,
+    },
+})
 
 function getSteps() {
   return ['UNLOCK YOUR WALLET', 'CHOOSE BCST PLAN', 'CONFIRM', 'WAIT RETURN'];
@@ -51,12 +52,12 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
     });
   };
 
-  handleBack = () => {
-    const { activeStep } = this.state
-    this.setState({
-      activeStep: activeStep - 1,
-    });
-  };
+    handleBack = () => {
+        const { activeStep } = this.state
+        this.setState({
+        activeStep: activeStep - 1,
+        });
+    };
 
   handleReset = () => {
     this.setState({

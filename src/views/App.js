@@ -9,15 +9,14 @@ import webTheme from './theme'
 import HeadWrapper from './head-wrapper'
 import store, { history } from '../store'
 import { PageTransitionSlideIn } from './pages/compoments/page-transition'
-import  WithStyles  from '../views/pages/investment.js'
+import Investment from '../views/pages/investment.js'
+import Home from '../views/pages/home'
 
-const Home = () => <p>home</p>
 const Dashboard = () => <p>dashboard</p>
-const Investment = () => <WithStyles />
 
 const HomePage = () => <PageTransitionSlideIn><Home /></PageTransitionSlideIn>
 const DashboardPage = () => <PageTransitionSlideIn><Dashboard /></PageTransitionSlideIn>
-const InvestmentPage = () => <PageTransitionSlideIn><WithStyles /></PageTransitionSlideIn>
+const InvestmentPage = () => <PageTransitionSlideIn><Investment /></PageTransitionSlideIn>
 
 const App = () => {
 	return (
