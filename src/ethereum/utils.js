@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 import eth from './ethereum-node'
-
+import EthereumTx from 'ethereumjs-tx'
 
 export const sendRawTransaction = async ( 
     { fromAddress, privateKey }, 
@@ -21,6 +21,6 @@ export const sendRawTransaction = async (
     tx.sign(privateKey)
     const receipt = await eth
         .sendSignedTransaction('0x' + tx.serialize().toString('hex'))
-        .on('receipt', res)
+        .on('receipt', (res)=>res)
     return receipt
 }

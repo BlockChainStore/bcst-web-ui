@@ -29,7 +29,7 @@ const CustomTableCell = withStyles(theme => (
 
 const styles = theme => ({
   root: {
-    width: '70%',
+    width: '90%',
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto',
   },
@@ -57,7 +57,7 @@ function createData(name, BCST10001, BCST50001, BCST300000, BCST500000, BCST8000
 const data = [
   createData('30 Days', '0.5% annualized return', '1.5% annualized return', '-', '-', '-', '-'),
   createData('60 Days', '1.5% annualized return', '2.5% annualized return', '4% annualized return', '8% annualized return', '12% annualized return', '16% annualized return',),
-  createData('90 Days', '2.5% annualized return', '4.5% annualized return', '6% annualized return', '10% annualized return', '14% annualized return', '18% annualized',),
+  createData('90 Days', '2.5% annualized return', '4.5% annualized return', '6% annualized return', '10% annualized return', '14% annualized return', '18% annualized return',),
 ];
 
  const CustomizedTable = (props) => {

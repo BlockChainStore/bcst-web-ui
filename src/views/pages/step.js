@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import Stepper from '@material-ui/core/Stepper'
+import Step from '@material-ui/core/Step'
+import StepLabel from '@material-ui/core/StepLabel'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   root: {
@@ -21,21 +21,21 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['UNLOCK YOUR WALLET', 'CHOOSE BSCT PLAN', 'CONFIRM', 'WAIT RETURN'];
+  return ['UNLOCK YOUR WALLET', 'CHOOSE BCST PLAN', 'CONFIRM', 'WAIT RETURN'];
 }
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return 'Select campaign settings...';
+    //  return 'UNLOCK YOUR WALLET'
     case 1:
-      return 'What is an ad group anyways?';
+    //  return 'CHOOSE BCST PLAN'
     case 2:
-      return 'This is the bit I really care about!';
+    //  return 'CONFIRM'
     case 3:
-      return 'This is the bit I really care about!';
+    //  return 'WAIT RETURN'
     default:
-      return 'Uknown stepIndex';
+     // return 'Unknown stepIndex'
   }
 }
 
@@ -45,14 +45,14 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
   };
 
   handleNext = () => {
-    const { activeStep } = this.state;
+    const { activeStep } = this.state
     this.setState({
       activeStep: activeStep + 1,
     });
   };
 
   handleBack = () => {
-    const { activeStep } = this.state;
+    const { activeStep } = this.state
     this.setState({
       activeStep: activeStep - 1,
     });
@@ -65,9 +65,10 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+
+    const { classes } = this.props
     const steps = getSteps();
-    const { activeStep } = this.state;
+    const { activeStep } = this.state
 
     return (
       <div className={classes.root}>
@@ -84,7 +85,7 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
           {this.state.activeStep === steps.length ? (
             <div>
               <Typography className={classes.instructions}>
-                All steps completed - you&quot;re finished
+                Thank you for investment us.
               </Typography>
               <Button onClick={this.handleReset}>Reset</Button>
             </div>
@@ -115,4 +116,4 @@ HorizontalLabelPositionBelowStepper.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(HorizontalLabelPositionBelowStepper);
+export default withStyles(styles)(HorizontalLabelPositionBelowStepper)
