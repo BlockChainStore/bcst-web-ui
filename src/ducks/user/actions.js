@@ -3,9 +3,9 @@ import { saga } from '../types'
 
 let actions = {}
 
-actions.onUnlockWallet = (address, privateKey) => ({
+actions.onUnlockWallet = (privateKey) => ({
     type: saga.UNLOCK_WALLET,
-    payload: { address, privateKey }
+    payload: privateKey
 })
 
 export default actions

@@ -2,21 +2,12 @@ import { saga } from '../../types'
 import actions from '../actions'
 
 it('test update info', () => {
-
     const expectAction = {
         type: saga.UNLOCK_WALLET,
-        payload: {
-            address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-            privateKey: '0000000000000000000000000000000000000000000000000000000000000001',
-        }
+        payload: '0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709'
     }
 
-    expect(
-        actions.onUnlockWallet(
-        '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-        '0000000000000000000000000000000000000000000000000000000000000001'
-        )
-    ).toEqual(expectAction)
-
+    expect(actions.onUnlockWallet('0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709'))
+    .toEqual(expectAction)
 })
 

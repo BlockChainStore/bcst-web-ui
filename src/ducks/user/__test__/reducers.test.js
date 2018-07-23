@@ -8,14 +8,14 @@ it('test update info', () => {
     const action = {
         type: user.UPDATE_INFO,
         payload: {
-            address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-            privateKey: '0000000000000000000000000000000000000000000000000000000000000001',
+            address: '0xb8CE9ab6943e0eCED004cDe8e3bBed6568B2Fa01',
+            privateKey: '0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709',
         }
     }
 
     const expectState = {
-        address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-        privateKey: '0000000000000000000000000000000000000000000000000000000000000001',
+        address: '0xb8CE9ab6943e0eCED004cDe8e3bBed6568B2Fa01',
+        privateKey: '0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709',
     }
 
     expect(infoReducer(previousState, action)).toEqual(expectState)
