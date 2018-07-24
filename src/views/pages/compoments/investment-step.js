@@ -29,12 +29,16 @@ function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
     //  return 'UNLOCK YOUR WALLET'
+      break
     case 1:
     //  return 'CHOOSE BCST PLAN'
+      break
     case 2:
     //  return 'CONFIRM'
+      break
     case 3:
     //  return 'WAIT RETURN'
+      break
     default:
      // return 'Unknown stepIndex'
   }

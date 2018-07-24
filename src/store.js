@@ -33,9 +33,6 @@ const store = createStore(
     applyMiddleware(...middleware),
 )
 
-
-console.log(rootSaga)
-
 sagaMiddleware.run(rootSaga)
 
 export default store

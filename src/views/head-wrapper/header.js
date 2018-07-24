@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
@@ -8,7 +7,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import SimpleModalWrapped from './unlock-walltet' 
 
 

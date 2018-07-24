@@ -1,13 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
-import { inherits } from 'util'
-import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import userActions from '../../ducks/user/actions'
@@ -36,7 +33,7 @@ const styles = theme => ({
 class SimpleModal extends React.Component {
     state = {
         open: false,
-        inputErr : false
+        isInputErr : false
     }
 
     handleOpen = () => this.setState({ ...this.state, open: true })
@@ -48,10 +45,10 @@ class SimpleModal extends React.Component {
         const validator = /^0x[a-f0-9]{64}$/g
         if (validator.test(inputPk)) {
             this.props.userActions.onUnlockWallet(inputPk)
-            this.setState({ ...this.state, inputErr: false, open: false})
+            this.setState({ ...this.state, isInputErr: false, open: false})
         } 
         else {
-            this.setState({ ...this.state, inputErr: true })
+            this.setState({ ...this.state, isInputErr: true })
         }
     }
 
@@ -75,10 +72,10 @@ class SimpleModal extends React.Component {
                             Please Enter Your Private Key
                         </Typography>
                         <TextField
-                            error={this.state.inputErr}
+                            error={this.state.isInputErr}
                             label="Your private key"
                             placeholder="etc. 0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709"
-                            helperText={this.state.inputErr ? 'Please enter a correct your private key.' : ''}
+                            helperText={this.state.isInputErr ? 'Please enter a correct your private key.' : ''}
                             margin="normal"
                             inputRef={ref => this.inputPk = ref}
                             fullWidth/>
