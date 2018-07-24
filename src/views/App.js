@@ -8,13 +8,16 @@ import webTheme from './theme'
 import HeadWrapper from './head-wrapper'
 import store, { history } from '../store'
 import { pageTransition } from './pages/compoments/page-transition'
+
 import Investment from '../views/pages/investment.js'
 import Home from '../views/pages/home'
+import PageNotFound from '../views/pages/page-not-found'
 
 const Dashboard = () => <p>dashboard</p>
 
 
 const App = () => {
+	const isUnlockWallet = !!store.getState().duck.user.info.address
 	return (
 		<MuiThemeProvider theme={webTheme}>
 			<Provider store={store}>
@@ -23,15 +26,18 @@ const App = () => {
 						<HeadWrapper>
 							<Switch>
 								<Route 
-									exact 
+									exact
 									path='/' 
 									component={pageTransition(Home)} />
-								<Route 
-									path='/dashboard' 
-									component={pageTransition(Dashboard)} />
-								<Route 
-									path='/investment' 
-									component={pageTransition(Investment)} />
+								{isUnlockWallet &&
+									<Route 
+										path='/dashboard' 
+										component={pageTransition(Dashboard)} />}
+								{isUnlockWallet &&
+									<Route 
+										path='/investment' 
+										component={pageTransition(Investment)} />}
+								<Route component={PageNotFound} />
 							</Switch>
 						</HeadWrapper>
 					</ConnectedRouter>
