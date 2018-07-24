@@ -9,11 +9,10 @@ import HeadWrapper from './head-wrapper'
 import store, { history } from '../store'
 import { pageTransition } from './pages/compoments/page-transition'
 
-import Investment from '../views/pages/investment.js'
 import Home from '../views/pages/home'
+import Dashboard from '../views/pages/dashboard'
+import Investment from '../views/pages/investment.js'
 import PageNotFound from '../views/pages/page-not-found'
-
-const Dashboard = () => <p>dashboard</p>
 
 
 const App = () => {
