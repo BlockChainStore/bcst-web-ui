@@ -48,7 +48,7 @@ class SimpleModal extends React.Component {
         const validator = /^0x[a-f0-9]{64}$/g
         if (validator.test(inputPk)) {
             this.props.userActions.onUnlockWallet(inputPk)
-            this.setState({ ...this.state, inputErr: false })
+            this.setState({ ...this.state, inputErr: false, open: false})
         } 
         else {
             this.setState({ ...this.state, inputErr: true })
@@ -56,14 +56,16 @@ class SimpleModal extends React.Component {
     }
 
     render() {
-        const { classes } = this.props
+        const { classes, user } = this.props
         return (
             <div>
                 <Button 
                     className={classes.headerButton}  
                     onClick={this.handleOpen}  
                     color="inherit" >
-                    UNLOCK WALLET
+                    {!!user.info.address
+                        ? "LOGOUT WALLET"
+                        :  "UNLOCK WALLET"}
                 </Button>
                 <Modal
                     open={this.state.open}
@@ -99,11 +101,15 @@ class SimpleModal extends React.Component {
 }
 
 
+const mapStateToProps = state => ({
+  user: state.duck.user
+})
+
 const mapDispatchToProps = dispatch => ({
   userActions: bindActionCreators(userActions, dispatch)
 })
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(withStyles(styles)(SimpleModal))
