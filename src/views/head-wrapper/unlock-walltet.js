@@ -45,21 +45,18 @@ class SimpleModal extends React.Component {
 
     handleUnlockWallet = () => {
         const inputPk = this.inputPk.value
-
-        // check inputPk
-
-        // if true
-        userActions.onUnlockWallet(inputPk)
-
-
-        // else false
-        // alert
-
-
+        const validator = /^0x[a-f0-9]{64}$/g
+        if (validator.test(inputPk)) {
+            this.props.userActions.onUnlockWallet(inputPk)
+            this.setState({ ...this.state, inputErr: false })
+        } 
+        else {
+            this.setState({ ...this.state, inputErr: true })
+        }
     }
 
     render() {
-        const { classes, userActions } = this.props
+        const { classes } = this.props
         return (
             <div>
                 <Button 
@@ -76,8 +73,10 @@ class SimpleModal extends React.Component {
                             Please Enter Your Private Key
                         </Typography>
                         <TextField
+                            error={this.state.inputErr}
                             label="Your private key"
                             placeholder="etc. 0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709"
+                            helperText={this.state.inputErr ? 'Please enter a correct your private key.' : ''}
                             margin="normal"
                             inputRef={ref => this.inputPk = ref}
                             fullWidth/>
