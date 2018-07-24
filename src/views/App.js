@@ -7,15 +7,12 @@ import { ConnectedRouter } from "react-router-redux"
 import webTheme from './theme'
 import HeadWrapper from './head-wrapper'
 import store, { history } from '../store'
-import { PageTransitionSlideIn } from './pages/compoments/page-transition'
+import { pageTransition } from './pages/compoments/page-transition'
 import Investment from '../views/pages/investment.js'
 import Home from '../views/pages/home'
 
 const Dashboard = () => <p>dashboard</p>
 
-const HomePage = () => <PageTransitionSlideIn><Home /></PageTransitionSlideIn>
-const DashboardPage = () => <PageTransitionSlideIn><Dashboard /></PageTransitionSlideIn>
-const InvestmentPage = () => <PageTransitionSlideIn><Investment /></PageTransitionSlideIn>
 
 const App = () => {
 	return (
@@ -25,9 +22,16 @@ const App = () => {
 					<ConnectedRouter history={history}>
 						<HeadWrapper>
 							<Switch>
-								<Route exact path='/' component={HomePage} />
-								<Route exact path='/dashboard' component={DashboardPage} />
-								<Route exact path='/investment' component={InvestmentPage} />
+								<Route 
+									exact 
+									path='/' 
+									component={pageTransition(Home)} />
+								<Route 
+									path='/dashboard' 
+									component={pageTransition(Dashboard)} />
+								<Route 
+									path='/investment' 
+									component={pageTransition(Investment)} />
 							</Switch>
 						</HeadWrapper>
 					</ConnectedRouter>

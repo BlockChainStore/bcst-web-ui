@@ -2,12 +2,14 @@ import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 
-export const PageTransitionSlideIn = ({children}) => {
-	return (
-      <ReactCSSTransitionGroup
+export const pageTransition = (Page) => () => (
+	<ReactCSSTransitionGroup
 		transitionAppear={true}
-        transitionName={'PageTransitionSlideIn'}>
-		{children}
-	   </ReactCSSTransitionGroup>
-	)
-}
+		transitionAppearTimeout={150}
+		transitionEnterTimeout={0}
+		transitionLeaveTimeout={0}
+		transitionName="PageTransitionSlideIn">
+		<Page />
+	</ReactCSSTransitionGroup>
+)
+	
