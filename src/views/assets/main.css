@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.PageTransitionSlideIn-appear {
+    transform: translateX(30px);
+    opacity: 0;
+}
+
+.PageTransitionSlideIn-appear.PageTransitionSlideIn-appear-active {
+    opacity: 1;
+    transform: translateX(0);;
+    transition: all 0.15s ease-out;
+}
