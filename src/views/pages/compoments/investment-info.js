@@ -34,20 +34,18 @@ const styles = theme => ({
     },
 })
 
-
 const createData = (name, BCST10001, BCST50001, BCST300000, BCST500000, BCST800000, BCST1000000) => {
-  return { name, BCST10001, BCST50001, BCST300000, BCST500000, BCST800000, BCST1000000 }
+    return { name, BCST10001, BCST50001, BCST300000, BCST500000, BCST800000, BCST1000000 }
 }
 
 const data = [
-  createData('30 Days', '0.5% annualized return', '1.5% annualized return', '-', '-', '-', '-'),
-  createData('60 Days', '1.5% annualized return', '2.5% annualized return', '4% annualized return', '8% annualized return', '12% annualized return', '16% annualized return',),
-  createData('90 Days', '2.5% annualized return', '4.5% annualized return', '6% annualized return', '10% annualized return', '14% annualized return', '18% annualized return',),
+    createData('30 Days', '0.5% annualized return', '1.5% annualized return', '-', '-', '-', '-'),
+    createData('60 Days', '1.5% annualized return', '2.5% annualized return', '4% annualized return', '8% annualized return', '12% annualized return', '16% annualized return',),
+    createData('90 Days', '2.5% annualized return', '4.5% annualized return', '6% annualized return', '10% annualized return', '14% annualized return', '18% annualized return',),
 ]
 
  const CustomizedTable = (props) => {
     const { classes } = props
-
     return (
         <Grid container>
             <Grid item xs={12}>
@@ -77,17 +75,17 @@ const data = [
                     <TableBody>
                         {data.map((item, index) => {
                             return (
-                            <TableRow className={classes.row} key={index}>
-                                <CustomTableCell className={classes.cell} component="th" scope="row">
-                                {item.name}
-                                </CustomTableCell>
-                                <CustomTableCell numeric>{item.BCST10001}</CustomTableCell>
-                                <CustomTableCell numeric>{item.BCST50001}</CustomTableCell>
-                                <CustomTableCell numeric>{item.BCST300000}</CustomTableCell>
-                                <CustomTableCell numeric>{item.BCST500000}</CustomTableCell>
-                                <CustomTableCell numeric>{item.BCST800000}</CustomTableCell>
-                                <CustomTableCell numeric>{item.BCST1000000}</CustomTableCell>
-                            </TableRow>
+                                <TableRow className={classes.row} key={index}>
+                                    <CustomTableCell className={classes.cell} component="th" scope="row">
+                                        {item.name}
+                                    </CustomTableCell>
+                                    <CustomTableCell numeric>{item.BCST10001}</CustomTableCell>
+                                    <CustomTableCell numeric>{item.BCST50001}</CustomTableCell>
+                                    <CustomTableCell numeric>{item.BCST300000}</CustomTableCell>
+                                    <CustomTableCell numeric>{item.BCST500000}</CustomTableCell>
+                                    <CustomTableCell numeric>{item.BCST800000}</CustomTableCell>
+                                    <CustomTableCell numeric>{item.BCST1000000}</CustomTableCell>
+                                </TableRow>
                             )
                         })}
                     </TableBody>
