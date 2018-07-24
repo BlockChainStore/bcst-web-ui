@@ -5,7 +5,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 export const PageTransitionSlideIn = ({children}) => {
 	return (
       <ReactCSSTransitionGroup
-        transitionAppear={true}
+		transitionAppear={true}
         transitionName={'PageTransitionSlideIn'}>
 		{children}
 	   </ReactCSSTransitionGroup>

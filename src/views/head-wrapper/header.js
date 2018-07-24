@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
@@ -8,8 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import SimpleModalWrapped from './unlock-walltet' 
+
 
 const styles = theme => ({
     appBar: {
@@ -41,6 +40,7 @@ const styles = theme => ({
 
 
 const NavTopBar = ({
+    userActions,
     classes,
     handleDrawerOpen, 
     isDrawerOpen,
@@ -72,20 +72,11 @@ const NavTopBar = ({
     )
 }
 
-NavTopBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
-    handleDrawerOpen: PropTypes.func.isRequired,
-    isDrawerOpen: PropTypes.bool.isRequired
-}
 
-const mapStateToProps = state => {
-    debugger
-    return {
-        router : state.router
-    }
-}
-  
+const mapStateToProps = state => ({
+    router: state.router
+})
+
 export default connect(
     mapStateToProps,
     null

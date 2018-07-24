@@ -7,9 +7,7 @@ import { saga, user } from '../types'
 
 function *unlockWallet() {
     while(true) {
-        const { payload: privateKey } = yield take([
-            saga.UNLOCK_WALLET
-        ])
+        const { payload: privateKey } = yield take(saga.UNLOCK_WALLET)
 
         const account = eth.accounts.privateKeyToAccount(privateKey)
         const bcstBalance = yield call(bcst.getBalance, account.address)
@@ -33,8 +31,16 @@ function *unlockWallet() {
     }
 }
 
+function *logoutWallet() {
+    while(true) {
+        yield take(saga.LOGOUT_WALLET)
+        localStorage.clear()
+    }
+}
+
 export default function* userSaga() {
     yield [
         unlockWallet(),
+        logoutWallet(),
     ]
 }

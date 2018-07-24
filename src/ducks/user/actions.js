@@ -8,4 +8,8 @@ actions.onUnlockWallet = (privateKey) => ({
     payload: privateKey
 })
 
+actions.onLogoutWallet = () => ({
+    type: saga.LOGOUT_WALLET
+})
+
 export default actions
