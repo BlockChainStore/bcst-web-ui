@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import SimpleModalWrapped from './unlock-walltet' 
 
+
 const styles = theme => ({
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -41,6 +42,7 @@ const styles = theme => ({
 
 
 const NavTopBar = ({
+    userActions,
     classes,
     handleDrawerOpen, 
     isDrawerOpen,
@@ -72,17 +74,11 @@ const NavTopBar = ({
     )
 }
 
-NavTopBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
-    handleDrawerOpen: PropTypes.func.isRequired,
-    isDrawerOpen: PropTypes.bool.isRequired
-}
 
 const mapStateToProps = state => ({
-    router : state.router
+    router: state.router
 })
-  
+
 export default connect(
     mapStateToProps,
     null

@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
@@ -7,91 +9,102 @@ import Button from '@material-ui/core/Button'
 import { inherits } from 'util'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-import Grid from '@material-ui/core/Grid';
-
-
-function getModalStyle() {
-  const top = 50 ;
-  const left = 50 ;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
+import Grid from '@material-ui/core/Grid'
+import userActions from '../../ducks/user/actions'
 
 
 const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: theme.spacing.unit * 80,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-  },
-  modalButton: {
-    marginTop: 15
-  },
-  headerButton: {
-    marginRight: 10
-  }
-});
+    paper: {
+        position: 'absolute',
+        width: theme.spacing.unit * 80,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+    },
+    modalButton: {
+        marginTop: 15
+    },
+    headerButton: {
+        marginRight: 10
+    }
+})
+
 
 class SimpleModal extends React.Component {
-  state = {
-    open: false,
-  };
+    state = {
+        open: false,
+        inputErr : false
+    }
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+    handleOpen = () => this.setState({ ...this.state, open: true })
 
-  render() {
-    const { classes } = this.props;
+    handleClose = () => this.setState({ ...this.state, open: false })
 
-    return (
-      <div>
-        <Button className={classes.headerButton}  onClick={this.handleOpen}  color="inherit" >UNLOCK WALLET</Button>
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.open}
-          onClose={this.handleClose}
-        > 
-          <div style={getModalStyle()} className={classes.paper}>
-            <Typography variant="title" id="modal-title">
-              Please Enter Your Private Key
-            </Typography>
-            <TextField
-              id="pk"
-              label="Your private key"
-              placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-              margin="normal"
-              fullWidth
-            />
-            <Grid container justify='flex-end'>
-              <Grid item className={classes.modalButton}>
-                <Button variant="contained" color="primary" className={classes.button} >
-                  Enter
-               </Button>
-               </Grid>
-              </Grid>
-          </div>
-        </Modal>
-      </div>
-    );
-  }
+    handleUnlockWallet = () => {
+        const inputPk = this.inputPk.value
+
+        // check inputPk
+
+        // if true
+        userActions.onUnlockWallet(inputPk)
+
+
+        // else false
+        // alert
+
+
+    }
+
+    render() {
+        const { classes, userActions } = this.props
+        return (
+            <div>
+                <Button 
+                    className={classes.headerButton}  
+                    onClick={this.handleOpen}  
+                    color="inherit" >
+                    UNLOCK WALLET
+                </Button>
+                <Modal
+                    open={this.state.open}
+                    onClose={this.handleClose}>
+                    <div className={classes.paper}>
+                        <Typography variant="title" id="modal-title">
+                            Please Enter Your Private Key
+                        </Typography>
+                        <TextField
+                            label="Your private key"
+                            placeholder="etc. 0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709"
+                            margin="normal"
+                            inputRef={ref => this.inputPk = ref}
+                            fullWidth/>
+                        <Grid container justify='flex-end'>
+                            <Grid item className={classes.modalButton}>
+                                <Button
+                                    onClick={this.handleUnlockWallet}
+                                    className={classes.button}
+                                    variant="contained" 
+                                    color="primary">
+                                    Enter
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </div>
+                </Modal>
+            </div>
+        )
+    }
 }
 
-SimpleModal.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-// We need an intermediary variable for handling the recursive nesting.
-const SimpleModalWrapped = withStyles(styles)(SimpleModal);
+const mapDispatchToProps = dispatch => ({
+  userActions: bindActionCreators(userActions, dispatch)
+})
 
-export default SimpleModalWrapped;
+export default connect(
+    null,
+    mapDispatchToProps
+)(withStyles(styles)(SimpleModal))
