@@ -1,8 +1,9 @@
 // import { select, take, put, call, fork, cancel, apply } from 'redux-saga/effects'
 // import { delay } from 'redux-saga'
-import { take, put, call } from 'redux-saga/effects'
+import { take, put, call, select} from 'redux-saga/effects'
 import eth, { bcst } from '../../ethereum'
 import { saga, user } from '../types'
+import { localState } from '../ulits'
 
 
 function *unlockWallet() {
@@ -28,19 +29,31 @@ function *unlockWallet() {
                 privateKey 
             }
         })
+        yield put({ type: saga.UNLOCK_WALLET_SUCCESS })
+    }
+}
+
+function *unlockWalletSuccess() {
+    while(true) {
+        yield take(saga.UNLOCK_WALLET_SUCCESS)
+        const state = yield select()
+        localState.store(state)
+        window.location = '/'
     }
 }
 
 function *logoutWallet() {
     while(true) {
         yield take(saga.LOGOUT_WALLET)
-        localStorage.clear()
+        localState.clear()
+        window.location = '/'
     }
 }
 
 export default function* userSaga() {
     yield [
         unlockWallet(),
+        unlockWalletSuccess(),
         logoutWallet(),
     ]
 }

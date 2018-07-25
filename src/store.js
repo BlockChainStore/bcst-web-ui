@@ -6,6 +6,7 @@ import { routerReducer, routerMiddleware } from "react-router-redux"
 
 import duckReducer from './ducks'
 import { rootSaga } from './ducks'
+import { localState } from './ducks/ulits'
 
 
 const logger = createLogger({
@@ -27,9 +28,11 @@ const reducers = combineReducers({
     duck: duckReducer
 })
 
+const duck = localState.get()
+
 const store = createStore(
     reducers,
-    {},
+    { duck },
     applyMiddleware(...middleware),
 )
 

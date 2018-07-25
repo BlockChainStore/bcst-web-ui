@@ -11,3 +11,11 @@ it('test update info', () => {
     .toEqual(expectAction)
 })
 
+it('test update info', () => {
+    const expectAction = {
+        type: saga.LOGOUT_WALLET,
+    }
+    expect(actions.onLogoutWallet())
+    .toEqual(expectAction)
+})
+

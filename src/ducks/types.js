@@ -9,6 +9,7 @@ export const user = {
 }
 
 export const saga = {
-    UNLOCK_WALLET: 'saga/UNLOCK_WALLET',
+    UNLOCK_WALLET: 'saga/user/UNLOCK_WALLET',
+    UNLOCK_WALLET_SUCCESS: 'saga/user/UNLOCK_WALLET_SUCCESS',
     LOGOUT_WALLET: 'saga/LOGOUT_WALLET',
 }
