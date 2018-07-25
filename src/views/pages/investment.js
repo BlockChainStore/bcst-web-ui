@@ -25,12 +25,16 @@ const Home = (props) => {
                 </Grid>
             </Grid>
             <Grid item xs={12} className={classes.block}>
-                <InvestmentStep />
+                <Grid container justify="center">
+                    <Grid item xs={11}>
+                        <InvestmentStep />
+                    </Grid>
+                </Grid>
             </Grid>
-            <Grid item xs={12} className={classes.block}>
+            {/* <Grid item xs={12} className={classes.block}>
                 <InvestmentChooseBCST />
                 <InvestmentChooseDay />
-            </Grid>
+            </Grid> */}
         </Grid>
     )
 }

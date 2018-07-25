@@ -24,7 +24,6 @@ const transfer = async (
     return res
 }
 
-
 export default {
     getBalance,
     allowance,
