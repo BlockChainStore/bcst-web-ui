@@ -3,7 +3,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import InvestmentInfo from './compoments/investment-info'
 import InvestmentStep from './compoments/investment-step'
-
+import InvestmentChooseBCST from './compoments/investment-choose-bcst'
+import InvestmentChooseDay from './compoments/investment-choose-day'
 
 const styles = theme => ({
     block: {
@@ -25,6 +26,10 @@ const Home = (props) => {
             </Grid>
             <Grid item xs={12} className={classes.block}>
                 <InvestmentStep />
+            </Grid>
+            <Grid item xs={12} className={classes.block}>
+                <InvestmentChooseBCST />
+                <InvestmentChooseDay />
             </Grid>
         </Grid>
     )
