@@ -7,6 +7,7 @@ import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import userActions from '../../ducks/user/actions'
 
 
@@ -26,6 +27,9 @@ const styles = theme => ({
     },
     headerButton: {
         marginRight: 10
+    },
+    progress: {
+        position: 'absolute'
     }
 })
 
@@ -33,7 +37,8 @@ const styles = theme => ({
 class SimpleModal extends React.Component {
     state = {
         open: false,
-        isInputErr : false
+        isInputErr: false,
+        isInputDisable: false
     }
 
     handleOpen = () => this.setState({ ...this.state, open: true })
@@ -45,7 +50,11 @@ class SimpleModal extends React.Component {
         const validator = /^0x[a-f0-9]{64}$/g
         if (validator.test(inputPk)) {
             this.props.userActions.onUnlockWallet(inputPk)
-            this.setState({ ...this.state, isInputErr: false, open: false})
+            this.setState({ 
+                ...this.state, 
+                isInputErr: false, 
+                isInputDisable: true
+            })
         } 
         else {
             this.setState({ ...this.state, isInputErr: true })
@@ -53,25 +62,36 @@ class SimpleModal extends React.Component {
     }
 
     render() {
-        const { classes, user } = this.props
+        const { classes, user, userActions } = this.props
+        const isUnlockWallet = !!user.info.address
         return (
             <div>
-                <Button 
-                    className={classes.headerButton}  
-                    onClick={this.handleOpen}  
-                    color="inherit" >
-                    {!!user.info.address
-                        ? "LOGOUT WALLET"
-                        :  "UNLOCK WALLET"}
-                </Button>
+                {isUnlockWallet
+                    ? <Button 
+                        className={classes.headerButton}  
+                        onClick={userActions.onLogoutWallet}  
+                        color="inherit" >
+                        LOGOUT WALLET
+                    </Button>
+                    : <Button 
+                        className={classes.headerButton}  
+                        onClick={this.handleOpen}  
+                        color="inherit" >
+                        UNLOCK WALLET
+                    </Button>}                
                 <Modal
                     open={this.state.open}
                     onClose={this.handleClose}>
                     <div className={classes.paper}>
-                        <Typography variant="title" id="modal-title">
+                        <Typography variant="title">
                             Please Enter Your Private Key
                         </Typography>
                         <TextField
+                            onKeyPress={(e) => {
+                                if(e.key === 'Enter') {
+                                    this.handleUnlockWallet()
+                                }
+                            }}
                             error={this.state.isInputErr}
                             label="Your private key"
                             placeholder="etc. 0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709"
@@ -84,8 +104,11 @@ class SimpleModal extends React.Component {
                                 <Button
                                     onClick={this.handleUnlockWallet}
                                     className={classes.button}
+                                    disabled={this.state.isInputDisable}
                                     variant="contained" 
                                     color="primary">
+                                    {this.state.isInputDisable && 
+                                        <CircularProgress size={25} className={classes.progress} />}
                                     Enter
                                 </Button>
                             </Grid>
