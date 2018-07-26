@@ -9,6 +9,11 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 
 const styles = theme => ({
@@ -22,7 +27,15 @@ const styles = theme => ({
     },
     btnContainer: {
         paddingTop: theme.spacing.unit * 3,
-    }
+    },
+    buttonDay: {
+        display: 'block',
+        marginTop: theme.spacing.unit * 2,
+    },
+    formControlDay: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+    },
 })
 
 const CheckYouAddressStep = ({ user }) => {
@@ -60,20 +73,57 @@ const ChooseBCST = ({ user, onChangeBCST, state }) => {
     )
 }
 
-const ChooseDay = ({ user, state }) => {
-    return (
+const ChooseDay = ({ user, onChangeDay, state }) => {
+    if(state.bcst < 10001){
+        return (
         <Grid container>
             <Grid item xs={12} >
-                <Grid container justify="center">
-                    <Grid item >
-                        <TextField
-                        label="BCST amount"
-                        margin="normal"/>
+                <Typography variant="headline" align="center" gutterBottom>
+                    Sorry your BCST too lower plan. please try again.
+                </Typography> 
+            </Grid>
+        </Grid>
+        )
+    }else{
+        return (
+            <Grid container>
+                <Grid item xs={12} >
+                    <Grid container justify="center">
+                        {state.value}
+                            <Grid item >
+                                {state.bcst >=300000 
+                                    ?  <FormControl component="fieldset" required >
+                                    <FormLabel component="legend">Day</FormLabel>
+                                    <RadioGroup
+                                    aria-label="Day"
+                                    name="gender1"
+                                    value={state.value}
+                                    onChange={onChangeDay}
+                                    >
+                                    <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
+                                    <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
+                                    </RadioGroup>
+                                </FormControl>
+                                    :  <FormControl component="fieldset" required >
+                                    <FormLabel component="legend">Day</FormLabel>
+                                    <RadioGroup
+                                    aria-label="Day"
+                                    name="gender1"
+                                    onChange={onChangeDay}
+                                    value={state.value}
+                                    >
+                                    <FormControlLabel value="30" control={<Radio color="primary"/>} label="30 Days" />
+                                    <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
+                                    <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
+                                    </RadioGroup>
+                                </FormControl>
+                            }
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
-    )
+        )
+    }
 }
 
 const getSteps = () => {
@@ -100,7 +150,8 @@ const getSteps = () => {
 class InvestmentStep extends React.Component {
     state = {
         activeStep: 0,
-        bcst: 0
+        bcst: 0,
+        value: 60,
     }
 
     handleNext = () => this.setState({
@@ -119,9 +170,12 @@ class InvestmentStep extends React.Component {
             bcst: e.target.value
         })
     }
+    handleChange = (e) => {
+        this.setState({ value: e.target.value });
+    };
 
     handleConfirm = () => {
-        console.log('!!!actions sand to smartcontract')
+        console.log('!!!actions send to smartcontract')
     }
 
     render() {
@@ -145,7 +199,8 @@ class InvestmentStep extends React.Component {
                         classes={classes}
                         user={user}
                         state={this.state}
-                        onChangeBCST={this.handleBCST}/>
+                        onChangeBCST={this.handleBCST}
+                        onChangeDay={this.handleChange}/>    
                     <Grid container justify="center" className={classes.btnContainer}>
                         <Grid item>
                             <Button
