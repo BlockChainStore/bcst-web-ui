@@ -138,19 +138,51 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
 
 const Confirm =  ({ user, state }) => {
     return (
-        <Grid container>
-            <Grid item xs={12} >
-                <Typography variant="headline" align="left" gutterBottom>
-                    Your Address:    {user.info.address}
-                </Typography> 
-                <Typography variant="headline" align="left" gutterBottom>
-                Investment: {state.bcst} BSCT
-                </Typography> 
-                <Typography variant="headline" align="left" gutterBottom>
-                Period: {state.day} Days
-                </Typography> 
+        // <Grid container>
+        //     <Grid item xs={12} >
+        //         <Typography variant="headline" align="left" gutterBottom>
+        //             Your Address:    {user.info.address}
+        //         </Typography> 
+        //         <Typography variant="headline" align="left" gutterBottom>
+        //             Investment: {state.bcst} BSCT
+        //         </Typography> 
+        //         <Typography variant="headline" align="left" gutterBottom>
+        //             Period: {state.day} Days
+        //         </Typography> 
+        //     </Grid>
+        // </Grid>
+            <Grid container>
+                <Grid item xs={2} >
+                    <Typography variant="headline" align="left" gutterBottom>
+                        Your Address:         
+                    </Typography> 
+                </Grid>
+                <Grid item xs={9} >
+                    <Typography variant="headline" align="left" gutterBottom>
+                        {user.info.address}        
+                    </Typography> 
+                </Grid>
+                <Grid item xs={2} >
+                    <Typography variant="headline" align="left" gutterBottom>
+                        Investment:      
+                    </Typography> 
+                </Grid>
+                <Grid item xs={9} >
+                    <Typography variant="headline" align="left" gutterBottom>
+                        {state.bcst} BSCT         
+                    </Typography> 
+                </Grid>
+                <Grid item xs={2} >
+                    <Typography variant="headline" align="left" gutterBottom>
+                        Period:         
+                    </Typography> 
+                </Grid>
+                <Grid item xs={9} >
+                    <Typography variant="headline" align="left" gutterBottom>
+                        {state.day} Days        
+                    </Typography> 
+                </Grid>
             </Grid>
-        </Grid>
     )
 }
 
