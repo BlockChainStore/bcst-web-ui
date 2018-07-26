@@ -43,7 +43,7 @@ const CheckYouAddressStep = ({ user }) => {
         <Grid container>
             <Grid item xs={12} >
                 <Typography variant="headline" align="center" gutterBottom>
-                    {user.info.address}
+                    Make sure your address is :    {user.info.address}
                 </Typography> 
             </Grid>
         </Grid>
@@ -57,7 +57,6 @@ const ChooseBCST = ({ user, onChangeBCST, state }) => {
                 <Typography align="center">
                     You have {user.bcst} bcs
                 </Typography>
-                {state.bcst}
             </Grid>
             <Grid item xs={12} >
                 <Grid container justify="center">
@@ -79,17 +78,27 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
         <Grid container>
             <Grid item xs={12} >
                 <Typography variant="headline" align="center" gutterBottom>
-                    Sorry your BCST too lower plan. please try again.
+                    Sorry your BCST too lower plan. please go back.
                 </Typography> 
             </Grid>
         </Grid>
         )
+    // }else if(user.bcst <state.bcst ){
+    //     return (
+    //         <Grid container>
+    //             <Grid item xs={12} >
+    //                 <Typography variant="headline" align="center" gutterBottom>
+    //                     Sorry, wrong input bcst lower than your bcst.
+    //                 </Typography> 
+    //             </Grid>
+    //         </Grid>
+    //         )
     }else{
         return (
             <Grid container>
                 <Grid item xs={12} >
                     <Grid container justify="center">
-                        {state.value}
+                        {state.day}
                             <Grid item >
                                 {state.bcst >=300000 
                                     ?  <FormControl component="fieldset" required >
@@ -97,7 +106,7 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
                                     <RadioGroup
                                     aria-label="Day"
                                     name="gender1"
-                                    value={state.value}
+                                    value={state.day}
                                     onChange={onChangeDay}
                                     >
                                     <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
@@ -110,7 +119,7 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
                                     aria-label="Day"
                                     name="gender1"
                                     onChange={onChangeDay}
-                                    value={state.value}
+                                    value={state.day}
                                     >
                                     <FormControlLabel value="30" control={<Radio color="primary"/>} label="30 Days" />
                                     <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
@@ -124,6 +133,25 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
             </Grid>
         )
     }
+}
+
+
+const Confirm =  ({ user, state }) => {
+    return (
+        <Grid container>
+            <Grid item xs={12} >
+                <Typography variant="headline" align="left" gutterBottom>
+                    Your Address:    {user.info.address}
+                </Typography> 
+                <Typography variant="headline" align="left" gutterBottom>
+                Investment: {state.bcst} BSCT
+                </Typography> 
+                <Typography variant="headline" align="left" gutterBottom>
+                Period: {state.day} Days
+                </Typography> 
+            </Grid>
+        </Grid>
+    )
 }
 
 const getSteps = () => {
@@ -141,7 +169,7 @@ const getSteps = () => {
         },
         { 
             title: 'Summary',
-            component: CheckYouAddressStep
+            component: Confirm
         },
     ]
 }
@@ -151,7 +179,7 @@ class InvestmentStep extends React.Component {
     state = {
         activeStep: 0,
         bcst: 0,
-        value: 60,
+        day: 60,
     }
 
     handleNext = () => this.setState({
@@ -171,7 +199,7 @@ class InvestmentStep extends React.Component {
         })
     }
     handleChange = (e) => {
-        this.setState({ value: e.target.value });
+        this.setState({ day: e.target.value });
     };
 
     handleConfirm = () => {
