@@ -5,9 +5,11 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
 import SimpleModalWrapped from './unlock-walltet' 
+import bcstLogo from '../assets/images/logo-wide.png'
 
 
 const styles = theme => ({
@@ -36,8 +38,22 @@ const styles = theme => ({
     hide: {
         display: 'none',
     },
+    logo: {
+        backgroundImage: `url(${bcstLogo})`,
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
+        width: 135,
+        height: 50,
+        marginRight: 10
+    },
+    keyboardArrowRight: {
+        fontSize: 40
+    },
+    textPath: {
+        fontSize: 20,
+        textTransform: 'capitalize'
+    }
 })
-
 
 const NavTopBar = ({
     userActions,
@@ -46,7 +62,7 @@ const NavTopBar = ({
     isDrawerOpen,
     router
 }) => {
-    const path = router.location.pathname.replace('/', '> ')
+    const path = router.location.pathname.replace('/', '')
     return (
         <AppBar 
             position="absolute"
@@ -63,9 +79,17 @@ const NavTopBar = ({
                         isDrawerOpen && classes.hide)}>
                     <MenuIcon />
                 </IconButton>
-                <Typography color="inherit" className={classes.flex}>
-                    BCST {path}
+                <div className={classes.logo}></div>
+                
+                {!!path && 
+                    <KeyboardArrowRight className={classes.keyboardArrowRight} />
+                }
+                <Typography className={classes.textPath} color="inherit" >
+                    {path}
                 </Typography>
+
+                <div className={classes.flex}></div>
+
                 <SimpleModalWrapped/>
             </Toolbar>
         </AppBar>
