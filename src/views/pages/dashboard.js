@@ -5,7 +5,8 @@ import Grid from '@material-ui/core/Grid'
 import BlockCurrency from './compoments/block-currency'
 import BlockAddress from './compoments/block-address'
 
-import ehtLogo from '../assets/images/logo-black.png'
+import ehtLogo from '../assets/images/currency/eth.png'
+import bcstLogo from '../assets/images/currency/bcst.png'
 
 
 const styles = theme => ({
@@ -37,7 +38,7 @@ const Dashboard = (props) => {
                     </Grid>
                     <Grid item xs={4}>
                         <BlockCurrency 
-                            avatar={ehtLogo} 
+                            avatar={bcstLogo} 
                             amount={user.bcst} 
                             symbol={'BCS'}/>
                     </Grid>
