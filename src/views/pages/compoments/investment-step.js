@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Joi from 'joi'
 import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -197,6 +198,15 @@ class InvestmentStep extends React.Component {
             ...this.state, 
             bcst: e.target.value
         })
+
+        const rule = {
+            numeric: true,
+            min: 100
+        }
+        const validator = Joi.number().min(1900).max(2013)
+        const result = Joi.validate(e.target.value, validator)
+        console.log(result)
+
     }
     handleChange = (e) => {
         this.setState({ day: e.target.value });
