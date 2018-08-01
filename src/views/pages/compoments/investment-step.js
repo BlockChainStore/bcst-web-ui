@@ -155,9 +155,9 @@ const Confirm =  ({ user, state }) => {
                 <Grid item xs={2} >
                     <Typography variant="headline" align="left" gutterBottom>
                         Your Address:         
-                    </Typography> 
+                    </Typography>
                 </Grid>
-                <Grid item xs={9} >
+                <Grid item xs={10} >
                     <Typography variant="headline" align="left" gutterBottom>
                         {user.info.address}        
                     </Typography> 
@@ -167,7 +167,7 @@ const Confirm =  ({ user, state }) => {
                         Investment:      
                     </Typography> 
                 </Grid>
-                <Grid item xs={9} >
+                <Grid item xs={10} >
                     <Typography variant="headline" align="left" gutterBottom>
                         {state.bcst} BSCT         
                     </Typography> 
@@ -177,7 +177,7 @@ const Confirm =  ({ user, state }) => {
                         Period:         
                     </Typography> 
                 </Grid>
-                <Grid item xs={9} >
+                <Grid item xs={10} >
                     <Typography variant="headline" align="left" gutterBottom>
                         {state.day} Days        
                     </Typography> 
@@ -260,7 +260,7 @@ class InvestmentStep extends React.Component {
                         user={user}
                         state={this.state}
                         onChangeBCST={this.handleBCST}
-                        onChangeDay={this.handleChange}/>    
+                        onChangeDay={this.handleChange}/>
                     <Grid container justify="center" className={classes.btnContainer}>
                         <Grid item>
                             <Button
