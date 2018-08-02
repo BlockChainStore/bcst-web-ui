@@ -55,7 +55,7 @@ const data = [
                 <Typography variant="subheading" align="center" gutterBottom>
                     Blockchain should be pragmatic - BCS Mall
                     In order to give back to the majority of BCST holders, we
-                    made a special event for individuals and community as time deposits with benefits as follows:
+                    made a special event for individual and community time deposits as follows:
                 </Typography>
             </Grid>
             <Grid item xs={12}>
