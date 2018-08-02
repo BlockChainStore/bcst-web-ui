@@ -2,20 +2,32 @@ import Web3 from 'web3'
 import eth from './ethereum-node'
 import EthereumTx from 'ethereumjs-tx'
 
-export const sendRawTransaction = async ( 
-    { fromAddress, privateKey }, 
-    { contractAddress, data },
-    { gasPrice, gasLimit=100000 } 
+
+export const estimateGas = (from, data) => {
+    return eth.estimateGas({ to: from, data: data })
+}
+
+export const sendDataToContract = async (
+    privateKey,
+    contractAddress, 
+    data, 
+    { gasPrice, gasLimit } 
 ) => {
+    const fromAddress = eth.accounts.privateKeyToAccount(privateKey).address
     const transactionCount = await eth.getTransactionCount(fromAddress)
+    const gasPriceInput = gasPrice || await eth.getGasPrice() 
+    const gasLimitInput = gasLimit || await estimateGas(fromAddress, data)
+    const gasLimitSafetyFactor = gasLimitInput * 1.15
+    
+    debugger
+
     const rawTransaction = {
-        "from": fromAddress,
-        "to": contractAddress, 
-        "gasPrice": Web3.utils.toHex(gasPrice*1e9),
-        "gasLimit": Web3.utils.toHex(gasLimit),
+        "nonce": Web3.utils.toHex(transactionCount),
+        "gasPrice": Web3.utils.toHex(gasPriceInput),
+        "gasLimit": Web3.utils.toHex(gasLimitSafetyFactor),
+        "to": contractAddress,
         "value": "0x00",
-        "data": data,
-        "nonce": Web3.utils.toHex(transactionCount)
+        "data": data
     }
     const tx = new EthereumTx(rawTransaction)
     tx.sign(privateKey)

@@ -1,9 +1,28 @@
-export const contractAddress = '0xbbf07ad8a358dce52d4cef715e9c390f02ac3bed'
+export const contractAddress = '0xc7d043273dd224e70616146b31517fbe0d6cd88f'
 
 export const abi = [
 	{
 		"constant": true,
 		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_user",
+				"type": "address"
+			}
+		],
 		"name": "info",
 		"outputs": [
 			{
@@ -11,7 +30,7 @@ export const abi = [
 				"type": "uint256"
 			},
 			{
-				"name": "_dayLeft",
+				"name": "_secondLeft",
 				"type": "uint256"
 			},
 			{
@@ -32,46 +51,13 @@ export const abi = [
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [],
-		"name": "withdraw",
-		"outputs": [
-			{
-				"name": "result",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_user",
-				"type": "address"
-			}
-		],
-		"name": "withdraw",
-		"outputs": [
-			{
-				"name": "result",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [],
-		"name": "owner",
+		"name": "Current",
 		"outputs": [
 			{
-				"name": "",
-				"type": "address"
+				"name": "result",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -106,17 +92,50 @@ export const abi = [
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [],
-		"name": "Current",
+		"name": "payEth",
 		"outputs": [
 			{
-				"name": "result",
+				"name": "a",
 				"type": "uint256"
 			}
 		],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [
+			{
+				"name": "result",
+				"type": "bool"
+			}
+		],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [
+			{
+				"name": "result",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
