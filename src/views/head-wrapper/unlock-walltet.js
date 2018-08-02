@@ -94,7 +94,7 @@ class SimpleModal extends React.Component {
                             }}
                             error={this.state.isInputErr}
                             label="Your private key"
-                            placeholder="etc. 0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709"
+                            placeholder="eg 0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709"
                             helperText={this.state.isInputErr ? 'Please enter a correct your private key.' : ''}
                             margin="normal"
                             inputRef={ref => this.inputPk = ref}
