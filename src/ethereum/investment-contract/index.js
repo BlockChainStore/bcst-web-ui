@@ -48,14 +48,14 @@ export default class InvestmentContract {
     }
 }
 
-const privateKey = '0xa7ac7527f5a86dd4970375d0c2fff71871132088105025100b60441ec5d1ba6e'
+// const privateKey = '0xa7ac7527f5a86dd4970375d0c2fff71871132088105025100b60441ec5d1ba6e'
 
-const investmentContract = new InvestmentContract(privateKey)
-const bcstContract = new BCSTContract(privateKey)
+// const investmentContract = new InvestmentContract(privateKey)
+// const bcstContract = new BCSTContract(privateKey)
 
-investmentContract.checkStatus().then(res => { 
-    console.log('<--- checkStatus', res)
-})
+// investmentContract.checkStatus().then(res => { 
+//     console.log('<--- checkStatus', res)
+// })
 
 // bcstContract.approve(contractAddress, 20000)
 // bcstContract.send().then(res => {
