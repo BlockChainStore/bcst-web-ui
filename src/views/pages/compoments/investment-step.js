@@ -1,4 +1,5 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Joi from 'joi'
@@ -10,11 +11,12 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControl from '@material-ui/core/FormControl'
+import FormLabel from '@material-ui/core/FormLabel'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import investmentActions from '../../../ducks/investment/actions'
 
 
 const styles = theme => ({
@@ -105,11 +107,10 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
                                     ?  <FormControl component="fieldset" required >
                                     <FormLabel component="legend">Day</FormLabel>
                                     <RadioGroup
-                                    aria-label="Day"
-                                    name="gender1"
-                                    value={state.day}
-                                    onChange={onChangeDay}
-                                    >
+                                        aria-label="Day"
+                                        name="gender1"
+                                        value={state.day}
+                                        onChange={onChangeDay}>
                                     <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
                                     <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
                                     </RadioGroup>
@@ -245,6 +246,8 @@ class InvestmentStep extends React.Component {
     };
 
     handleConfirm = () => {
+        const { investmentActions } = this.props
+        investmentActions.onSubmitInvestment(this.state.bcst, this.state.day)
         console.log('!!!actions send to smartcontract')
     }
 
@@ -310,7 +313,12 @@ const mapStateToProps = state => ({
     user: state.duck.user
 })
 
+const mapDispatchToProps = dispatch => ({
+    investmentActions: bindActionCreators(investmentActions, dispatch)
+})
+  
+
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(withStyles(styles)(InvestmentStep))
