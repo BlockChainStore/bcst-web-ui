@@ -35,10 +35,25 @@ export default class BCSTContract {
         ).encodeABI()
     }
 
-    send = ({gasPrice, gasLimit}) => sendDataToContract(
-        this.privateKey,
-        this.contractAddress,
-        this.data,
-        { gasPrice, gasLimit }
-    )
+    approve = (toAddress, amount) => {
+        this.data = cm.approve(
+            toAddress, 
+            Web3.utils.toHex(amount)
+        ).encodeABI()
+    }
+
+    send = (options) => {
+        let gasLimit = null
+        let gasPrice = null
+        if(!!options) {
+            gasLimit = options.gasLimit
+            gasPrice = options.gasPrice
+        }
+        return sendDataToContract(
+            this.privateKey,
+            this.contractAddress,
+            this.data,
+            { gasPrice, gasLimit }
+        )
+    }
 }

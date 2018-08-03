@@ -14,25 +14,23 @@ export const sendDataToContract = async (
     { gasPrice, gasLimit } 
 ) => {
     const fromAddress = eth.accounts.privateKeyToAccount(privateKey).address
+    const privateKeyBuffer = Buffer.from(privateKey.substring(2), 'hex')
     const transactionCount = await eth.getTransactionCount(fromAddress)
     const gasPriceInput = gasPrice || await eth.getGasPrice() 
-    const gasLimitInput = gasLimit || await estimateGas(fromAddress, data)
-    const gasLimitSafetyFactor = gasLimitInput * 1.15
-    
-    debugger
+    const gasLimitInput = gasLimit || 300000
 
     const rawTransaction = {
         "nonce": Web3.utils.toHex(transactionCount),
         "gasPrice": Web3.utils.toHex(gasPriceInput),
-        "gasLimit": Web3.utils.toHex(gasLimitSafetyFactor),
+        "gasLimit": Web3.utils.toHex(gasLimitInput),
         "to": contractAddress,
         "value": "0x00",
         "data": data
     }
     const tx = new EthereumTx(rawTransaction)
-    tx.sign(privateKey)
+    tx.sign(privateKeyBuffer)
     const receipt = await eth
         .sendSignedTransaction('0x' + tx.serialize().toString('hex'))
-        .on('receipt', (res)=>res)
+        .on('receipt', res => res)
     return receipt
 }

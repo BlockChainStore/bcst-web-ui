@@ -1,20 +1,6 @@
-export const contractAddress = '0xc7d043273dd224e70616146b31517fbe0d6cd88f'
+export const contractAddress = '0x8267bc95786355106d56b28a172b1af30d8cf7a7'
 
 export const abi = [
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
 	{
 		"constant": true,
 		"inputs": [
@@ -26,23 +12,23 @@ export const abi = [
 		"name": "info",
 		"outputs": [
 			{
-				"name": "_amount",
+				"name": "principle",
 				"type": "uint256"
 			},
 			{
-				"name": "_secondLeft",
+				"name": "secondLeft",
 				"type": "uint256"
 			},
 			{
-				"name": "_packetDay",
+				"name": "annualized",
 				"type": "uint256"
 			},
 			{
-				"name": "_annualized",
+				"name": "returnInvestment",
 				"type": "uint256"
 			},
 			{
-				"name": "_outcome",
+				"name": "packetDay",
 				"type": "uint256"
 			}
 		],
@@ -51,13 +37,46 @@ export const abi = [
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [],
-		"name": "Current",
+		"name": "withdraw",
 		"outputs": [
 			{
 				"name": "result",
-				"type": "uint256"
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [
+			{
+				"name": "result",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
 			}
 		],
 		"payable": false,
@@ -83,34 +102,6 @@ export const abi = [
 		"name": "deposit",
 		"outputs": [
 			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "payEth",
-		"outputs": [
-			{
-				"name": "a",
-				"type": "uint256"
-			}
-		],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "withdraw",
-		"outputs": [
-			{
 				"name": "result",
 				"type": "bool"
 			}
@@ -120,22 +111,17 @@ export const abi = [
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_user",
-				"type": "address"
-			}
-		],
-		"name": "withdraw",
+		"constant": true,
+		"inputs": [],
+		"name": "Datenow",
 		"outputs": [
 			{
-				"name": "result",
-				"type": "bool"
+				"name": "timeNow",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
