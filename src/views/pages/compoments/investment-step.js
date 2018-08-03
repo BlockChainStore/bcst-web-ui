@@ -253,7 +253,8 @@ class InvestmentStep extends React.Component {
 
     render() {
         const steps = getSteps()
-        const { classes, user } = this.props
+        const { classes, user, investment } = this.props
+        debugger
         const { activeStep } = this.state
         const Component = steps[activeStep].component
         return (
@@ -310,7 +311,8 @@ class InvestmentStep extends React.Component {
 
 
 const mapStateToProps = state => ({
-    user: state.duck.user
+    user: state.duck.user,
+    investment: state.duck.investment
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,7 +1,7 @@
 import web3 from 'web3'
 import { take, put, call, select} from 'redux-saga/effects'
 import { BCSTContract, InvestmentContract} from '../../ethereum'
-import { saga } from '../types'
+import { saga , investment } from '../types'
 
 
 function *submitInvest() {
@@ -35,8 +35,17 @@ function *fetchStatus() {
     const store = yield select()
     const privateKey = store.duck.user.info.privateKey
     const investmentContract = new InvestmentContract(privateKey)
-    investmentContract.checkStatus().then(res => { 
-        console.log('<--- checkStatus', res)
+
+    const investmentStatus = yield call(investmentContract.checkStatus)
+    yield put({ 
+        type: investment.UPDATE_INFO, 
+        payload:  { 
+            annualized: investmentStatus.annualized, 
+            packetDay: investmentStatus.packetDay, 
+            principle: investmentStatus.principle,
+            returnInvestment: investmentStatus.returnInvestment,
+            secondLeft: investmentStatus.secondLeft
+        }
     })
 }
 

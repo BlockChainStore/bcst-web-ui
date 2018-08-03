@@ -1,5 +1,5 @@
 export const investment = {
-
+    UPDATE_INFO: 'investment/info/UPDATE'
 }
 
 export const user = {
