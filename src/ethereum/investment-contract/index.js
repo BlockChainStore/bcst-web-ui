@@ -18,6 +18,8 @@ export default class InvestmentContract {
         this.data = '0x00'
     }
 
+    getContractAddress = () => this.contractAddress
+
     checkStatus = () => cm.info(this.fromAddress).call()
 
     deposit = (amount, packetDay) => {

@@ -18,6 +18,8 @@ export default class BCSTContract {
         this.data = '0x00'
     }
 
+    getContractAddress = () => this.contractAddress
+    
     getBalance = async (address) => {
         const value = await cm.balanceOf(address).call()
         return value / Math.pow(10, this.tokenDigit)
