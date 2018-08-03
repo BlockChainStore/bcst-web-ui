@@ -10,6 +10,7 @@ function *submitInvest() {
         const store = yield select()
 
         const privateKey = store.duck.user.info.privateKey
+       
         const investmentContract = new InvestmentContract(privateKey)
         const bcstContract = new BCSTContract(privateKey)
 
@@ -21,6 +22,8 @@ function *submitInvest() {
                 console.log(res)
             })
         })
+        
+
 
         // investmentContract.withdraw()
         // investmentContract.send().then(res => {
@@ -34,19 +37,22 @@ function *submitInvest() {
 function *fetchStatus() {
     const store = yield select()
     const privateKey = store.duck.user.info.privateKey
-    const investmentContract = new InvestmentContract(privateKey)
 
-    const investmentStatus = yield call(investmentContract.checkStatus)
-    yield put({ 
-        type: investment.UPDATE_INFO, 
-        payload:  { 
-            annualized: investmentStatus.annualized, 
-            packetDay: investmentStatus.packetDay, 
-            principle: investmentStatus.principle,
-            returnInvestment: investmentStatus.returnInvestment,
-            secondLeft: investmentStatus.secondLeft
-        }
-    })
+    if(!!privateKey) {
+        const investmentContract = new InvestmentContract(privateKey)
+        const investmentStatus = yield call(investmentContract.checkStatus)
+        yield put({ 
+            type: investment.UPDATE_INFO, 
+            payload:  { 
+                annualized: investmentStatus.annualized, 
+                packetDay: investmentStatus.packetDay, 
+                principle: investmentStatus.principle,
+                returnInvestment: investmentStatus.returnInvestment,
+                secondLeft: investmentStatus.secondLeft
+            }
+        })
+    }
+
 }
 
 

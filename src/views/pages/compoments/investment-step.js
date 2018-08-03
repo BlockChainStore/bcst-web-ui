@@ -41,7 +41,7 @@ const styles = theme => ({
     },
 })
 
-const CheckYouAddressStep = ({ user }) => {
+const CheckYouAddressStep = ({ user , }) => {
     return (
         <Grid container>
             <Grid item xs={12} >
@@ -128,7 +128,7 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
                                     <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
                                     </RadioGroup>
                                 </FormControl>
-                            }
+                                }
                         </Grid>
                     </Grid>
                 </Grid>
@@ -250,11 +250,10 @@ class InvestmentStep extends React.Component {
         investmentActions.onSubmitInvestment(this.state.bcst, this.state.day)
         console.log('!!!actions send to smartcontract')
     }
-
+    
     render() {
         const steps = getSteps()
         const { classes, user, investment } = this.props
-        debugger
         const { activeStep } = this.state
         const Component = steps[activeStep].component
         return (
