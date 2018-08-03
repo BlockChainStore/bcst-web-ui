@@ -7,6 +7,7 @@ import userReducers from './user/reducers'
 // import all of saga in dock here 
 import userSaga from './user/saga'
 // import investmentSaga from './investment/saga'
+import commonSaga from './common/saga'
 
 
 const reducer = combineReducers({
@@ -18,6 +19,7 @@ const reducer = combineReducers({
 function* rootSaga() {
     yield [
         userSaga(),
+        commonSaga(),
     ]
 }
 
