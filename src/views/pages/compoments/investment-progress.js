@@ -68,7 +68,7 @@ class InvestmentProgress extends React.Component {
         const {  investment } = this.props
         const annualized=investment.info.annualized/10+'%'
         const secondLeftDays=investment.info.secondLeft / 60 / 60 / 24
-        const secondLeftHrs=secondLeftDays % 24
+        const secondLeftHrs=investment.info.secondLeft / 60 / 60 % 24
         const returnInvestment=investment.info.returnInvestment
         const packetDay=investment.info.packetDay
         const principle=investment.info.principle

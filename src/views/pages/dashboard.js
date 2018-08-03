@@ -40,7 +40,7 @@ const Dashboard = (props) => {
                         <BlockCurrency 
                             avatar={bcstLogo} 
                             amount={user.bcst} 
-                            symbol={'BCS'}/>
+                            symbol={'BCST'}/>
                     </Grid>
                 </Grid>
             </Grid>
