@@ -1,5 +1,5 @@
 import { delay } from 'redux-saga'
-import { take, select, call, takeLatest } from 'redux-saga/effects'
+import { select, call, takeLatest } from 'redux-saga/effects'
 
 import { localState } from '../ulits'
 

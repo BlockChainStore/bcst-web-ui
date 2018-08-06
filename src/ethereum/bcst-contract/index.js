@@ -3,9 +3,9 @@ import eth from '../ethereum-node'
 import { sendDataToContract } from '../utils'
 import { abi, contractAddress } from './config'
 
+
 const contract = new eth.Contract(abi, contractAddress)
 const cm = contract.methods
-
 
 export default class BCSTContract {
     constructor(privateKey) {

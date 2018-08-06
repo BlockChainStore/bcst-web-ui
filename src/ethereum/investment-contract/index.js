@@ -2,9 +2,6 @@ import Web3 from 'web3'
 import eth from '../ethereum-node'
 import { sendDataToContract } from '../utils'
 import { abi, contractAddress } from './config'
-import web3 from 'web3'
-
-import BCSTContract from '../bcst-contract'
 
 const contract = new eth.Contract(abi, contractAddress)
 const cm = contract.methods

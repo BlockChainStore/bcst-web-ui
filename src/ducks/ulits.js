@@ -1,6 +1,5 @@
-
-
 const localStateKey = 'duck'
+
 export const localState = {
     store: (state) => {
         const stateStringify = JSON.stringify(state.duck)    

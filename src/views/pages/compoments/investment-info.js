@@ -21,7 +21,6 @@ const CustomTableCell = withStyles(theme => ({
     },
 }))(TableCell)
 
-
 const styles = theme => ({
     row: {
         '&:nth-of-type(odd)': {

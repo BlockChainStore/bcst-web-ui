@@ -1,7 +1,6 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import Joi from 'joi'
 import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper'
@@ -41,6 +40,7 @@ const styles = theme => ({
     },
 })
 
+
 const CheckYouAddressStep = ({ user , }) => {
     return (
         <Grid container>
@@ -52,6 +52,7 @@ const CheckYouAddressStep = ({ user , }) => {
         </Grid>
     )
 }
+
 
 const ChooseBCST = ({ user, onChangeBCST, state }) => {
     return (
@@ -75,6 +76,7 @@ const ChooseBCST = ({ user, onChangeBCST, state }) => {
     )
 }
 
+
 const ChooseDay = ({ user, onChangeDay, state }) => {
     if(state.bcst < 10001){
         return (
@@ -86,16 +88,6 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
             </Grid>
         </Grid>
         )
-    // }else if(user.bcst <state.bcst ){
-    //     return (
-    //         <Grid container>
-    //             <Grid item xs={12} >
-    //                 <Typography variant="headline" align="center" gutterBottom>
-    //                     Sorry, wrong input bcst lower than your bcst.
-    //                 </Typography> 
-    //             </Grid>
-    //         </Grid>
-    //         )
     }else{
         return (
             <Grid container>
@@ -140,19 +132,6 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
 
 const Confirm =  ({ user, state }) => {
     return (
-        // <Grid container>
-        //     <Grid item xs={12} >
-        //         <Typography variant="headline" align="left" gutterBottom>
-        //             Your Address:    {user.info.address}
-        //         </Typography> 
-        //         <Typography variant="headline" align="left" gutterBottom>
-        //             Investment: {state.bcst} BSCT
-        //         </Typography> 
-        //         <Typography variant="headline" align="left" gutterBottom>
-        //             Period: {state.day} Days
-        //         </Typography> 
-        //     </Grid>
-        // </Grid>
             <Grid container>
                 <Grid item xs={2} >
                     <Typography variant="headline" align="left" gutterBottom>
@@ -232,18 +211,14 @@ class InvestmentStep extends React.Component {
             bcst: e.target.value
         })
 
-        const rule = {
-            numeric: true,
-            min: 100
-        }
         const validator = Joi.number().min(1900).max(2013)
         const result = Joi.validate(e.target.value, validator)
         console.log(result)
 
     }
     handleChange = (e) => {
-        this.setState({ day: e.target.value });
-    };
+        this.setState({ day: e.target.value })
+    }
 
     handleConfirm = () => {
         const { investmentActions } = this.props
@@ -253,7 +228,7 @@ class InvestmentStep extends React.Component {
     
     render() {
         const steps = getSteps()
-        const { classes, user, investment } = this.props
+        const { classes, user } = this.props
         const { activeStep } = this.state
         const Component = steps[activeStep].component
         return (
@@ -282,7 +257,6 @@ class InvestmentStep extends React.Component {
                                 className={classes.button}>
                                 Back
                             </Button>
-                            
                             {activeStep === steps.length - 1 
                                 ? <Button
                                     variant="contained"
@@ -300,14 +274,12 @@ class InvestmentStep extends React.Component {
                                 </Button>
                             }
                         </Grid>
-                    </ Grid>
+                    </Grid>
                 </Grid>
-
             </Grid>
         )
     }
 }
-
 
 const mapStateToProps = state => ({
     user: state.duck.user,
@@ -317,7 +289,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     investmentActions: bindActionCreators(investmentActions, dispatch)
 })
-  
 
 export default connect(
     mapStateToProps,

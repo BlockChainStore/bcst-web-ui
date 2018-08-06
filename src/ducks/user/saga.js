@@ -1,5 +1,3 @@
-// import { select, take, put, call, fork, cancel, apply } from 'redux-saga/effects'
-// import { delay } from 'redux-saga'
 import web3 from 'web3'
 import { take, put, call, select} from 'redux-saga/effects'
 import eth, { BCSTContract } from '../../ethereum'
@@ -10,14 +8,11 @@ import { localState } from '../ulits'
 function *unlockWallet() {
     while(true) {
         const { payload: privateKey } = yield take(saga.UNLOCK_WALLET)
-
         const account = eth.accounts.privateKeyToAccount(privateKey)
         const bcstContract = new BCSTContract(privateKey)
-
         const bcstBalance = yield call(bcstContract.balance)
         const ethBalanceWei = yield call(eth.getBalance, account.address)
         const ethBalance = web3.utils.fromWei(ethBalanceWei, 'ether')
-
 
         yield put({ 
             type: user.UPDATE_BCST, 

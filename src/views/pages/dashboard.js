@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import BlockCurrency from './compoments/block-currency'
 import BlockAddress from './compoments/block-address'
-
 import ehtLogo from '../assets/images/currency/eth.png'
 import bcstLogo from '../assets/images/currency/bcst.png'
 
@@ -43,9 +42,6 @@ const Dashboard = (props) => {
                             symbol={'BCST'}/>
                     </Grid>
                 </Grid>
-            </Grid>
-            <Grid item xs={12} className={classes.block}>
-                
             </Grid>
         </Grid>
     )

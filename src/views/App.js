@@ -8,7 +8,6 @@ import webTheme from './theme'
 import HeadWrapper from './head-wrapper'
 import store, { history } from '../store'
 import { pageTransition } from './pages/compoments/page-transition'
-
 import Home from '../views/pages/home'
 import Dashboard from '../views/pages/dashboard'
 import Investment from '../views/pages/investment.js'

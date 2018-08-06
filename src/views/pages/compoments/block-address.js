@@ -27,7 +27,6 @@ const blockCurrency = (props) => {
 	)
 }
 
-
 const mapStateToProps = state => ({
     user: state.duck.user
 })
