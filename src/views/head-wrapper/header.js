@@ -9,7 +9,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
 import SimpleModalWrapped from './unlock-walltet' 
-import bcstLogo from '../assets/images/logo-wide.png'
+import bcstLogo from '../assets/images/logo-wide-white.png'
 
 
 const styles = theme => ({
@@ -65,7 +65,7 @@ const NavTopBar = ({
     const path = router.location.pathname.replace('/', '')
     return (
         <AppBar 
-            position="absolute"
+            position="fixed"
             className={classNames(
                 classes.appBar, 
                 isDrawerOpen && classes.appBarShift)}>
@@ -79,9 +79,12 @@ const NavTopBar = ({
                         isDrawerOpen && classes.hide)}>
                     <MenuIcon />
                 </IconButton>
-                <div className={classes.logo}></div>
+                {!isDrawerOpen &&
+                    <div className={classes.logo}></div>
+                }
                 
-                {!!path && 
+                
+                {!!path && !isDrawerOpen && 
                     <KeyboardArrowRight className={classes.keyboardArrowRight} />
                 }
                 <Typography className={classes.textPath} color="inherit" >
