@@ -66,6 +66,9 @@ const ChooseBCST = ({ user, onChangeBCST, state }) => {
                 <Grid container justify="center">
                     <Grid item >
                         <TextField
+                            error={state.bcstInputErr}
+                            helperText={state.bcstInputErr && 'Please enter corrent BCST'}
+                            value={state.bcst}
                             onChange={onChangeBCST}
                             label="BCST amount"
                             margin="normal"/>
@@ -78,55 +81,41 @@ const ChooseBCST = ({ user, onChangeBCST, state }) => {
 
 
 const ChooseDay = ({ user, onChangeDay, state }) => {
-    if(state.bcst < 10001){
-        return (
+    const day = state.day.toString() //dayInputErr
+    return (
         <Grid container>
             <Grid item xs={12} >
-                <Typography variant="headline" align="center" gutterBottom>
-                    Sorry your BCST too lower plan. please go back.
-                </Typography> 
-            </Grid>
-        </Grid>
-        )
-    }else{
-        return (
-            <Grid container>
-                <Grid item xs={12} >
-                    <Grid container justify="center">
-                        {state.day}
-                            <Grid item >
-                                {state.bcst >=300000 
-                                    ?  <FormControl component="fieldset" required >
+                <Grid container justify="center">
+                    {state.day}
+                        <Grid item >
+                            {state.bcst >=300000 
+                                ?  <FormControl component="fieldset" >
                                     <FormLabel component="legend">Day</FormLabel>
                                     <RadioGroup
-                                        aria-label="Day"
-                                        name="gender1"
-                                        value={state.day}
-                                        onChange={onChangeDay}>
-                                    <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
-                                    <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
+                                        onChange={onChangeDay}
+                                        value={day}>
+                                        <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
+                                        <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
                                     </RadioGroup>
                                 </FormControl>
-                                    :  <FormControl component="fieldset" required >
+                                :  <FormControl component="fieldset" required >
                                     <FormLabel component="legend">Day</FormLabel>
                                     <RadioGroup
-                                    aria-label="Day"
-                                    name="gender1"
-                                    onChange={onChangeDay}
-                                    value={state.day}
-                                    >
-                                    <FormControlLabel value="30" control={<Radio color="primary"/>} label="30 Days" />
-                                    <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
-                                    <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
+                                        onChange={onChangeDay}
+                                        value={day}>
+                                        <FormControlLabel value="30" control={<Radio color="primary"/>} label="30 Days" />
+                                        <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
+                                        <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
                                     </RadioGroup>
                                 </FormControl>
-                                }
-                        </Grid>
+                            }
+                            {state.dayInputErr && 
+                                <Typography color={'error'} gutterBottom noWrap>Please choose days.</Typography>}
                     </Grid>
                 </Grid>
             </Grid>
-        )
-    }
+        </Grid>
+    )
 }
 
 
@@ -191,14 +180,47 @@ const getSteps = () => {
 class InvestmentStep extends React.Component {
     state = {
         activeStep: 0,
+        bcstInputErr: false,
         bcst: 0,
-        day: 60,
+        dayInputErr: false,
+        day: 0,
     }
 
-    handleNext = () => this.setState({
-        ...this.state, 
-        activeStep: this.state.activeStep + 1
-    })
+    handleNext = () => {
+        switch (this.state.activeStep) {
+            case 1:
+                const validator = Joi.number().min(10001).max(100000)
+                const result = Joi.validate(this.state.bcst, validator)
+
+                if(!!result.error) {
+                    this.setState({...this.state, bcstInputErr: true})
+                }
+                else {
+                    this.setState({
+                        ...this.state, 
+                        bcstInputErr: false, 
+                        activeStep: this.state.activeStep + 1})
+                }
+                break
+            case 2:
+                if(!!!this.state.day) {
+                    this.setState({...this.state, dayInputErr: true})
+                }
+                else {
+                    this.setState({
+                        ...this.state, 
+                        dayInputErr: false, 
+                        activeStep: this.state.activeStep + 1})
+                }
+                break
+            default:
+                this.setState({
+                    ...this.state, 
+                    activeStep: this.state.activeStep + 1
+                })
+                break
+        } 
+    }
 
     handleBack = () => this.setState({
         ...this.state, 
@@ -211,7 +233,7 @@ class InvestmentStep extends React.Component {
             bcst: e.target.value
         })
 
-        const validator = Joi.number().min(1900).max(2013)
+        const validator = Joi.number().min(10001).max(100000)
         const result = Joi.validate(e.target.value, validator)
         console.log(result)
 
