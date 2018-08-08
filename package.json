@@ -11,6 +11,7 @@
     "ethereumjs-tx": "^1.3.6",
     "history": "^4.7.2",
     "joi": "^13.4.0",
+    "joi-browser": "^13.4.0",
     "jsx": "^0.9.89",
     "react": "^16.4.1",
     "react-addons-css-transition-group": "^15.6.2",
@@ -23,6 +24,9 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
     "web3": "^1.0.0-beta.34"
+  },
+  "browser": {
+    "joi": "joi-browser"
   },
   "scripts": {
     "start": "react-scripts start",
