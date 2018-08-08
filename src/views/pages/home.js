@@ -16,7 +16,7 @@ const Home = (props) => {
         <Grid container>
             <Grid item xs={12} className={classes.block}>
                 <Grid container justify="center">
-                    <Grid item xs={11}>
+                    <Grid item  xs={12} lg={10}>
                         <InvestmentInfo />
                     </Grid>
                 </Grid>

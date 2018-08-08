@@ -15,28 +15,19 @@ import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
+import Paper from '@material-ui/core/Paper'
+import { LinearProgress } from './progress'
 import investmentActions from '../../../ducks/investment/actions'
 
 
 const styles = theme => ({
-    button: {
-        marginRight: theme.spacing.unit,
-    },
-    stepComponent: {
+    stepContainer: {
         backgroundColor: '#fff',
         padding: theme.spacing.unit * 3,
-        paddingTop: theme.spacing.unit * 10,
+        paddingTop: theme.spacing.unit * 6,
     },
     btnContainer: {
-        paddingTop: theme.spacing.unit * 3,
-    },
-    buttonDay: {
-        display: 'block',
-        marginTop: theme.spacing.unit * 2,
-    },
-    formControlDay: {
-        margin: theme.spacing.unit,
-        minWidth: 120,
+        padding: theme.spacing.unit * 3,
     },
 })
 
@@ -46,7 +37,7 @@ const CheckYouAddressStep = ({ user , }) => {
         <Grid container>
             <Grid item xs={12} >
                 <Typography variant="headline" align="center" gutterBottom>
-                    Make sure your address is :    {user.info.address}
+                    Make sure your address is {user.info.address}
                 </Typography> 
             </Grid>
         </Grid>
@@ -56,24 +47,21 @@ const CheckYouAddressStep = ({ user , }) => {
 
 const ChooseBCST = ({ user, onChangeBCST, state }) => {
     return (
-        <Grid container>
+        <Grid container justify="center">
             <Grid item xs={12} >
                 <Typography align="center">
                     You have {user.bcst} bcs
                 </Typography>
             </Grid>
-            <Grid item xs={12} >
-                <Grid container justify="center">
-                    <Grid item >
-                        <TextField
-                            error={state.bcstInputErr}
-                            helperText={state.bcstInputErr && 'Please enter corrent BCST'}
-                            value={state.bcst}
-                            onChange={onChangeBCST}
-                            label="BCST amount"
-                            margin="normal"/>
-                    </Grid>
-                </Grid>
+            <Grid item xs={6} lg={4} >
+                <TextField
+                    error={state.bcstInputErr}
+                    helperText={state.bcstInputErr && 'Please enter correct BCST'}
+                    value={state.bcst}
+                    onChange={onChangeBCST}
+                    label="BCST amount"
+                    margin="normal"
+                    fullWidth/>
             </Grid>
         </Grid>
     )
@@ -86,11 +74,10 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
         <Grid container>
             <Grid item xs={12} >
                 <Grid container justify="center">
-                    {state.day}
                         <Grid item >
                             {state.bcst >=300000 
                                 ?  <FormControl component="fieldset" >
-                                    <FormLabel component="legend">Day</FormLabel>
+                                    <FormLabel component="legend" required>Day</FormLabel>
                                     <RadioGroup
                                         onChange={onChangeDay}
                                         value={day}>
@@ -98,7 +85,7 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
                                         <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
                                     </RadioGroup>
                                 </FormControl>
-                                :  <FormControl component="fieldset" required >
+                                :  <FormControl component="fieldset" required>
                                     <FormLabel component="legend">Day</FormLabel>
                                     <RadioGroup
                                         onChange={onChangeDay}
@@ -124,7 +111,7 @@ const Confirm =  ({ user, state }) => {
             <Grid container>
                 <Grid item xs={2} >
                     <Typography variant="headline" align="left" gutterBottom>
-                        Your Address:         
+                        Your Address      
                     </Typography>
                 </Grid>
                 <Grid item xs={10} >
@@ -134,7 +121,7 @@ const Confirm =  ({ user, state }) => {
                 </Grid>
                 <Grid item xs={2} >
                     <Typography variant="headline" align="left" gutterBottom>
-                        Investment:      
+                        Investment
                     </Typography> 
                 </Grid>
                 <Grid item xs={10} >
@@ -144,12 +131,12 @@ const Confirm =  ({ user, state }) => {
                 </Grid>
                 <Grid item xs={2} >
                     <Typography variant="headline" align="left" gutterBottom>
-                        Period:         
+                        Period
                     </Typography> 
                 </Grid>
                 <Grid item xs={10} >
                     <Typography variant="headline" align="left" gutterBottom>
-                        {state.day} Days        
+                        {state.day} Days
                     </Typography> 
                 </Grid>
             </Grid>
@@ -180,6 +167,7 @@ const getSteps = () => {
 class InvestmentStep extends React.Component {
     state = {
         activeStep: 0,
+        isloadding: false,
         bcstInputErr: false,
         bcst: 0,
         dayInputErr: false,
@@ -189,47 +177,40 @@ class InvestmentStep extends React.Component {
     handleNext = () => {
         switch (this.state.activeStep) {
             case 1:
-                const validator = Joi.number().min(10001).max(100000)
+                const validator = Joi.number().min(10001).max(this.props.user.bcst)
                 const result = Joi.validate(this.state.bcst, validator)
 
                 if(!!result.error) {
-                    this.setState({...this.state, bcstInputErr: true})
+                    this.setState({ bcstInputErr: true })
                 }
                 else {
                     this.setState({
-                        ...this.state, 
                         bcstInputErr: false, 
                         activeStep: this.state.activeStep + 1})
                 }
                 break
             case 2:
                 if(!!!this.state.day) {
-                    this.setState({...this.state, dayInputErr: true})
+                    this.setState({ dayInputErr: true })
                 }
                 else {
                     this.setState({
-                        ...this.state, 
                         dayInputErr: false, 
                         activeStep: this.state.activeStep + 1})
                 }
                 break
             default:
-                this.setState({
-                    ...this.state, 
-                    activeStep: this.state.activeStep + 1
-                })
+                this.setState({ activeStep: this.state.activeStep + 1 })
                 break
         } 
     }
 
     handleBack = () => this.setState({
-        ...this.state, 
         activeStep: this.state.activeStep - 1
     })
 
     handleBCST = (e) => {
         this.setState({
-            ...this.state, 
             bcst: e.target.value
         })
 
@@ -238,6 +219,7 @@ class InvestmentStep extends React.Component {
         console.log(result)
 
     }
+
     handleChange = (e) => {
         this.setState({ day: e.target.value })
     }
@@ -245,7 +227,7 @@ class InvestmentStep extends React.Component {
     handleConfirm = () => {
         const { investmentActions } = this.props
         investmentActions.onSubmitInvestment(this.state.bcst, this.state.day)
-        console.log('!!!actions send to smartcontract')
+        this.setState({ isloadding: true })
     }
     
     render() {
@@ -254,51 +236,61 @@ class InvestmentStep extends React.Component {
         const { activeStep } = this.state
         const Component = steps[activeStep].component
         return (
-            <Grid container>
-                <Grid item xs={12} >
-                    <Stepper activeStep={activeStep}>
-                        {steps.map((item, index) => (
-                            <Step key={item.title}>
-                                <StepLabel>{item.title}</StepLabel>
-                            </Step>)
-                        )}
-                    </Stepper>
-                </ Grid>
-                <Grid item xs={12} className={classes.stepComponent} >
-                    <Component
-                        classes={classes}
-                        user={user}
-                        state={this.state}
-                        onChangeBCST={this.handleBCST}
-                        onChangeDay={this.handleChange}/>
-                    <Grid container justify="center" className={classes.btnContainer}>
-                        <Grid item>
-                            <Button
-                                disabled={activeStep === 0}
-                                onClick={this.handleBack}
-                                className={classes.button}>
-                                Back
-                            </Button>
-                            {activeStep === steps.length - 1 
-                                ? <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={this.handleConfirm}
+            <Paper elevation={2}>
+                <Grid container>
+                    <Grid item xs={12} >
+                        <Stepper activeStep={activeStep}>
+                            {steps.map((item, index) => (
+                                <Step key={item.title}>
+                                    <StepLabel>{item.title}</StepLabel>
+                                </Step>)
+                            )}
+                        </Stepper>
+                    </ Grid>
+                    <Grid item xs={12} className={classes.stepContainer} >
+                        <Component
+                            classes={classes}
+                            user={user}
+                            state={this.state}
+                            onChangeBCST={this.handleBCST}
+                            onChangeDay={this.handleChange}/>
+                    </Grid>
+                    <Grid item xs={12} className={classes.btnContainer} >
+                        <Grid container justify="center">
+                            <Grid item>
+                                <Button
+                                    disabled={activeStep === 0}
+                                    onClick={this.handleBack}
                                     className={classes.button}>
-                                    Confirm
+                                    Back
                                 </Button>
-                                : <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={this.handleNext}
-                                    className={classes.button}>
-                                    Next
-                                </Button>
-                            }
+                                {activeStep === steps.length - 1 
+                                    ? <Button
+                                        disabled={this.state.isloadding}
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={this.handleConfirm}
+                                        className={classes.button}>
+                                        Confirm
+                                    </Button>
+                                    : <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={this.handleNext}
+                                        className={classes.button}>
+                                        Next
+                                    </Button>
+                                }
+                            </Grid>
                         </Grid>
                     </Grid>
+
+                    {this.state.isloadding &&
+                        <Grid item xs={12} >
+                            <LinearProgress />
+                        </Grid>}
                 </Grid>
-            </Grid>
+            </Paper>
         )
     }
 }

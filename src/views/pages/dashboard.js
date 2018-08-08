@@ -24,22 +24,30 @@ const Dashboard = (props) => {
     const spacing = 24
     return (
         <Grid container>
-            <Grid item xs={12} className={classes.firstBlock}>
-                <BlockAddress />
-            </Grid>
-            <Grid item xs={12} className={classes.block}>
-                <Grid container spacing={spacing} >
-                    <Grid item xs={4}>
-                        <BlockCurrency 
-                            avatar={ehtLogo} 
-                            amount={user.eth} 
-                            symbol={'ETH'}/>
+            <Grid item xs={12}>
+                <Grid container justify="center">
+                    <Grid item xs={12} lg={10} className={classes.firstBlock}>
+                        <BlockAddress />
                     </Grid>
-                    <Grid item xs={4}>
-                        <BlockCurrency 
-                            avatar={bcstLogo} 
-                            amount={user.bcst} 
-                            symbol={'BCST'}/>
+                </Grid>
+            </Grid>
+            <Grid item xs={12}>
+                <Grid container justify="center">
+                    <Grid item xs={12} lg={10} className={classes.block}>
+                        <Grid container spacing={spacing} >
+                            <Grid item xs={6} lg={4}>
+                                <BlockCurrency 
+                                    avatar={ehtLogo} 
+                                    amount={user.eth} 
+                                    symbol={'ETH'}/>
+                            </Grid>
+                            <Grid item xs={6} lg={4}>
+                                <BlockCurrency 
+                                    avatar={bcstLogo} 
+                                    amount={user.bcst} 
+                                    symbol={'BCST'}/>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>

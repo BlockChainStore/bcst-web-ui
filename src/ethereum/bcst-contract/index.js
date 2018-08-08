@@ -33,14 +33,14 @@ export default class BCSTContract {
     transfer = (toAddress, amount) => {
         this.data = cm.transfer(
             toAddress, 
-            Web3.utils.toHex(amount)
+            Web3.utils.toHex(amount * Math.pow(10, this.tokenDigit))
         ).encodeABI()
     }
 
     approve = (toAddress, amount) => {
         this.data = cm.approve(
             toAddress, 
-            Web3.utils.toHex(amount)
+            Web3.utils.toHex(amount * Math.pow(10, this.tokenDigit))
         ).encodeABI()
     }
 

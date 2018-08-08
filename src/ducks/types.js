@@ -11,6 +11,7 @@ export const user = {
 export const saga = {
     SUBMIT_INVESTMENT: 'saga/investment/SUBMIT_INVESTMENT',
     WITHDRAW_INVESTMENT: 'saga/investment/WITHDRAW_INVESTMENT',
+    FETCH_STATUS_INVESTMENT: 'saga/investment/FETCH_STATUS_INVESTMENT',
 
     UNLOCK_WALLET: 'saga/user/UNLOCK_WALLET',
     UNLOCK_WALLET_SUCCESS: 'saga/user/UNLOCK_WALLET_SUCCESS',

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -58,7 +57,6 @@ const styles = theme => ({
 	},
 	content: {
 		flexGrow: 1,
-		backgroundColor: theme.palette.background.default,
 		marginLeft: theme.spacing.unit * 9,
 		paddingTop: theme.spacing.unit * 9,
 		padding: theme.spacing.unit * 3,

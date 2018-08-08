@@ -31,6 +31,11 @@ const styles = theme => ({
         backgroundColor: theme.palette.primary.light,
         color: theme.palette.common.white,
     },
+    table: {
+        width: 0,
+        overflowY: 'hidden',
+        overflowX: 'auto'
+    }
 })
 
 const createData = (name, BCST10001, BCST50001, BCST300000, BCST500000, BCST800000, BCST1000000) => {
@@ -47,18 +52,18 @@ const data = [
     const { classes } = props
     return (
         <Grid container>
-            <Grid item xs={12}>
+            <Grid item>
                 <Typography variant="display2" align="center" gutterBottom>
                     BCST Time Deposits
                 </Typography>
                 <Typography variant="subheading" align="center" gutterBottom>
                     Blockchain should be pragmatic - BCS Mall
                     In order to give back to the majority of BCST holders, we
-                    made a special event for individual and community time deposits as follows:
+                    made a special event for individual and community time deposits as follows.
                 </Typography>
             </Grid>
-            <Grid item xs={12}>
-                <Table className={classes.table}>
+            <Grid item xs={12} className={classes.table}>
+                <Table >
                     <TableHead>
                         <TableRow>
                             <CustomTableCell></CustomTableCell>

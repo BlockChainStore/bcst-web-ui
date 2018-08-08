@@ -12,13 +12,14 @@ function *submitInvest() {
         const bcstContract = new BCSTContract(privateKey)
 
         bcstContract.approve(investmentContract.getContractAddress(), amount)
-        bcstContract.send().then(res => {
-            console.log(res)
-            investmentContract.deposit(amount, packetDay)
-            investmentContract.send().then(res => {
-                console.log(res)
-            })
-        })
+        const resApprove = yield call(bcstContract.send)
+        console.log('[resApprove]', resApprove)
+
+        investmentContract.deposit(amount, packetDay)
+        const resDeposit = yield call(investmentContract.send)
+        console.log('[resDeposit]', resDeposit)
+
+        yield put({ type: saga.FETCH_STATUS_INVESTMENT })
     }
 }
 
@@ -30,23 +31,23 @@ function *withdrawInvestment() {
         const investmentContract = new InvestmentContract(privateKey)
 
         investmentContract.withdraw()
-        investmentContract.send().then(res => {
-            console.log(res)
-        })
+        const resWithdraw = yield call(investmentContract.send)
+        console.log('[resWithdraw]', resWithdraw)
 
+        yield put({ type: saga.FETCH_STATUS_INVESTMENT })
     }
 }
 
-
-
 function *fetchStatus() {
-    const store = yield select()
-    const privateKey = store.duck.user.info.privateKey
-
-    if(!!privateKey) {
+    while(true) {
+        yield take(saga.FETCH_STATUS_INVESTMENT)
+        const store = yield select()
+        const privateKey = store.duck.user.info.privateKey
         const investmentContract = new InvestmentContract(privateKey)
         const investmentStatus = yield call(investmentContract.checkStatus)
-        yield put({ 
+        console.log('[checkStatus]', investmentStatus)
+
+        yield put({
             type: investment.UPDATE_INFO, 
             payload:  { 
                 annualized: investmentStatus.annualized, 
@@ -57,14 +58,24 @@ function *fetchStatus() {
             }
         })
     }
-
 }
 
+
+function *init() {
+    const store = yield select()
+    const privateKey = store.duck.user.info.privateKey
+
+    if(!!privateKey) {
+        yield put({ type: saga.FETCH_STATUS_INVESTMENT })
+    }
+
+}   
 
 export default function* investmentSaga() {
     yield [
         submitInvest(),
         fetchStatus(),
         withdrawInvestment(),
+        init(),
     ]
 }

@@ -12,6 +12,7 @@ export default class InvestmentContract {
             .privateKeyToAccount(privateKey).address
         this.privateKey = privateKey
         this.contractAddress = contractAddress
+        this.tokenDigit = 8
         this.data = '0x00'
     }
 
@@ -21,7 +22,7 @@ export default class InvestmentContract {
 
     deposit = (amount, packetDay) => {
         this.data = cm.deposit(
-            Web3.utils.toHex(amount), 
+            Web3.utils.toHex(amount * Math.pow(10, this.tokenDigit)), 
             Web3.utils.toHex(packetDay), 
             this.contractAddress
         ).encodeABI()
@@ -46,31 +47,4 @@ export default class InvestmentContract {
         )
     }
 }
-
-// const privateKey = '0xa7ac7527f5a86dd4970375d0c2fff71871132088105025100b60441ec5d1ba6e'
-
-// const investmentContract = new InvestmentContract(privateKey)
-// const bcstContract = new BCSTContract(privateKey)
-
-// investmentContract.checkStatus().then(res => { 
-//     console.log('<--- checkStatus', res)
-// })
-
-// bcstContract.approve(contractAddress, 20000)
-// bcstContract.send().then(res => {
-//     console.log(res)
-
-//     investmentContract.deposit(20000, 30)
-//     investmentContract.send().then(res => {
-//         console.log(res)
-//     })
-
-// })
-
-// investmentContract.withdraw()
-// investmentContract.send().then(res => {
-//     console.log(res)
-// })
-
-
 
