@@ -43,7 +43,7 @@ const styles = theme => ({
 			easing: theme.transitions.easing.sharp,
 			duration: theme.transitions.duration.leavingScreen,
 		}),
-		width: theme.spacing.unit * 7,
+		width: 0,
 		[theme.breakpoints.up('sm')]: {
 			width: theme.spacing.unit * 9,
 		},
@@ -57,7 +57,10 @@ const styles = theme => ({
 	},
 	content: {
 		flexGrow: 1,
-		marginLeft: theme.spacing.unit * 9,
+		marginLeft: 0,
+		[theme.breakpoints.up('sm')]: {
+			marginLeft: theme.spacing.unit * 9,
+		},
 		paddingTop: theme.spacing.unit * 9,
 		padding: theme.spacing.unit * 3,
 		transition: theme.transitions.create('margin-left', {
@@ -75,7 +78,7 @@ const styles = theme => ({
 })
 
 class MiniDrawer extends React.Component {
-	state = { open: true }
+	state = { open: false }
 	handleDrawerOpen = () => this.setState({ open: true })
 	handleDrawerClose = () => this.setState({ open: false })
 	

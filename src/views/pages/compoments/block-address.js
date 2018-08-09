@@ -10,6 +10,9 @@ const styles = theme => ({
 		...theme.mixins.gutters(),
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2
+	},
+	wordBreak: {
+		wordBreak: 'break-all'
 	}
 })
 
@@ -20,7 +23,7 @@ const blockCurrency = (props) => {
 			<Typography variant="headline" gutterBottom>
 				Your Address
 			</Typography>
-			<Typography color="textSecondary" gutterBottom >
+			<Typography color="textSecondary" className={classes.wordBreak} gutterBottom>
 				{user.info.address}
 			</Typography>
 		</Paper>

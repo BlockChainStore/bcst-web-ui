@@ -30,8 +30,12 @@ const styles = theme => ({
         }),
     },
     menuButton: {
-        marginLeft: 12,
-        marginRight: 36,
+        marginLeft: 4,
+        marginRight: 4,
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: 12,
+            marginRight: 12,
+        },
     },
     flex: {
         flexGrow: 1,
@@ -40,15 +44,23 @@ const styles = theme => ({
         display: 'none',
     },
     logo: {
-        backgroundImage: `url(${bcstLogo})`,
-        backgroundPosition: 'center center',
-        backgroundSize: 'cover',
-        width: 135,
-        height: 50,
-        marginRight: 10
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            backgroundImage: `url(${bcstLogo})`,
+            backgroundPosition: 'center center',
+            backgroundSize: 'cover',
+            display: 'block',
+            width: 135,
+            height: 50,
+            marginRight: 10
+        }
     },
     keyboardArrowRight: {
-        fontSize: 40
+        fontSize: 40,
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'block',
+        }
     },
     textPath: {
         fontSize: 20,
@@ -83,7 +95,6 @@ const NavTopBar = ({
                 {!isDrawerOpen &&
                     <div className={classes.logo}></div>
                 }
-                
                 
                 {!!path && !isDrawerOpen && 
                     <KeyboardArrowRight className={classes.keyboardArrowRight} />
