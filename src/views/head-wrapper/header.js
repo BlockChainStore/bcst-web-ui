@@ -57,7 +57,6 @@ const styles = theme => ({
 })
 
 const NavTopBar = ({
-    userActions,
     classes,
     handleDrawerOpen, 
     isDrawerOpen,
