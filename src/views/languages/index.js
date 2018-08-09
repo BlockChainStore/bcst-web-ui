@@ -6,18 +6,26 @@ import translations from './translations'
 class Text extends React.PureComponent {
 
 
-    translate = (keyWord, options) => {
+    translate = (keyWord, params) => {
         const language = this.props.language || 'en'
-        const text = translations[language].messages[keyWord]
+        let text = translations[language].messages[keyWord]
+
+        for (const param in params) {
+            text = text.replace(
+                new RegExp(`{${param}}`, 'g'), 
+                params[param]
+            )
+        }
+
         return text
     }
 
     render() {
         const keyWord = this.props.keyWord
-        const options = this.props.options || {}
+        const params = this.props.params || {}
         return (
             <span>
-                {this.translate(keyWord, options)}
+                {this.translate(keyWord, params)}
             </span>
         )
     }
