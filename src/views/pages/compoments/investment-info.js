@@ -40,11 +40,8 @@ const styles = theme => ({
     }
 })
 
-const createData = (name, BCST10001, BCST50001, BCST300000, BCST500000, BCST800000, BCST1000000) => {
-    return { name, BCST10001, BCST50001, BCST300000, BCST500000, BCST800000, BCST1000000 }
-}
 
- const CustomizedTable = (props, context) => {
+const CustomizedTable = (props, context) => {
     const { classes } = props
     return (
         <Grid container>
