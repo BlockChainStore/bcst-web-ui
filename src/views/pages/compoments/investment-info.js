@@ -48,7 +48,7 @@ const createData = (name, BCST10001, BCST50001, BCST300000, BCST500000, BCST8000
     const { classes } = props
     return (
         <Grid container>
-            <Grid item>
+            <Grid item xs={12}>
                 <Typography variant="display2" align="center" gutterBottom>
                     <Text  keyWord={'project'} />
                 </Typography>
