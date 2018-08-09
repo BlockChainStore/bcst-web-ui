@@ -8,6 +8,7 @@ import { user } from '../types'
         address: string,
         privateKey: string,
     },
+    language: string,
     eth: decimal
     bcst: decimal,
 }
@@ -43,10 +44,20 @@ export const bcstReducer = (state = null, action) => {
     }
 }
 
+export const languageReducer = (state = 'en', action) => {
+    switch(action.type) {
+        case user.UPDATE_LANGUAGE:
+            return action.payload
+        default:
+            return state
+    }
+}
+
 const reducers = combineReducers({
     info: infoReducer,
     eth: ethReducer,
-    bcst: bcstReducer
+    bcst: bcstReducer,
+    language: languageReducer,
 })
  
 export default reducers

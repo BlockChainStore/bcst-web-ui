@@ -6,6 +6,7 @@ export const user = {
     UPDATE_INFO: 'user/info/UPDATE',
     UPDATE_ETH: 'user/eth/UPDATE',
     UPDATE_BCST: 'user/bcst/UPDATE',
+    UPDATE_LANGUAGE: 'user/language/UPDATE',
 }
 
 export const saga = {

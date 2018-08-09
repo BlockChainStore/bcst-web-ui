@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Grid from '@material-ui/core/Grid'
 
+import Text from '../../languages'
+
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -48,13 +50,14 @@ const data = [
     createData('90 Days', '2.5% annualized return', '4.5% annualized return', '6% annualized return', '10% annualized return', '14% annualized return', '18% annualized return',),
 ]
 
- const CustomizedTable = (props) => {
+ const CustomizedTable = (props, context) => {
     const { classes } = props
     return (
         <Grid container>
             <Grid item>
                 <Typography variant="display2" align="center" gutterBottom>
-                    BCST Time Deposits
+                    BCST Time Deposits 
+                    <Text keyWord={'hello'} />
                 </Typography>
                 <Typography variant="subheading" align="center" gutterBottom>
                     Blockchain should be pragmatic - BCS Mall

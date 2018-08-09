@@ -21,9 +21,6 @@ const Home = (props) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={12} className={classes.block}>
-                
-            </Grid>
         </Grid>
     )
 }
