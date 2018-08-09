@@ -18,7 +18,7 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import Paper from '@material-ui/core/Paper'
 import { LinearProgress } from './progress'
 import investmentActions from '../../../ducks/investment/actions'
-
+import Text from '../../languages'
 
 const styles = theme => ({
     stepContainer: {
@@ -37,7 +37,7 @@ const CheckYouAddressStep = ({ user , }) => {
         <Grid container>
             <Grid item xs={12} >
                 <Typography variant="headline" align="center" gutterBottom>
-                    Make sure your address is {user.info.address}
+                    <Text keyWord={'makeSure'}/>{user.info.address}
                 </Typography> 
             </Grid>
         </Grid>
@@ -70,6 +70,7 @@ const ChooseBCST = ({ user, onChangeBCST, state }) => {
 
 const ChooseDay = ({ user, onChangeDay, state }) => {
     const day = state.day.toString() //dayInputErr
+
     return (
         <Grid container>
             <Grid item xs={12} >
@@ -86,13 +87,13 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
                                     </RadioGroup>
                                 </FormControl>
                                 :  <FormControl component="fieldset" required>
-                                    <FormLabel component="legend">Day</FormLabel>
+                                    <FormLabel component="legend"><Text  keyWord={'days'} /></FormLabel>
                                     <RadioGroup
                                         onChange={onChangeDay}
                                         value={day}>
-                                        <FormControlLabel value="30" control={<Radio color="primary"/>} label="30 Days" />
-                                        <FormControlLabel value="60" control={<Radio color="primary"/>} label="60 Days" />
-                                        <FormControlLabel value="90" control={<Radio color="primary"/>} label="90 Days" />
+                                        <FormControlLabel value="30" control={<Radio color="primary"/>} label="30"/> 
+                                        <FormControlLabel value="60" control={<Radio color="primary"/>} label="60"/>
+                                        <FormControlLabel value="90" control={<Radio color="primary"/>} label="90"/>
                                     </RadioGroup>
                                 </FormControl>
                             }
@@ -111,7 +112,7 @@ const Confirm =  ({ user, state }) => {
             <Grid container>
                 <Grid item xs={2} >
                     <Typography variant="headline" align="left" gutterBottom>
-                        Your Address      
+                        <Text  keyWord={'YourAddress'} />    
                     </Typography>
                 </Grid>
                 <Grid item xs={10} >
@@ -121,7 +122,7 @@ const Confirm =  ({ user, state }) => {
                 </Grid>
                 <Grid item xs={2} >
                     <Typography variant="headline" align="left" gutterBottom>
-                        Investment
+                    <Text  keyWord={'investment'} />
                     </Typography> 
                 </Grid>
                 <Grid item xs={10} >
@@ -136,7 +137,7 @@ const Confirm =  ({ user, state }) => {
                 </Grid>
                 <Grid item xs={10} >
                     <Typography variant="headline" align="left" gutterBottom>
-                        {state.day} Days
+                        {state.day} <Text  keyWord={'days'} />  
                     </Typography> 
                 </Grid>
             </Grid>
@@ -262,7 +263,7 @@ class InvestmentStep extends React.Component {
                                     disabled={activeStep === 0}
                                     onClick={this.handleBack}
                                     className={classes.button}>
-                                    Back
+                                    <Text keyWord={'back'}/>
                                 </Button>
                                 {activeStep === steps.length - 1 
                                     ? <Button
@@ -278,7 +279,7 @@ class InvestmentStep extends React.Component {
                                         color="primary"
                                         onClick={this.handleNext}
                                         className={classes.button}>
-                                        Next
+                                        <Text keyWord={'next'}/>
                                     </Button>
                                 }
                             </Grid>

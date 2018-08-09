@@ -44,25 +44,16 @@ const createData = (name, BCST10001, BCST50001, BCST300000, BCST500000, BCST8000
     return { name, BCST10001, BCST50001, BCST300000, BCST500000, BCST800000, BCST1000000 }
 }
 
-const data = [
-    createData('30 Days', '0.5% annualized return', '1.5% annualized return', '-', '-', '-', '-'),
-    createData('60 Days', '1.5% annualized return', '2.5% annualized return', '4% annualized return', '8% annualized return', '12% annualized return', '16% annualized return',),
-    createData('90 Days', '2.5% annualized return', '4.5% annualized return', '6% annualized return', '10% annualized return', '14% annualized return', '18% annualized return',),
-]
-
  const CustomizedTable = (props, context) => {
     const { classes } = props
     return (
         <Grid container>
             <Grid item>
                 <Typography variant="display2" align="center" gutterBottom>
-                    BCST Time Deposits 
-                    <Text keyWord={'hello'} />
+                    <Text  keyWord={'project'} />
                 </Typography>
                 <Typography variant="subheading" align="center" gutterBottom>
-                    Blockchain should be pragmatic - BCS Mall
-                    In order to give back to the majority of BCST holders, we
-                    made a special event for individual and community time deposits as follows.
+                    <Text keyWord={'describe'} />
                 </Typography>
             </Grid>
             <Grid item xs={12} className={classes.table}>
@@ -79,21 +70,40 @@ const data = [
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((item, index) => {
-                            return (
-                                <TableRow className={classes.row} key={index}>
-                                    <CustomTableCell className={classes.cell} component="th" scope="row">
-                                        {item.name}
-                                    </CustomTableCell>
-                                    <CustomTableCell numeric>{item.BCST10001}</CustomTableCell>
-                                    <CustomTableCell numeric>{item.BCST50001}</CustomTableCell>
-                                    <CustomTableCell numeric>{item.BCST300000}</CustomTableCell>
-                                    <CustomTableCell numeric>{item.BCST500000}</CustomTableCell>
-                                    <CustomTableCell numeric>{item.BCST800000}</CustomTableCell>
-                                    <CustomTableCell numeric>{item.BCST1000000}</CustomTableCell>
-                                </TableRow>
-                            )
-                        })}
+                        <TableRow className={classes.row} >
+                            <CustomTableCell className={classes.cell} component="th" scope="row">
+                                30<Text keyWord={'days'}/>
+                            </CustomTableCell>
+                            <CustomTableCell numeric>0.5%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>1.5%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric></CustomTableCell>
+                            <CustomTableCell numeric></CustomTableCell>
+                            <CustomTableCell numeric></CustomTableCell>
+                            <CustomTableCell numeric></CustomTableCell>
+                        </TableRow>
+                        <TableRow className={classes.row} >
+                            <CustomTableCell className={classes.cell} component="th" scope="row">
+                                60<Text keyWord={'days'}/>
+                            </CustomTableCell>
+                            <CustomTableCell numeric>1.5%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>2.5%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>4%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>8%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>12%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>16%<Text keyWord={'annualized'}/></CustomTableCell>
+                        </TableRow>
+                        <TableRow className={classes.row} >
+                            <CustomTableCell className={classes.cell} component="th" scope="row">
+                                90<Text keyWord={'days'}/>
+                            </CustomTableCell>
+                            <CustomTableCell numeric>2.5%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>4.5%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>6%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>10%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>14%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>18%<Text keyWord={'annualized'}/></CustomTableCell>
+                        </TableRow>
+
                     </TableBody>
                 </Table>
             </Grid>

@@ -6,7 +6,7 @@ import BlockCurrency from './compoments/block-currency'
 import BlockAddress from './compoments/block-address'
 import ehtLogo from '../assets/images/currency/eth.png'
 import bcstLogo from '../assets/images/currency/bcst.png'
-
+import Text from '../languages'
 
 const styles = theme => ({
     firstBlock: {

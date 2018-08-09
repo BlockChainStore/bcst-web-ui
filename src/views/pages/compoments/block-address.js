@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-
+import Text from '../../languages'
 
 const styles = theme => ({
 	paper: {
@@ -18,7 +18,7 @@ const blockCurrency = (props) => {
 	return (
 		<Paper className={classes.paper} elevation={1}>
 			<Typography variant="headline" gutterBottom>
-				Your Address
+				<Text  keyWord={'YourAddress'} />
 			</Typography>
 			<Typography color="textSecondary" gutterBottom >
 				{user.info.address}
