@@ -25,9 +25,6 @@ const styles = theme => ({
     modalButton: {
         marginTop: 15
     },
-    headerButton: {
-        marginRight: 10
-    },
     progress: {
         position: 'absolute'
     }
@@ -68,13 +65,11 @@ class SimpleModal extends React.Component {
             <div>
                 {isUnlockWallet
                     ? <Button 
-                        className={classes.headerButton}  
                         onClick={userActions.onLogoutWallet}  
                         color="inherit" >
                         LOGOUT WALLET
                     </Button>
                     : <Button 
-                        className={classes.headerButton}  
                         onClick={this.handleOpen}  
                         color="inherit" >
                         UNLOCK WALLET
