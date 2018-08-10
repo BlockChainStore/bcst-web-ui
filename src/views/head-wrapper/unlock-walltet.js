@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import userActions from '../../ducks/user/actions'
+import Text from '../languages'
 
 
 const styles = theme => ({
@@ -67,19 +68,19 @@ class SimpleModal extends React.Component {
                     ? <Button 
                         onClick={userActions.onLogoutWallet}  
                         color="inherit" >
-                        LOGOUT WALLET
+                        <Text keyWord={'logoutWallet'} />             
                     </Button>
                     : <Button 
                         onClick={this.handleOpen}  
                         color="inherit" >
-                        UNLOCK WALLET
+                        <Text  keyWord={'unlockWallet'}/>
                     </Button>}                
                 <Modal
                     open={this.state.open}
                     onClose={this.handleClose}>
                     <div className={classes.paper}>
                         <Typography variant="title">
-                            Please Enter Your Private Key
+                            <Text  keyWord={'enterPk'}/>
                         </Typography>
                         <TextField
                             onKeyPress={(e) => {
@@ -88,9 +89,9 @@ class SimpleModal extends React.Component {
                                 }
                             }}
                             error={this.state.isInputErr}
-                            label="Your private key"
+                            label={<Text  keyWord={'yourPK'}/>}
                             placeholder="eg 0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709"
-                            helperText={this.state.isInputErr ? 'Please enter a correct your private key.' : ''}
+                            helperText={this.state.isInputErr ? <Text  keyWord={'correctPK'}/> : ''}
                             margin="normal"
                             inputRef={ref => this.inputPk = ref}
                             fullWidth/>
@@ -104,7 +105,7 @@ class SimpleModal extends React.Component {
                                     color="primary">
                                     {this.state.isInputDisable && 
                                         <CircularProgress size={25} className={classes.progress} />}
-                                    Enter
+                                    <Text  keyWord={'enter'}/>
                                 </Button>
                             </Grid>
                         </Grid>

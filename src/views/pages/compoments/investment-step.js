@@ -50,16 +50,16 @@ const ChooseBCST = ({ user, onChangeBCST, state }) => {
         <Grid container justify="center">
             <Grid item xs={12} >
                 <Typography align="center">
-                    You have {user.bcst} bcs
+                    <Text keyWord={'youHave'} /> {user.bcst} bcst
                 </Typography>
             </Grid>
             <Grid item xs={6} lg={4} >
                 <TextField
                     error={state.bcstInputErr}
-                    helperText={state.bcstInputErr && 'Please enter correct BCST'}
+                    helperText={state.bcstInputErr && <Text keyWord={'enterBcst'} />}
                     value={state.bcst}
                     onChange={onChangeBCST}
-                    label="BCST amount"
+                    label={<Text keyWord={'bcstAmount'} />}
                     margin="normal"
                     fullWidth/>
             </Grid>
@@ -71,6 +71,9 @@ const ChooseBCST = ({ user, onChangeBCST, state }) => {
 const ChooseDay = ({ user, onChangeDay, state }) => {
     const day = state.day.toString() //dayInputErr
 
+    const day30 = <Text  keyWord={'numbDays'} params={{days:'30'}}/> 
+    const day60 = <Text  keyWord={'numbDays'} params={{days:'60'}}/> 
+    const day90 = <Text  keyWord={'numbDays'} params={{days:'90'}}/> 
     return (
         <Grid container>
             <Grid item xs={12} >
@@ -91,14 +94,14 @@ const ChooseDay = ({ user, onChangeDay, state }) => {
                                     <RadioGroup
                                         onChange={onChangeDay}
                                         value={day}>
-                                        <FormControlLabel value="30" control={<Radio color="primary"/>} label="30"/> 
-                                        <FormControlLabel value="60" control={<Radio color="primary"/>} label="60"/>
-                                        <FormControlLabel value="90" control={<Radio color="primary"/>} label="90"/>
+                                        <FormControlLabel value="30" control={<Radio color="primary"/>} label={day30}/> 
+                                        <FormControlLabel value="60" control={<Radio color="primary"/>} label={day60}/>
+                                        <FormControlLabel value="90" control={<Radio color="primary"/>} label={day90}/>
                                     </RadioGroup>
                                 </FormControl>
                             }
                             {state.dayInputErr && 
-                                <Typography color={'error'} gutterBottom noWrap>Please choose days.</Typography>}
+                                <Typography color={'error'} gutterBottom noWrap><Text keyWord={'pleaseChooseDay'} /></Typography>}
                     </Grid>
                 </Grid>
             </Grid>
@@ -112,7 +115,7 @@ const Confirm =  ({ user, state }) => {
             <Grid container>
                 <Grid item xs={2} >
                     <Typography variant="headline" align="left" gutterBottom>
-                        <Text  keyWord={'YourAddress'} />    
+                        <Text  keyWord={'yourAddress'} />    
                     </Typography>
                 </Grid>
                 <Grid item xs={10} >
@@ -132,7 +135,7 @@ const Confirm =  ({ user, state }) => {
                 </Grid>
                 <Grid item xs={2} >
                     <Typography variant="headline" align="left" gutterBottom>
-                        Period
+                    <Text  keyWord={'period'} />
                     </Typography> 
                 </Grid>
                 <Grid item xs={10} >
@@ -147,18 +150,18 @@ const Confirm =  ({ user, state }) => {
 const getSteps = () => {
     return [
         { 
-            title: 'Check You address',
+            title:<Text keyWord={'checkAddress'} />,
             component: CheckYouAddressStep },
         { 
-            title: 'Choose BCST',
+            title: <Text keyWord={'chooseBcst'} />,
             component: ChooseBCST
         },
         { 
-            title: 'Choose Day',
+            title: <Text keyWord={'chooseDay'} />,
             component: ChooseDay
         },
         { 
-            title: 'Summary',
+            title: <Text keyWord={'summary'} />,
             component: Confirm
         },
     ]
@@ -272,7 +275,7 @@ class InvestmentStep extends React.Component {
                                         color="primary"
                                         onClick={this.handleConfirm}
                                         className={classes.button}>
-                                        Confirm
+                                        <Text keyWord={'confirm'}/>
                                     </Button>
                                     : <Button
                                         variant="contained"

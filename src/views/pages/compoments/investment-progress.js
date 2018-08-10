@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import { LinearProgress } from './progress'
 import investmentActions from '../../../ducks/investment/actions'
-
+import Text from '../../languages'
 
 const styles = theme => ({
     infoContainer: {
@@ -44,7 +44,7 @@ class InvestmentProgress extends React.Component {
         const dateFormat = `${!!secondLeftDays ? secondLeftDays + ' days ' : ''}${!!secondLeftHrs ? secondLeftHrs + ' hours ' : ''}`
         const packetDay = investment.info.packetDay
         const principle = investment.info.principle / Math.pow(10, 8)
-
+{/* <Text  keyWord={'numbDays'} params={{days:'30'}}/> */}
         return (
             <Paper elevation={2}>
                 <Grid container justify="center">
@@ -54,21 +54,21 @@ class InvestmentProgress extends React.Component {
                             align="center" 
                             variant="headline"
                             color='textSecondary'>
-                            Status {investment.info.secondLeft !== '0'  ? 'Pending' : 'Ready'}
+                            {investment.info.secondLeft !== '0'  ? <Text keyWord={'statusPending'} /> : <Text keyWord={'statusReady'} />}
                         </Typography>
                         <Typography 
                             variant="display1" 
                             align="center" 
                             color='primary'
                             className={classes.principleText}>
-                            Principle {principle} BCST
+                            <Text keyWord={'principle'} /> {principle} BCST
                         </Typography>
                         <Typography 
                             gutterBottom 
                             align="center" 
                             color='textSecondary' 
                             noWrap>
-                            Packet {packetDay} days, Annualized {annualized}
+                            <Text keyWord={'packet'} /> {packetDay} <Text keyWord={'days'} />, <Text keyWord={'annualized'} /> {annualized}
                         </Typography>
                     </Grid>
 
@@ -82,7 +82,7 @@ class InvestmentProgress extends React.Component {
                                     onClick={this.handleWithdraw}>
                                     {investment.info.secondLeft !== '0'
                                         ? dateFormat + ' left'
-                                        : 'Withdraw'}
+                                        : <Text keyWord={'withdraw'} />}
                                 </Button>
                             </Grid>
                         </Grid>

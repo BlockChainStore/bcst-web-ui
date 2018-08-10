@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import SimpleModalWrapped from './unlock-walltet' 
 import bcstLogo from '../assets/images/logo-wide-white.png'
 import SwitchLanguages from './switch-languages'
-
+import Text from '../languages'
 
 const styles = theme => ({
     appBar: {
@@ -99,7 +99,7 @@ const NavTopBar = ({
                     <KeyboardArrowRight className={classes.keyboardArrowRight} />
                 }
                 <Typography className={classes.textPath} color="inherit" >
-                    {path}
+                    <Text  keyWord={path}/> 
                 </Typography>
 
                 <div className={classes.flex}></div>

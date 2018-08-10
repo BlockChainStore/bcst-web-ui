@@ -21,7 +21,7 @@ const blockCurrency = (props) => {
 	return (
 		<Paper className={classes.paper} elevation={1}>
 			<Typography variant="headline" gutterBottom>
-				<Text  keyWord={'YourAddress'} />
+				<Text  keyWord={'yourAddress'} />
 			</Typography>
 			<Typography color="textSecondary" className={classes.wordBreak} gutterBottom>
 				{user.info.address}
