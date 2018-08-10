@@ -10,6 +10,7 @@ export default {
             investment : 'Investment',
             day : ' day',
             days : ' days',
+            Days : ' Days',
             numbDays : '{days} days',
             numbHours : '{hours} hours',
             annualized : ' annualized return',
@@ -35,11 +36,14 @@ export default {
             statusPending : 'Status pending...',
             principle : 'Principle',
             packet : 'Packet',
-            hoursLeft : 'HOURS LEFT',
+            daysAndHoursLeft : '{days} Days {hours} Hours left',
+            hoursLeft : '{hours} Hours left',
             correctPK : 'Please enter a correct your private key.',
             pleaseChooseDay : 'Please choose days',
             statusReady : 'Status ready',
             withdraw : 'WITHDRAW',
+            personalInfo : 'Personal locked up plan：(Monthly statstcal summary）',
+            communityInfo : 'Community locked up plan：(Monthly statstcal summary）',
         }
     },
     zh: {
@@ -53,6 +57,7 @@ export default {
             investment : '投资',
             day : '天',
             days : '天',
+            Days : '天',
             numbDays : '{days} 天',
             annualized : '年化收益',
             makeSure : '确认钱包地址',
@@ -77,11 +82,14 @@ export default {
             statusPending : '计划锁仓状态',
             principle : '锁定',
             packet : '锁仓',
-            hoursLeft : '倒计时1小时',
+            daysAndHoursLeft : '倒计时{days}天{hours}小时',
+            hoursLeft : '倒计时{hours}小时',
             correctPK : '请输入正确的私钥',
             pleaseChooseDay : '请选择天数',
             statusReady : '锁仓状态',
             withdraw : '提取',
+            personalInfo : '个人锁仓计划：（月统计核放)',
+            communityInfo : '社区锁仓计划：（月统计核放)',
 
         }
     }

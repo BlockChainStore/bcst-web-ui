@@ -41,10 +41,16 @@ class InvestmentProgress extends React.Component {
         const annualized = investment.info.annualized/10+'%'
         const secondLeftDays = parseInt(investment.info.secondLeft / ( 60 * 60 * 24) , 10)
         const secondLeftHrs = Math.ceil((investment.info.secondLeft / ( 60 * 60)) % 24 , 10)
-        const dateFormat = `${!!secondLeftDays ? secondLeftDays + ' days ' : ''}${!!secondLeftHrs ? secondLeftHrs + ' hours ' : ''}`
         const packetDay = investment.info.packetDay
         const principle = investment.info.principle / Math.pow(10, 8)
 {/* <Text  keyWord={'numbDays'} params={{days:'30'}}/> */}
+        const DateFormat = () => (
+            <span> 
+                {secondLeftDays == 0
+                ? <Text  keyWord={'hoursLeft'} params={{hours:secondLeftHrs}}/> 
+                :<Text  keyWord={'daysAndHoursLeft'} params={{days:secondLeftDays,hours:secondLeftHrs}}/>}
+            </span>
+            )
         return (
             <Paper elevation={2}>
                 <Grid container justify="center">
@@ -81,7 +87,7 @@ class InvestmentProgress extends React.Component {
                                     color="primary"
                                     onClick={this.handleWithdraw}>
                                     {investment.info.secondLeft !== '0'
-                                        ? dateFormat + ' left'
+                                        ? <DateFormat />
                                         : <Text keyWord={'withdraw'} />}
                                 </Button>
                             </Grid>

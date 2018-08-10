@@ -16,6 +16,7 @@ const CustomTableCell = withStyles(theme => ({
         backgroundColor: theme.palette.primary.light,
         color: theme.palette.common.white,
         textAlign: 'center',
+        fontSize: 18,
     },
     body: {
         fontSize: 16,
@@ -53,37 +54,54 @@ const CustomizedTable = (props, context) => {
                     <Text keyWord={'describe'} />
                 </Typography>
             </Grid>
+            <Text keyWord={'personalInfo'}/>
             <Grid item xs={12} className={classes.table}>
                 <Table >
                     <TableHead>
                         <TableRow>
-                            <CustomTableCell></CustomTableCell>
-                            <CustomTableCell numeric>10,001 BCST</CustomTableCell>
-                            <CustomTableCell numeric>50,001 BCST</CustomTableCell>
-                            <CustomTableCell numeric>300,000 BCST</CustomTableCell>
-                            <CustomTableCell numeric>500,000 BCST</CustomTableCell>
-                            <CustomTableCell numeric>800,000 BCST</CustomTableCell>
-                            <CustomTableCell numeric>1,000,000 BCST</CustomTableCell>
+                            <CustomTableCell>BCST</CustomTableCell>
+                            <CustomTableCell numeric> 30<Text keyWord={'Days'}/></CustomTableCell>
+                            <CustomTableCell numeric> 60<Text keyWord={'Days'}/></CustomTableCell>
+                            <CustomTableCell numeric> 90<Text keyWord={'Days'}/></CustomTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         <TableRow className={classes.row} >
                             <CustomTableCell className={classes.cell} component="th" scope="row">
-                                30<Text keyWord={'days'}/>
+                                10001 BCST
                             </CustomTableCell>
                             <CustomTableCell numeric>0.5%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>1.5%<Text keyWord={'annualized'}/></CustomTableCell>
-                            <CustomTableCell numeric></CustomTableCell>
-                            <CustomTableCell numeric></CustomTableCell>
-                            <CustomTableCell numeric></CustomTableCell>
-                            <CustomTableCell numeric></CustomTableCell>
+                            <CustomTableCell numeric>2.5%<Text keyWord={'annualized'}/></CustomTableCell>
                         </TableRow>
                         <TableRow className={classes.row} >
                             <CustomTableCell className={classes.cell} component="th" scope="row">
-                                60<Text keyWord={'days'}/>
+                                50001 BCST
                             </CustomTableCell>
                             <CustomTableCell numeric>1.5%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>2.5%<Text keyWord={'annualized'}/></CustomTableCell>
+                            <CustomTableCell numeric>4.5%<Text keyWord={'annualized'}/></CustomTableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </Grid>
+            <Text keyWord={'communityInfo'}/>
+            <Grid item xs={12} className={classes.table}>
+                <Table >
+                    <TableHead>
+                        <TableRow>
+                            <CustomTableCell>BCST</CustomTableCell>
+                            <CustomTableCell numeric>300000</CustomTableCell>
+                            <CustomTableCell numeric>500000</CustomTableCell>
+                            <CustomTableCell numeric>800000</CustomTableCell>
+                            <CustomTableCell numeric>1000000</CustomTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow className={classes.row} >
+                            <CustomTableCell className={classes.cell} component="th" scope="row">
+                                60<Text keyWord={'Days'}/>
+                            </CustomTableCell>
                             <CustomTableCell numeric>4%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>8%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>12%<Text keyWord={'annualized'}/></CustomTableCell>
@@ -91,16 +109,13 @@ const CustomizedTable = (props, context) => {
                         </TableRow>
                         <TableRow className={classes.row} >
                             <CustomTableCell className={classes.cell} component="th" scope="row">
-                                90<Text keyWord={'days'}/>
+                                90<Text keyWord={'Days'}/>
                             </CustomTableCell>
-                            <CustomTableCell numeric>2.5%<Text keyWord={'annualized'}/></CustomTableCell>
-                            <CustomTableCell numeric>4.5%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>6%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>10%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>14%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>18%<Text keyWord={'annualized'}/></CustomTableCell>
                         </TableRow>
-
                     </TableBody>
                 </Table>
             </Grid>
