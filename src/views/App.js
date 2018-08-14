@@ -12,6 +12,7 @@ import Home from '../views/pages/home'
 import Dashboard from '../views/pages/dashboard'
 import Investment from '../views/pages/investment.js'
 import PageNotFound from '../views/pages/page-not-found'
+import Test from '../views/pages/test.js'
 
 
 const App = () => {
@@ -35,7 +36,11 @@ const App = () => {
 									<Route 
 										path='/investment' 
 										component={pageTransition(Investment)} />}
+								<Route 
+										path='/test' 
+										component={pageTransition(Test)} />		
 								<Route component={PageNotFound} />
+
 							</Switch>
 						</HeadWrapper>
 					</ConnectedRouter>

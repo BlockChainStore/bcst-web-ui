@@ -23,6 +23,9 @@ const styles = theme => ({
         left: '50%',
         transform: 'translate(-50%, -50%)'
     },
+    button: {
+        margin: theme.spacing.unit,
+    },
     modalButton: {
         marginTop: 15
     },
@@ -42,6 +45,22 @@ class SimpleModal extends React.Component {
     handleOpen = () => this.setState({ ...this.state, open: true })
 
     handleClose = () => this.setState({ ...this.state, open: false })
+
+    handleUnlockWallet = () => {
+        const inputPk = this.inputPk.value
+        const validator = /^0x[a-f0-9]{64}$/g
+        if (validator.test(inputPk)) {
+            this.props.userActions.onUnlockWallet(inputPk)
+            this.setState({ 
+                ...this.state, 
+                isInputErr: false, 
+                isInputDisable: true
+            })
+        } 
+        else {
+            this.setState({ ...this.state, isInputErr: true })
+        }
+    }
 
     handleUnlockWallet = () => {
         const inputPk = this.inputPk.value
@@ -97,6 +116,13 @@ class SimpleModal extends React.Component {
                             fullWidth/>
                         <Grid container justify='flex-end'>
                             <Grid item className={classes.modalButton}>
+                                <Button
+                                    onClick={this.handleUnlockWallet}
+                                    className={classes.button}
+                                    variant="contained" 
+                                    color="primary">
+                                    CREATE WALLET
+                                </Button>
                                 <Button
                                     onClick={this.handleUnlockWallet}
                                     className={classes.button}
