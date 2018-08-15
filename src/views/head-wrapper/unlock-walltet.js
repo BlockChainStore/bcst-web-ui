@@ -2,12 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
+import SwipeableViews from 'react-swipeable-views'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import AppBar from '@material-ui/core/AppBar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
 import userActions from '../../ducks/user/actions'
 import Text from '../languages'
 import PrivateKeyBlock from './unlock-walltet-private-key'
@@ -19,27 +22,42 @@ const styles = theme => ({
         width: theme.spacing.unit * 80,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4,
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)'
     }
 })
 
+function TabContainer({ children, dir }) {
+    return (
+      <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+        {children}
+      </Typography>
+    );
+  }
 
 class UnlockWallet extends React.Component {
-    state = { open: false }
+    state = { open: false, tab: 0}
 
     handleOpen = () => this.setState({ ...this.state, open: true })
 
     handleClose = () => this.setState({ ...this.state, open: false })
+
+    handleChangeTab = (event, value) => {
+        this.setState({ tab: value })
+    }
+    
+    handleChangeTabIndex = index => {
+        this.setState({ value: index })
+    }
+    
 
     handleUnlockWallet = (privateKey) => {
         this.props.userActions.onUnlockWallet(privateKey)
     }
 
     render() {
-        const { classes, user, userActions } = this.props
+        const { classes, theme, user, userActions } = this.props
         const isUnlockWallet = !!user.info.address
         return (
             <div>
@@ -58,7 +76,28 @@ class UnlockWallet extends React.Component {
                     open={this.state.open}
                     onClose={this.handleClose}>
                     <div className={classes.paper}>
-                        <PrivateKeyBlock handleUnlockWallet={this.handleUnlockWallet}/>
+                        <AppBar position="static" color="default">
+                            <Tabs
+                                value={this.state.tab}
+                                onChange={this.handleChangeTab}
+                                indicatorColor="primary"
+                                textColor="primary"
+                                fullWidth>
+                                <Tab label="Private Key" />
+                                <Tab label="Keystore" />
+                                <Tab label="New Wallet" />
+                            </Tabs>
+                        </AppBar>
+                        <SwipeableViews
+                            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                            index={this.state.tab}
+                            onChangeIndex={this.handleChangeTabIndex}>
+                            <TabContainer dir={theme.direction}>
+                                <PrivateKeyBlock handleUnlockWallet={this.handleUnlockWallet}/>
+                            </TabContainer>
+                            <TabContainer dir={theme.direction}>Item Two</TabContainer>
+                            <TabContainer dir={theme.direction}>Item Three</TabContainer>
+                        </SwipeableViews>
                     </div>
                 </Modal>
             </div>
@@ -78,4 +117,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withStyles(styles)(UnlockWallet))
+)(withStyles(styles, { withTheme: true })(UnlockWallet))
