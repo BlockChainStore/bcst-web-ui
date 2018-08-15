@@ -16,9 +16,6 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
     },
-    modalButton: {
-        marginTop: 15
-    },
     progress: {
         position: 'absolute'
     }
@@ -65,7 +62,7 @@ class PrivateKeyBlock extends React.Component {
                     inputRef={ref => this.inputPk = ref}
                     fullWidth/>
                 <Grid container justify='flex-end'>
-                    <Grid item className={classes.modalButton}>
+                    <Grid item>
                         <Button
                             onClick={this.handleEnterPrivateKey}
                             className={classes.button}

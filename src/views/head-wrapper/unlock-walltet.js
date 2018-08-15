@@ -14,6 +14,7 @@ import Tab from '@material-ui/core/Tab'
 import userActions from '../../ducks/user/actions'
 import Text from '../languages'
 import PrivateKeyBlock from './unlock-walltet-private-key'
+import KeystoreBlock from './unlock-walltet-keystore'
 
 
 const styles = theme => ({
@@ -95,7 +96,9 @@ class UnlockWallet extends React.Component {
                             <TabContainer dir={theme.direction}>
                                 <PrivateKeyBlock handleUnlockWallet={this.handleUnlockWallet}/>
                             </TabContainer>
-                            <TabContainer dir={theme.direction}>Item Two</TabContainer>
+                            <TabContainer dir={theme.direction}>
+                                <KeystoreBlock handleUnlockWallet={this.handleUnlockWallet}/>
+                            </TabContainer>
                             <TabContainer dir={theme.direction}>Item Three</TabContainer>
                         </SwipeableViews>
                     </div>

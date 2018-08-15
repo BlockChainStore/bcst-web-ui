@@ -118,7 +118,7 @@ class FullWidthTabs extends React.Component {
                 <Button
                     onClick={this.handleUnlockWallet}
                     className={classes.button}
-                    variant="contained" 
+                    variant="fab" 
                     color="primary">
                     SELECT WALLET FILE
                 </Button>
