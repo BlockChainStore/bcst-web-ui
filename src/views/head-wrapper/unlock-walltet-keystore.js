@@ -83,7 +83,7 @@ class KeystoreBlock extends React.Component {
             if (evt.target.readyState == FileReader.DONE) {
                 const data = evt.target.result
                 try {
-                    const jsonData = JSON.parse(data)
+                    const jsonData = JSON.parse(data.toLowerCase())
                     const result = Joi.validate(jsonData, keystoreSchema)
                     if(!!!result.error) {
                         this.setState({ jsonData: jsonData, isDataErr: false })
@@ -104,24 +104,17 @@ class KeystoreBlock extends React.Component {
     handleEnterPrivateKey = () => {
         
         const password = this.inputPassword.value
-        // this.state.jsonData
-        let isPasswordCorrent = true;
-        let pk;
-        console.log(password)
-        // call web3 then isPasswordCorrent
-        try{
-            pk = decrypt(this.state.jsonData, password).privateKey
+        let isPasswordCorrent = true
+        let privateKey = null
+        try {
+            privateKey = decrypt(this.state.jsonData, password).privateKey
         }
         catch(e){
-            isPasswordCorrent=false
+            isPasswordCorrent = false
         }
-        console.log(isPasswordCorrent)
-        console.log(pk[2,pk.length])
-        
-
-
+    
         if (isPasswordCorrent) {
-            this.props.handleUnlockWallet(pk)
+            this.props.handleUnlockWallet(privateKey)
             this.setState({ isProcessing: true, isPasswordErr: false})
         } 
         else {
