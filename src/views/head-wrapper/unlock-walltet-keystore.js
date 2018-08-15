@@ -19,7 +19,7 @@ import IconButton from '@material-ui/core/IconButton'
 import userActions from '../../ducks/user/actions'
 import Text from '../languages'
 import Joi from 'joi'
-
+import { decrypt } from '../../ethereum/utils'
 
 const styles = theme => ({
     inputFile: {
@@ -61,7 +61,7 @@ class KeystoreBlock extends React.Component {
             version: Joi.number().valid(3),
             id: Joi.string().required(),
             address: Joi.string().required(),
-            Crypto: Joi.object().keys({
+            crypto: Joi.object().keys({
                 ciphertext: Joi.string().required(),
                 cipherparams: Joi.object().keys({
                     iv: Joi.string().required()
@@ -102,17 +102,26 @@ class KeystoreBlock extends React.Component {
     }
 
     handleEnterPrivateKey = () => {
-        debugger
         
         const password = this.inputPassword.value
         // this.state.jsonData
+        let isPasswordCorrent = true;
+        let pk;
+        console.log(password)
         // call web3 then isPasswordCorrent
-
-        const isPasswordCorrent = true
+        try{
+            pk = decrypt(this.state.jsonData, password).privateKey
+        }
+        catch(e){
+            isPasswordCorrent=false
+        }
+        console.log(isPasswordCorrent)
+        console.log(pk[2,pk.length])
+        
 
 
         if (isPasswordCorrent) {
-            // this.props.handleUnlockWallet(password)
+            this.props.handleUnlockWallet(pk)
             this.setState({ isProcessing: true, isPasswordErr: false})
         } 
         else {
