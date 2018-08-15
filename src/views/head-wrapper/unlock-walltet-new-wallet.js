@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import FileSaver from 'file-saver'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
@@ -8,7 +9,16 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import userActions from '../../ducks/user/actions'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Input from '@material-ui/core/Input'
+import FormControl from '@material-ui/core/FormControl'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import InputLabel from '@material-ui/core/InputLabel'
+import IconButton from '@material-ui/core/IconButton'
+import CloudDownload from '@material-ui/icons/CloudDownload'
+import eth from '../../ethereum/'
 import Text from '../languages'
 
 
@@ -16,32 +26,46 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
     },
-    modalButton: {
-        marginTop: 15
+    buttonBackup: {
+        marginTop: theme.spacing.unit
     },
-    progress: {
-        position: 'absolute'
+    iconCloudDownload: {
+        marginLeft: 8,
+        marginRight: 8
+    },
+    downloadKeystoreBlock: {
+        marginTop: theme.spacing.unit * 3
     }
 })
 
 
-class PrivateKeyBlock extends React.Component {
+class NewWalletBlock extends React.Component {
 
     state = {
-        isInputErr: false,
-        isInputDisable: false
+        showPassword: false,
+        isInputDisable: false,
+        address: null,
+        jsonData: null
     }
 
-    handleEnterPrivateKey = () => {
-        const inputPk = this.inputPk.value
-        const validator = /^0x[a-f0-9]{64}$/g
-        if (validator.test(inputPk)) {
-            this.props.handleUnlockWallet(inputPk)
-            this.setState({ isInputErr: false, isInputDisable: true })
-        } 
-        else {
-            this.setState({ isInputErr: true })
-        }
+    handleClickShowPassword = () => {
+        this.setState({ showPassword: !this.state.showPassword })
+    }
+
+    handleCreateWallet = () => {
+        const wallet = eth.accounts.create()
+        const address = wallet.address
+        const inputPassword = this.inputPassword.value
+        const encryptData = eth.accounts.encrypt(wallet.privateKey, inputPassword)
+        this.setState({ isInputDisable: true, address: address, jsonData: encryptData})
+    }
+
+    handleDownloadKeystore = () => {
+        const file = new File(
+            [JSON.stringify(this.state.jsonData)], 
+            { type: "text/plain;charset=utf-8" }
+        )
+        FileSaver.saveAs(file, `${new Date().toUTCString()}-${this.state.address}.backup`)
     }
 
     render() {
@@ -49,35 +73,61 @@ class PrivateKeyBlock extends React.Component {
         return (
             <div>
                 <Typography variant="title">
-                    <Text  keyWord={'enterPk'}/>
+                    Create new wallet
                 </Typography>
-                <TextField
-                    onKeyPress={(e) => {
-                        if(e.key === 'Enter') {
-                            this.handleEnterPrivateKey()
-                        }
-                    }}
-                    error={this.state.isInputErr}
-                    label={<Text  keyWord={'yourPK'}/>}
-                    placeholder="eg 0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709"
-                    helperText={this.state.isInputErr ? <Text  keyWord={'correctPK'}/> : ''}
-                    margin="normal"
-                    inputRef={ref => this.inputPk = ref}
-                    fullWidth/>
-                <Grid container justify='flex-end'>
+
+                <FormControl 
+                    fullWidth>
+                    <InputLabel>Enter a password</InputLabel>
+                    <Input
+                        inputRef={ref => this.inputPassword = ref}
+                        type={this.state.showPassword ? 'text' : 'password'}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton onClick={this.handleClickShowPassword}>
+                                    {this.state.showPassword 
+                                        ? <VisibilityOff /> 
+                                        : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>}
+                        disabled={this.state.isInputDisable}
+                        fullWidth/>
+                </FormControl>
+                <Grid container justify='center'>
                     <Grid item className={classes.modalButton}>
                         <Button
-                            onClick={this.handleEnterPrivateKey}
+                            onClick={this.handleCreateWallet}
                             className={classes.button}
                             disabled={this.state.isInputDisable}
                             variant="contained" 
                             color="primary">
-                            {this.state.isInputDisable && 
-                                <CircularProgress size={25} className={classes.progress} />}
-                            <Text  keyWord={'enter'}/>
+                            Create
                         </Button>
                     </Grid>
                 </Grid>
+
+                {!!this.state.address &&
+                    <div className={classes.downloadKeystoreBlock}>
+                        <Typography color="secondary" align="center">
+                            **Do not lose it!** It cannot be recovered if you lose it.
+                        </Typography>
+                        <Typography color="secondary" align="center">
+                            **Do not share it!** Your funds will be stolen if you use this file on a malicious/phishing site.
+                        </Typography>
+                        <Typography color="secondary" align="center">
+                            **Make a backup!** Secure it like the millions of dollars it may one day be worth.
+                        </Typography>
+                        <Button
+                            onClick={this.handleDownloadKeystore}
+                            className={classes.buttonBackup}
+                            variant="extendedFab"
+                            size="large"
+                            color="primary"
+                            fullWidth>
+                            Download Keystore File 
+                            <CloudDownload className={classes.iconCloudDownload} />
+                        </Button>
+                    </div>}
             </div>
         )
     }
@@ -85,4 +135,4 @@ class PrivateKeyBlock extends React.Component {
 }
 
 
-export default withStyles(styles)(PrivateKeyBlock)
+export default withStyles(styles)(NewWalletBlock)

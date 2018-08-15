@@ -15,6 +15,7 @@ import userActions from '../../ducks/user/actions'
 import Text from '../languages'
 import PrivateKeyBlock from './unlock-walltet-private-key'
 import KeystoreBlock from './unlock-walltet-keystore'
+import NewWalletBlock from './unlock-walltet-new-wallet'
 
 
 const styles = theme => ({
@@ -99,7 +100,9 @@ class UnlockWallet extends React.Component {
                             <TabContainer dir={theme.direction}>
                                 <KeystoreBlock handleUnlockWallet={this.handleUnlockWallet}/>
                             </TabContainer>
-                            <TabContainer dir={theme.direction}>Item Three</TabContainer>
+                            <TabContainer dir={theme.direction}>
+                                <NewWalletBlock />
+                            </TabContainer>
                         </SwipeableViews>
                     </div>
                 </Modal>
