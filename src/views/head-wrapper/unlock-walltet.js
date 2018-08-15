@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import userActions from '../../ducks/user/actions'
 import Text from '../languages'
+import PrivateKeyBlock from './unlock-walltet-private-key'
 
 
 const styles = theme => ({
@@ -22,60 +23,19 @@ const styles = theme => ({
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)'
-    },
-    button: {
-        margin: theme.spacing.unit,
-    },
-    modalButton: {
-        marginTop: 15
-    },
-    progress: {
-        position: 'absolute'
     }
 })
 
 
-class SimpleModal extends React.Component {
-    state = {
-        open: false,
-        isInputErr: false,
-        isInputDisable: false
-    }
+class UnlockWallet extends React.Component {
+    state = { open: false }
 
     handleOpen = () => this.setState({ ...this.state, open: true })
 
     handleClose = () => this.setState({ ...this.state, open: false })
 
-    handleUnlockWallet = () => {
-        const inputPk = this.inputPk.value
-        const validator = /^0x[a-f0-9]{64}$/g
-        if (validator.test(inputPk)) {
-            this.props.userActions.onUnlockWallet(inputPk)
-            this.setState({ 
-                ...this.state, 
-                isInputErr: false, 
-                isInputDisable: true
-            })
-        } 
-        else {
-            this.setState({ ...this.state, isInputErr: true })
-        }
-    }
-
-    handleUnlockWallet = () => {
-        const inputPk = this.inputPk.value
-        const validator = /^0x[a-f0-9]{64}$/g
-        if (validator.test(inputPk)) {
-            this.props.userActions.onUnlockWallet(inputPk)
-            this.setState({ 
-                ...this.state, 
-                isInputErr: false, 
-                isInputDisable: true
-            })
-        } 
-        else {
-            this.setState({ ...this.state, isInputErr: true })
-        }
+    handleUnlockWallet = (privateKey) => {
+        this.props.userActions.onUnlockWallet(privateKey)
     }
 
     render() {
@@ -98,43 +58,7 @@ class SimpleModal extends React.Component {
                     open={this.state.open}
                     onClose={this.handleClose}>
                     <div className={classes.paper}>
-                        <Typography variant="title">
-                            <Text  keyWord={'enterPk'}/>
-                        </Typography>
-                        <TextField
-                            onKeyPress={(e) => {
-                                if(e.key === 'Enter') {
-                                    this.handleUnlockWallet()
-                                }
-                            }}
-                            error={this.state.isInputErr}
-                            label={<Text  keyWord={'yourPK'}/>}
-                            placeholder="eg 0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709"
-                            helperText={this.state.isInputErr ? <Text  keyWord={'correctPK'}/> : ''}
-                            margin="normal"
-                            inputRef={ref => this.inputPk = ref}
-                            fullWidth/>
-                        <Grid container justify='flex-end'>
-                            <Grid item className={classes.modalButton}>
-                                <Button
-                                    onClick={this.handleUnlockWallet}
-                                    className={classes.button}
-                                    variant="contained" 
-                                    color="primary">
-                                    CREATE WALLET
-                                </Button>
-                                <Button
-                                    onClick={this.handleUnlockWallet}
-                                    className={classes.button}
-                                    disabled={this.state.isInputDisable}
-                                    variant="contained" 
-                                    color="primary">
-                                    {this.state.isInputDisable && 
-                                        <CircularProgress size={25} className={classes.progress} />}
-                                    <Text  keyWord={'enter'}/>
-                                </Button>
-                            </Grid>
-                        </Grid>
+                        <PrivateKeyBlock handleUnlockWallet={this.handleUnlockWallet}/>
                     </div>
                 </Modal>
             </div>
@@ -154,4 +78,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withStyles(styles)(SimpleModal))
+)(withStyles(styles)(UnlockWallet))
