@@ -1,14 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import userActions from '../../ducks/user/actions'
 import Text from '../languages'
 
 
@@ -80,6 +76,5 @@ class PrivateKeyBlock extends React.Component {
     }
 
 }
-
 
 export default withStyles(styles)(PrivateKeyBlock)

@@ -1,12 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
 import Input from '@material-ui/core/Input'
-import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -16,10 +12,10 @@ import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import InputLabel from '@material-ui/core/InputLabel'
 import IconButton from '@material-ui/core/IconButton'
-import userActions from '../../ducks/user/actions'
 import Text from '../languages'
 import Joi from 'joi'
-import { decrypt } from '../../ethereum/utils'
+import eth from '../../ethereum/'
+
 
 const styles = theme => ({
     inputFile: {
@@ -56,7 +52,6 @@ class KeystoreBlock extends React.Component {
     handleChooesFile = (e) => {
         const file = e.target.files[0]
         const reader = new FileReader()
-
         const keystoreSchema = Joi.object().keys({
             version: Joi.number().valid(3),
             id: Joi.string().required(),
@@ -80,10 +75,10 @@ class KeystoreBlock extends React.Component {
         })
 
         reader.onloadend = (evt) => {
-            if (evt.target.readyState == FileReader.DONE) {
+            if (evt.target.readyState === FileReader.DONE) {
                 const data = evt.target.result
                 try {
-                    const jsonData = JSON.parse(data)
+                    const jsonData = JSON.parse(data.toLowerCase())
                     const result = Joi.validate(jsonData, keystoreSchema)
                     if(!!!result.error) {
                         this.setState({ jsonData: jsonData, isDataErr: false })
@@ -104,24 +99,17 @@ class KeystoreBlock extends React.Component {
     handleEnterPrivateKey = () => {
         
         const password = this.inputPassword.value
-        // this.state.jsonData
-        let isPasswordCorrent = true;
-        let pk;
-        console.log(password)
-        // call web3 then isPasswordCorrent
-        try{
-            pk = decrypt(this.state.jsonData, password).privateKey
+        let isPasswordCorrent = true
+        let privateKey = null
+        try {
+            privateKey = eth.accounts.decrypt(this.state.jsonData, password).privateKey
         }
         catch(e){
-            isPasswordCorrent=false
+            isPasswordCorrent = false
         }
-        console.log(isPasswordCorrent)
-        console.log(pk[2,pk.l])
-        
-
 
         if (isPasswordCorrent) {
-            this.props.handleUnlockWallet(pk)
+            this.props.handleUnlockWallet(privateKey)
             this.setState({ isProcessing: true, isPasswordErr: false})
         } 
         else {
@@ -135,7 +123,7 @@ class KeystoreBlock extends React.Component {
             <div>
                 <div>
                     <Typography variant="title">
-                        Please choose your wallet file.
+                        <Text keyWord={'chooseKeystore'} />
                     </Typography>
                     <FormControl fullWidth>
                         <Input
@@ -147,7 +135,7 @@ class KeystoreBlock extends React.Component {
                             fullWidth/>
                         {this.state.isDataErr && 
                             <FormHelperText error>
-                                Wallet is not in JSON format
+                                <Text keyWord={'wrongJson'} />
                             </FormHelperText>}
                     </FormControl>
                 </div>
@@ -155,11 +143,11 @@ class KeystoreBlock extends React.Component {
                 {!this.state.isDataErr &&  !!this.state.jsonData &&
                     <div className={classes.passwordBlock}>
                         <Typography variant="title">
-                            Your wallet is encrypted. Please enter the password.
+                            <Text keyWord={'passForEn'} />
                         </Typography>
                         <FormControl 
                             fullWidth>
-                            <InputLabel>Password</InputLabel>
+                            <InputLabel><Text keyWord={'password'} /></InputLabel>
                             <Input
                                 inputRef={ref => this.inputPassword = ref}
                                 type={this.state.showPassword ? 'text' : 'password'}
@@ -176,7 +164,7 @@ class KeystoreBlock extends React.Component {
                                 fullWidth/>
                             {this.state.isPasswordErr && 
                                 <FormHelperText error>
-                                    Wrong password
+                                    <Text keyWord={'wrongPassword'} />
                                 </FormHelperText>}
                         </FormControl>
                         <Grid container justify='flex-end'>
@@ -197,7 +185,6 @@ class KeystoreBlock extends React.Component {
             </div>
         )
     }
-
 }
 
 
