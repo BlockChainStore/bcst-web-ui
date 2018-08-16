@@ -76,7 +76,7 @@ class InvestmentProgress extends React.Component {
                             align="center" 
                             color='textSecondary' 
                             noWrap>
-                            <Text keyWord={''} /> {depositDay} <Text keyWord={'days'}/>
+                            <Text keyWord={'logtime'} /> {depositDay} <Text keyWord={'days'}/>
                         </Typography>
                         <Typography 
                             gutterBottom 
@@ -90,14 +90,14 @@ class InvestmentProgress extends React.Component {
                             align="center" 
                             color='textSecondary' 
                             noWrap>
-                            <Text keyWord={''} /> {invest} BCST
+                            <Text keyWord={'bonusToday'} /> {invest} BCST
                         </Typography>
                         <Typography 
                             gutterBottom 
                             align="center" 
                             color='textSecondary' 
                             noWrap>
-                            <Text keyWord={''} /> {sum} BCST
+                            <Text keyWord={'totalToday'} /> {sum} BCST
                         </Typography>
                     </Grid>
 

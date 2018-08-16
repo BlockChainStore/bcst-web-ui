@@ -59,6 +59,9 @@ export default {
             warning2 : '**Do not share it!** Your funds will be stolen if you use this file on a malicious/phishing site.',
             warning3 : '**Make a backup!** Secure it like the millions of dollars it may one day be worth.',
             downloadKeyFile : 'download keystore file',
+            logtime : 'Log on time',
+            bonusToday : 'Bonus on today',
+            totalToday : ' Total on today',
         }
     },
     zh: {
@@ -120,6 +123,9 @@ export default {
             warning2 : '**请不要发给其他人！**如果您在恶意/网络钓鱼网站上使用此文件，您的资金将被盗。',
             warning3 : '**请备份！**它可能有一天价值数百万美元。',
             downloadKeyFile : '下载keystore文件',
+            logtime : '锁定时长',
+            bonusToday : '今日奖励',
+            totalToday : '总量',
         }
     }
 }
