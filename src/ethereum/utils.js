@@ -34,7 +34,3 @@ export const sendDataToContract = async (
         .on('receipt', res => res)
     return receipt
 }
-
-export const decrypt = (json, pw) => {
-    return eth.accounts.decrypt(json, pw)
-}

@@ -6,8 +6,6 @@ import SwipeableViews from 'react-swipeable-views'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import Grid from '@material-ui/core/Grid'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
@@ -85,9 +83,9 @@ class UnlockWallet extends React.Component {
                                 indicatorColor="primary"
                                 textColor="primary"
                                 fullWidth>
-                                <Tab label="Private Key" />
-                                <Tab label="Keystore" />
-                                <Tab label="New Wallet" />
+                                <Tab label={<Text keyWord={'privateKey'} />}/>
+                                <Tab label={<Text keyWord={'keyStore'} />}/>
+                                <Tab label={<Text keyWord={'newWalllet'} />}/>
                             </Tabs>
                         </AppBar>
                         <SwipeableViews

@@ -24,7 +24,6 @@ export default class InvestmentContract {
         this.data = cm.deposit(
             Web3.utils.toHex(amount * Math.pow(10, this.tokenDigit)), 
             Web3.utils.toHex(packetDay), 
-            this.contractAddress
         ).encodeABI()
     }
 

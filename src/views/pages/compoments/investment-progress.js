@@ -42,11 +42,13 @@ class InvestmentProgress extends React.Component {
         const secondLeftDays = parseInt(investment.info.secondLeft / ( 60 * 60 * 24) , 10)
         const secondLeftHrs = Math.ceil((investment.info.secondLeft / ( 60 * 60)) % 24 , 10)
         const packetDay = investment.info.packetDay
+        const depositDay= packetDay-secondLeftDays
         const principle = investment.info.principle / Math.pow(10, 8)
-{/* <Text  keyWord={'numbDays'} params={{days:'30'}}/> */}
+        const invest = (((principle * investment.info.annualized * packetDay / 365000)) * depositDay / packetDay).toFixed(8)
+        const sum = parseFloat(principle) + parseFloat(invest)
         const DateFormat = () => (
             <span> 
-                {secondLeftDays == 0
+                {secondLeftDays === 0
                 ? <Text  keyWord={'hoursLeft'} params={{hours:secondLeftHrs}}/> 
                 :<Text  keyWord={'daysAndHoursLeft'} params={{days:secondLeftDays,hours:secondLeftHrs}}/>}
             </span>
@@ -74,7 +76,28 @@ class InvestmentProgress extends React.Component {
                             align="center" 
                             color='textSecondary' 
                             noWrap>
+                            <Text keyWord={''} /> {depositDay} <Text keyWord={'days'}/>
+                        </Typography>
+                        <Typography 
+                            gutterBottom 
+                            align="center" 
+                            color='textSecondary' 
+                            noWrap>
                             <Text keyWord={'packet'} /> {packetDay} <Text keyWord={'days'} />, <Text keyWord={'annualized'} /> {annualized}
+                        </Typography>
+                        <Typography 
+                            gutterBottom 
+                            align="center" 
+                            color='textSecondary' 
+                            noWrap>
+                            <Text keyWord={''} /> {invest} BCST
+                        </Typography>
+                        <Typography 
+                            gutterBottom 
+                            align="center" 
+                            color='textSecondary' 
+                            noWrap>
+                            <Text keyWord={''} /> {sum} BCST
                         </Typography>
                     </Grid>
 

@@ -1,15 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import FileSaver from 'file-saver'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Input from '@material-ui/core/Input'
 import FormControl from '@material-ui/core/FormControl'
@@ -73,12 +67,11 @@ class NewWalletBlock extends React.Component {
         return (
             <div>
                 <Typography variant="title">
-                    Create new wallet
+                    <Text keyWord={'createWallet'} />
                 </Typography>
-
                 <FormControl 
                     fullWidth>
-                    <InputLabel>Enter a password</InputLabel>
+                    <InputLabel><Text keyWord={'enterPW'} /></InputLabel>
                     <Input
                         inputRef={ref => this.inputPassword = ref}
                         type={this.state.showPassword ? 'text' : 'password'}
@@ -101,21 +94,20 @@ class NewWalletBlock extends React.Component {
                             disabled={this.state.isInputDisable}
                             variant="contained" 
                             color="primary">
-                            Create
+                            <Text keyWord={'create'} />
                         </Button>
                     </Grid>
                 </Grid>
-
                 {!!this.state.address &&
                     <div className={classes.downloadKeystoreBlock}>
                         <Typography color="secondary" align="center">
-                            **Do not lose it!** It cannot be recovered if you lose it.
+                            <Text keyWord={'warning1'} />
                         </Typography>
                         <Typography color="secondary" align="center">
-                            **Do not share it!** Your funds will be stolen if you use this file on a malicious/phishing site.
+                            <Text keyWord={'warning2'} />
                         </Typography>
                         <Typography color="secondary" align="center">
-                            **Make a backup!** Secure it like the millions of dollars it may one day be worth.
+                            <Text keyWord={'warning3'} />
                         </Typography>
                         <Button
                             onClick={this.handleDownloadKeystore}
@@ -124,14 +116,13 @@ class NewWalletBlock extends React.Component {
                             size="large"
                             color="primary"
                             fullWidth>
-                            Download Keystore File 
+                            <Text keyWord={'downloadKeyFile'} />
                             <CloudDownload className={classes.iconCloudDownload} />
                         </Button>
                     </div>}
             </div>
         )
     }
-
 }
 
 
