@@ -42,7 +42,7 @@ const styles = theme => ({
 })
 
 
-const CustomizedTable = (props, context) => {
+const CustomizedTable = (props) => {
     const { classes } = props
     return (
         <Grid container>
