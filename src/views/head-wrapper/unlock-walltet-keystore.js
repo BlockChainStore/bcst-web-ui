@@ -116,7 +116,7 @@ class KeystoreBlock extends React.Component {
             isPasswordCorrent=false
         }
         console.log(isPasswordCorrent)
-        console.log(pk[2,pk.length])
+        console.log(pk[2,pk.l])
         
 
 
