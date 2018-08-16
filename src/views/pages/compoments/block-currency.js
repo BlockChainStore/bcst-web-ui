@@ -14,7 +14,7 @@ const styles = theme => ({
 	}
 })
 
-const blockCurrency = (props) => {
+const BlockCurrency = (props) => {
 	const { classes, avatar, amount, symbol } = props
 	return (
 		<Paper elevation={1}>
@@ -30,4 +30,4 @@ const blockCurrency = (props) => {
 	)
 }
 
-export default withStyles(styles)(blockCurrency)
+export default withStyles(styles)(BlockCurrency)
