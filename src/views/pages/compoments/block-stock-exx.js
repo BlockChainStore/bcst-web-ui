@@ -19,12 +19,11 @@ const styles = theme => ({
 		height: 450
 	},
 	header: {
-		height: 40,
 		borderBottom: `1px solid ${theme.palette.grey.A100}`
 	},
 	textHeader: {
-		padding: '10px 0',
-		fontSize: 'small'
+		paddingTop: 16,
+		paddingBottom: 8
 	},
 	progress: {
 		position: 'absolute',
@@ -139,9 +138,9 @@ class BlockStockEXXComponent extends React.Component {
 		const { classes } = this.props
 		return (
 			<div className={classes.container}>
-				<Grid container className={classes.header}>
-					<Grid item xs>
-						{!!this.state.ticker &&
+				{!!this.state.options &&
+					<Grid container>
+						<Grid item xs={12} className={classes.header} >
 							<Grid container justify="space-around">
 								<Grid item>
 									<Typography color="textSecondary" className={classes.textHeader}>
@@ -163,14 +162,16 @@ class BlockStockEXXComponent extends React.Component {
 										<span>24HTrading Volumes {this.state.ticker.volumes} BCST</span>
 									</Typography>
 								</Grid>
-							</Grid>}
-					</Grid>
-        		</Grid>
-				{!!this.state.options &&
-					<HighchartsReact
-						highcharts={Highcharts}
-						constructorType={'stockChart'}
-						options={this.state.options}/>}
+							</Grid>
+						</Grid>
+						<Grid item xs={12}>
+							<HighchartsReact
+								highcharts={Highcharts}
+								constructorType={'stockChart'}
+								options={this.state.options}/>
+						</Grid>
+					</Grid>}
+
 				{!!!this.state.options &&
 					<div className={classes.progress}>
 						<CircularProgress size={75} />
