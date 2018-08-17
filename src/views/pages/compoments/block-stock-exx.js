@@ -5,19 +5,26 @@ import Paper from '@material-ui/core/Paper'
 import Highcharts from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import axios from 'axios'
 import Typography from '@material-ui/core/Typography'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import AppBar from '@material-ui/core/AppBar'
+import axios from 'axios'
+import exxLogo from '../../assets/images/logo-exx.png'
 
 
 const styles = theme => ({
-	paper: {
+	container: {
 		position: 'relative',
-		height: 450,
-		marginBottom: 24
+		height: 450
 	},
-	textValue: {
-		padding: '4px 16px',
-		fontSize: 'larger'
+	header: {
+		height: 40,
+		borderBottom: `1px solid ${theme.palette.grey.A100}`
+	},
+	textHeader: {
+		padding: '10px 0',
+		fontSize: 'small'
 	},
 	progress: {
 		position: 'absolute',
@@ -27,9 +34,12 @@ const styles = theme => ({
 	},
 	exxLogo: {
 		backgroundColor: '#23262D',
+		borderRadius: 15,
 		padding: '8px 16px',
-		height: 20,
-		width: 60
+		marginBottom: -10,
+		marginLeft: 10,
+		height: 30,
+		width: 90
 	}
 })
 
@@ -39,8 +49,10 @@ const symbolPair = {
 	'BCST/ETH': 'bcst_eth'
 }
 
+const symbolPairArray = Object.keys(symbolPair)
+
 const buildOptions = (data) => {
-	// [datetime, open, high, low, close, volum ]]
+	// [datetime, open, high, low, close, volum ]
 	const trickData = data.datas.data
 	const moneyType = data.datas.moneyType
 	const contractUnit = data.datas.contractUnit
@@ -88,10 +100,11 @@ const buildOptions = (data) => {
 	}
 }
 
-class BlockStockEXX extends React.Component {
+
+class BlockStockEXXComponent extends React.Component {
 
 	state = { options: null, ticker: null}
-	
+
 	componentDidMount() {
 		const { symbol } = this.props
 		const lowwerSymbol = symbolPair[symbol]
@@ -99,50 +112,58 @@ class BlockStockEXX extends React.Component {
 		const klinesApi = 'https://api.exx.com/data/v1/klines?'
 		const klinesParam = `market=${lowwerSymbol}&type=1day&size=1000`
 		const klinesUri = corsURL + klinesApi + klinesParam
-		const tickerApi = 'https://api.exx.com/data/v1/ticker?'
-		const tickerParam = `currency=${lowwerSymbol}`
-		const tickerUri = corsURL + tickerApi + tickerParam
 
 		const headers = { 'X-Requested-With': 'XMLHttpRequest' }
-		const reqKlines = axios.get(klinesUri, { headers })
-		const reqTicker = axios.get(tickerUri, { headers })
-		Promise.all([reqKlines, reqTicker])
-		.then(values => {
-			const klinesRes = values[0].data
-
+		axios.get(klinesUri, { headers })
+		.then(klinesRes => klinesRes.data)
+		.then(klinesRes => {
 			let options = null
-			try {
-				options = buildOptions(klinesRes)
-			} catch (error) {
-				console.log('[klines res error]', klinesUri, values[0])
-			}
-
 			let ticker = null
 			try {
-				ticker = values[1].data.ticker.buy
+				options = buildOptions(klinesRes)
+				const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
+				ticker = {
+					open: lastTicker[1],
+					high: lastTicker[2],
+					low: lastTicker[3],
+					volumes: lastTicker[5],
+				}
 			} catch (error) {
-				console.log('[ticker res error]', tickerUri, values[1])
+				console.log('[klines res error]', klinesUri, klinesRes)
 			}
-
 			this.setState({ options, ticker })
 		})
 	}
 
 	render() {
-		const { classes, symbol } = this.props
+		const { classes } = this.props
 		return (
-			<Paper className={classes.paper} elevation={1}>
-				<Grid container justify='flex-end'>
-					<Grid item>
-						<Typography color="textSecondary" className={classes.textValue}>
-							{!!this.state.ticker &&
-								<span>~{this.state.ticker} {symbol}</span>}
-						</Typography>
-					</Grid>
-            		<Grid item>
-						<img 
-							className={classes.exxLogo} 
-							src="https://www.exxvip.com/src/images/logo.png" />
+			<div className={classes.container}>
+				<Grid container className={classes.header}>
+					<Grid item xs>
+						{!!this.state.ticker &&
+							<Grid container justify="space-around">
+								<Grid item>
+									<Typography color="textSecondary" className={classes.textHeader}>
+										<span>Open {this.state.ticker.open}</span>
+									</Typography>
+								</Grid>
+								<Grid item>
+									<Typography color="textSecondary" className={classes.textHeader}>
+										<span>Maximum {this.state.ticker.high}</span>
+									</Typography>
+								</Grid>
+								<Grid item>
+									<Typography color="textSecondary" className={classes.textHeader}>
+										<span>Minimum {this.state.ticker.low}</span>
+									</Typography>
+								</Grid>
+								<Grid item>
+									<Typography color="textSecondary" className={classes.textHeader}>
+										<span>24HTrading Volumes {this.state.ticker.volumes} BCST</span>
+									</Typography>
+								</Grid>
+							</Grid>}
 					</Grid>
         		</Grid>
 				{!!this.state.options &&
@@ -154,10 +175,63 @@ class BlockStockEXX extends React.Component {
 					<div className={classes.progress}>
 						<CircularProgress size={75} />
 					</div>}
-			</Paper>
+			</div>
 			
 		)
 	}
 }
 
-export default withStyles(styles)(BlockStockEXX)
+
+const BlockStockEXX = withStyles(styles)(BlockStockEXXComponent)
+
+
+class BlockStock extends React.Component {
+	state = { 
+		value: 0, 
+		symbol: symbolPairArray[0]
+	}
+  
+	handleChange = (event, value) => { 
+	  	this.setState({ value: value, symbol: symbolPairArray[value]})
+	}
+  
+	render() {
+		const { classes } = this.props
+		return (
+			<Grid container justify="center">
+				<Grid item  xs={12}>
+					<Typography variant="display2" align="center" gutterBottom>
+						BCST Trade Views On
+						<a href="https://www.exxvip.com/" rel="noopener noreferrer" target="_blank" >
+							<img 
+								alt="logo exx"
+								className={classes.exxLogo} 
+								src={exxLogo} />	
+						</a>
+					</Typography>
+				</Grid>
+				<Grid item  xs={12}>
+					<Paper elevation={1}>
+						<AppBar position="static" color="default">
+							<Tabs
+								value={this.state.value}
+								indicatorColor="primary"
+								textColor="primary"
+								onChange={this.handleChange}
+								fullWidth
+								centered>
+								{symbolPairArray.map((item, i) => (
+									<Tab key={i} label={item} />
+								))}
+							</Tabs>
+						</AppBar>
+						<BlockStockEXX key={this.state.symbol} symbol={this.state.symbol} />
+					</Paper>
+				</Grid>
+			</Grid>
+		)
+	}
+}
+  
+
+export default withStyles(styles)(BlockStock)
