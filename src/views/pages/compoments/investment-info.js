@@ -37,7 +37,8 @@ const styles = theme => ({
     table: {
         width: 0,
         overflowY: 'hidden',
-        overflowX: 'auto'
+        overflowX: 'auto',
+        marginBottom: 10
     }
 })
 
