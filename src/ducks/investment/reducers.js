@@ -10,6 +10,8 @@ import { investment } from '../types'
         principle: string,
         returnInvestment: string,
         secondLeft: string,
+        dateDeposit: string,
+        rateCNYdeposit: string
     },
 }
 */
@@ -19,7 +21,9 @@ const initInfoState  = {
     packetDay: null, 
     principle: null,
     returnInvestment: null,
-    secondLeft: null
+    secondLeft: null,
+    dateDeposit: null,
+    rateCNYdeposit: null,
 }
 
 export const infoReducer = (state = initInfoState, action) => {
@@ -30,7 +34,9 @@ export const infoReducer = (state = initInfoState, action) => {
                 packetDay: action.payload.packetDay, 
                 principle: action.payload.principle,
                 returnInvestment: action.payload.returnInvestment,
-                secondLeft: action.payload.secondLeft
+                secondLeft: action.payload.secondLeft,
+                dateDeposit: action.payload.dateDeposit,
+                rateCNYdeposit: action.payload.rateCNYdeposit,
             }
         default:
             return state

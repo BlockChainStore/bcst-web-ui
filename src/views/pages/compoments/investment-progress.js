@@ -9,6 +9,8 @@ import Paper from '@material-ui/core/Paper'
 import { LinearProgress } from './progress'
 import investmentActions from '../../../ducks/investment/actions'
 import Text from '../../languages'
+import axios from 'axios'
+
 
 const styles = theme => ({
     infoContainer: {
@@ -24,6 +26,8 @@ const styles = theme => ({
 })
 
 
+
+
 class InvestmentProgress extends React.Component {
 
     state = {
@@ -35,6 +39,29 @@ class InvestmentProgress extends React.Component {
         this.setState({ isloadding: true })
         investmentActions.withdrawInvestment()
     }
+    componentDidMount() {
+		const lowwerSymbol = 'bcst_cnyt'
+		const corsURL = 'https://cors-anywhere.herokuapp.com/'
+		const klinesApi = 'https://api.exx.com/data/v1/klines?'
+		const klinesParam = `market=${lowwerSymbol}&type=1day&size=1`
+		const klinesUri = corsURL + klinesApi + klinesParam
+		const headers = { 'X-Requested-With': 'XMLHttpRequest' }
+		axios.get(klinesUri, { headers })
+		.then(klinesRes => klinesRes.data)
+		.then(klinesRes => {
+			let options = null
+            let ticker = null
+            let rateNow = null
+			try {
+				const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
+                rateNow = lastTicker[2]
+			} catch (error) {
+				console.log('[klines res error]', klinesUri, klinesRes)
+			}
+			this.setState({ options, ticker, rateNow })
+        })
+        
+	}
 
     render() {
         const { classes, investment } = this.props
@@ -46,6 +73,8 @@ class InvestmentProgress extends React.Component {
         const principle = investment.info.principle / Math.pow(10, 8)
         const invest = (((principle * investment.info.annualized * packetDay / 365000)) * depositDay / packetDay).toFixed(8)
         const sum = parseFloat(principle) + parseFloat(invest)
+        const timeStamp1 = investment.info.rateCNYdeposit
+        const rateNow1 = this.state.rateNow
         const DateFormat = () => (
             <span> 
                 {secondLeftDays === 0
@@ -53,6 +82,7 @@ class InvestmentProgress extends React.Component {
                 :<Text  keyWord={'daysAndHoursLeft'} params={{days:secondLeftDays,hours:secondLeftHrs}}/>}
             </span>
             )
+        console.log('rateNow1 ' + rateNow1)
         return (
             <Paper elevation={2}>
                 <Grid container justify="center">
@@ -98,6 +128,20 @@ class InvestmentProgress extends React.Component {
                             color='textSecondary' 
                             noWrap>
                             <Text keyWord={'totalToday'} /> {sum} BCST
+                        </Typography>
+                        <Typography 
+                            gutterBottom 
+                            align="center" 
+                            color='textSecondary' 
+                            noWrap>
+                            On date deposit ≈ {timeStamp1} CNY : 1 BCST
+                        </Typography>
+                        <Typography 
+                            gutterBottom 
+                            align="center" 
+                            color='textSecondary' 
+                            noWrap>
+                            Now ≈ {rateNow1} CNY : 1 BCST
                         </Typography>
                     </Grid>
 

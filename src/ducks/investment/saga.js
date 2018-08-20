@@ -1,7 +1,7 @@
 import { take, put, call, select} from 'redux-saga/effects'
 import { BCSTContract, InvestmentContract} from '../../ethereum'
 import { saga , investment } from '../types'
-
+import axios from 'axios'
 
 function *submitInvest() {
     while(true) {
@@ -45,8 +45,17 @@ function *fetchStatus() {
         const privateKey = store.duck.user.info.privateKey
         const investmentContract = new InvestmentContract(privateKey)
         const investmentStatus = yield call(investmentContract.checkStatus)
-        console.log('[checkStatus]', investmentStatus)
-
+        console.log('[checkStatus]', investmentStatus) 
+        const lowwerSymbol = 'bcst_cnyt'
+		const corsURL = 'https://cors-anywhere.herokuapp.com/'
+        const klinesApi = 'https://api.exx.com/data/v1/klines?'
+        const callDate = investmentStatus.timestampDeposit - ( 60 * 60 * 24 * 8 )
+		const klinesParam = `market=${lowwerSymbol}&type=1day&size=1000&since=${callDate}000`
+		const klinesUri = corsURL + klinesApi + klinesParam
+		const headers = { 'X-Requested-With': 'XMLHttpRequest' }        
+        const klinesRes = yield call(axios.get, klinesUri, { headers })
+        const lastTicker = klinesRes.data.datas.data[0]
+        
         yield put({
             type: investment.UPDATE_INFO, 
             payload:  { 
@@ -54,7 +63,9 @@ function *fetchStatus() {
                 packetDay: investmentStatus.packetDay, 
                 principle: investmentStatus.principle,
                 returnInvestment: investmentStatus.returnInvestment,
-                secondLeft: investmentStatus.secondLeft
+                secondLeft: investmentStatus.secondLeft,
+                dateDeposit: investmentStatus.timestampDeposit,
+                rateCNYdeposit: lastTicker[2]
             }
         })
     }

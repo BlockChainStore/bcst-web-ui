@@ -33,7 +33,7 @@ export default {
             enter : 'Enter',
             unlockWallet : 'unlock wallet',
             logoutWallet : 'logout walllet',
-            statusPending : 'Status pending...',
+            statusPending : 'Status pending',
             principle : 'Principle',
             packet : 'Packet',
             daysAndHoursLeft : '{days} Days {hours} Hours left',

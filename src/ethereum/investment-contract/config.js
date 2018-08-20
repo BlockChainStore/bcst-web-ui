@@ -1,20 +1,6 @@
-export const contractAddress = '0x6a52466ef34c39303c8c9401bfce0dc1f3bf261c'
+export const contractAddress = '0xa40f92d93530ad9fd9ff15f0affb79f1bbc15238'
 
 export const abi = [
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
 	{
 		"constant": true,
 		"inputs": [
@@ -44,6 +30,10 @@ export const abi = [
 			{
 				"name": "packetDay",
 				"type": "uint256"
+			},
+			{
+				"name": "timestampDeposit",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -51,13 +41,46 @@ export const abi = [
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [],
-		"name": "Datenow",
+		"name": "withdraw",
 		"outputs": [
 			{
-				"name": "timeNow",
-				"type": "uint256"
+				"name": "result",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [
+			{
+				"name": "result",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
 			}
 		],
 		"payable": false,
@@ -88,36 +111,17 @@ export const abi = [
 		"type": "function"
 	},
 	{
-		"constant": false,
+		"constant": true,
 		"inputs": [],
-		"name": "withdraw",
+		"name": "Datenow",
 		"outputs": [
 			{
-				"name": "result",
-				"type": "bool"
+				"name": "timeNow",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_user",
-				"type": "address"
-			}
-		],
-		"name": "withdraw",
-		"outputs": [
-			{
-				"name": "result",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{

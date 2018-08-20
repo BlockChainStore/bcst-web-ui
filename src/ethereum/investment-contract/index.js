@@ -45,5 +45,7 @@ export default class InvestmentContract {
             { gasPrice, gasLimit }
         )
     }
+
+    
 }
 

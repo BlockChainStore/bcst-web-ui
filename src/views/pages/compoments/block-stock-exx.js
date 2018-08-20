@@ -111,7 +111,7 @@ class BlockStockEXXComponent extends React.Component {
 		const klinesApi = 'https://api.exx.com/data/v1/klines?'
 		const klinesParam = `market=${lowwerSymbol}&type=1day&size=1000`
 		const klinesUri = corsURL + klinesApi + klinesParam
-
+		
 		const headers = { 'X-Requested-With': 'XMLHttpRequest' }
 		axios.get(klinesUri, { headers })
 		.then(klinesRes => klinesRes.data)

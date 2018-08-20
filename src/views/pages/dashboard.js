@@ -6,6 +6,8 @@ import BlockCurrency from './compoments/block-currency'
 import BlockAddress from './compoments/block-address'
 import ehtLogo from '../assets/images/currency/eth.png'
 import bcstLogo from '../assets/images/currency/bcst.png'
+import BlockStockEXX from './compoments/block-stock-exx'
+
 
 const styles = theme => ({
     firstBlock: {
@@ -15,7 +17,11 @@ const styles = theme => ({
     block: {
         marginTop: theme.spacing.unit * 3,
         marginBottom: theme.spacing.unit * 2
-    }
+    },
+    blockExx: {
+        paddingTop: theme.spacing.unit * 8,
+        paddingBottom: theme.spacing.unit * 5
+    },
 })
 
 const Dashboard = (props) => {
@@ -32,7 +38,7 @@ const Dashboard = (props) => {
             </Grid>
             <Grid item xs={12}>
                 <Grid container justify="center">
-                    <Grid item xs={12} lg={10} className={classes.block}>
+                    <Grid item xs={12} lg={10} className={classes.blockExx}>
                         <Grid container spacing={spacing} >
                             <Grid item xs={12} lg={4}>
                                 <BlockCurrency 
@@ -47,6 +53,13 @@ const Dashboard = (props) => {
                                     symbol={'BCST'}/>
                             </Grid>
                         </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item xs={12} className={classes.block}>
+                <Grid container justify="center">
+                    <Grid item  xs={12} lg={10}>
+                        <BlockStockEXX />
                     </Grid>
                 </Grid>
             </Grid>
