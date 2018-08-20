@@ -19,14 +19,14 @@ const Home = (props) => {
             <Grid item xs={12} className={classes.block}>
                 <Grid container justify="center">
                     <Grid item  xs={12} lg={10}>
-                        <InvestmentInfo />
+                        <BlockStockEXX />
                     </Grid>
                 </Grid>
             </Grid>
             <Grid item xs={12} className={classes.block}>
                 <Grid container justify="center">
                     <Grid item  xs={12} lg={10}>
-                        <BlockStockEXX />
+                        <InvestmentInfo />
                     </Grid>
                 </Grid>
             </Grid>
