@@ -8,6 +8,9 @@ import Paper from '@material-ui/core/Paper'
 
 
 const styles = theme => ({
+	paper: {
+		height: '100%'
+	},
 	avatar: {
 		width: 50,
 		height: 50
@@ -17,7 +20,7 @@ const styles = theme => ({
 const BlockCurrency = (props) => {
 	const { classes, avatar, amount, symbol } = props
 	return (
-		<Paper elevation={1}>
+		<Paper elevation={1} className={classes.paper}>
 			<List>
 				<ListItem>
 					<Avatar

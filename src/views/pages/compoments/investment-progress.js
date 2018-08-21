@@ -10,7 +10,26 @@ import { LinearProgress } from './progress'
 import investmentActions from '../../../ducks/investment/actions'
 import Text from '../../languages'
 import axios from 'axios'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
 
+
+const CustomTableCell = withStyles(theme => ({
+    head: {
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.common.white,
+        textAlign: 'center',
+        fontSize: 14,
+    },
+    body: {
+        fontSize: 12,
+        textAlign: 'center',
+        
+    },
+}))(TableCell)
 
 const styles = theme => ({
     infoContainer: {
@@ -18,11 +37,29 @@ const styles = theme => ({
         padding: theme.spacing.unit * 3,
     },
     btnContainer: {
-        padding: theme.spacing.unit * 3,
+
     },
     principleText: {
         fontWeight: 'bold'
-    }
+    },
+    row: {
+        '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.background.default,
+        
+        },
+    },
+    cell: {
+        // backgroundColor: theme.palette.primary.light,
+        // color: theme.palette.common.white,
+
+    },
+    table: {
+        marginTop: 50,
+        maxWidth: 400,
+        overflowY: 'hidden',
+        overflowX: 'auto',
+        marginBottom: 30
+    },
 })
 
 
@@ -54,6 +91,7 @@ class InvestmentProgress extends React.Component {
             let rateNow = null
 			try {
 				const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
+                console.log('nowww '+lastTicker)
                 rateNow = lastTicker[2]
 			} catch (error) {
 				console.log('[klines res error]', klinesUri, klinesRes)
@@ -86,65 +124,67 @@ class InvestmentProgress extends React.Component {
         return (
             <Paper elevation={2}>
                 <Grid container justify="center">
-                    <Grid item xs={12} className={classes.infoContainer}>
-                        <Typography 
-                            gutterBottom 
-                            align="center" 
-                            variant="headline"
-                            color='textSecondary'>
-                            {investment.info.secondLeft !== '0'  ? <Text keyWord={'statusPending'} /> : <Text keyWord={'statusReady'} />}
-                        </Typography>
-                        <Typography 
-                            variant="display1" 
-                            align="center" 
-                            color='primary'
-                            className={classes.principleText}>
-                            <Text keyWord={'principle'} /> {principle} BCST
-                        </Typography>
-                        <Typography 
-                            gutterBottom 
-                            align="center" 
-                            color='textSecondary' 
-                            noWrap>
-                            <Text keyWord={'logtime'} /> {depositDay} <Text keyWord={'days'}/>
-                        </Typography>
-                        <Typography 
-                            gutterBottom 
-                            align="center" 
-                            color='textSecondary' 
-                            noWrap>
-                            <Text keyWord={'packet'} /> {packetDay} <Text keyWord={'days'} />, <Text keyWord={'annualized'} /> {annualized}
-                        </Typography>
-                        <Typography 
-                            gutterBottom 
-                            align="center" 
-                            color='textSecondary' 
-                            noWrap>
-                            <Text keyWord={'bonusToday'} /> {invest} BCST
-                        </Typography>
-                        <Typography 
-                            gutterBottom 
-                            align="center" 
-                            color='textSecondary' 
-                            noWrap>
-                            <Text keyWord={'totalToday'} /> {sum} BCST
-                        </Typography>
-                        <Typography 
-                            gutterBottom 
-                            align="center" 
-                            color='textSecondary' 
-                            noWrap>
-                            On date deposit ≈ {timeStamp1} CNY : 1 BCST
-                        </Typography>
-                        <Typography 
-                            gutterBottom 
-                            align="center" 
-                            color='textSecondary' 
-                            noWrap>
-                            Now ≈ {rateNow1} CNY : 1 BCST
-                        </Typography>
+                    <Grid item xs={12} className={classes.table}>
+                        <Table >
+                            <TableHead>
+                                <TableRow>
+                                    <CustomTableCell>{investment.info.secondLeft !== '0'  ? <Text keyWord={'statusPending'} /> : <Text keyWord={'statusReady'} />}</CustomTableCell>
+                                </TableRow>
+                            </TableHead>
+                        </Table >
+                        <Table >
+                            <TableBody>
+                                <TableRow className={classes.row} >
+                                    <CustomTableCell className={classes.cell} component="th" scope="row">
+                                        <Text keyWord={'principle'} /> 
+                                    </CustomTableCell>
+                                    <CustomTableCell numeric>{principle} BCST</CustomTableCell>
+                                </TableRow>
+                                <TableRow className={classes.row} >
+                                    <CustomTableCell className={classes.cell} component="th" scope="row">
+                                        <Text keyWord={'logtime'} /> 
+                                    </CustomTableCell>
+                                    <CustomTableCell numeric>{depositDay} <Text keyWord={'days'}/> </CustomTableCell>
+                                </TableRow>
+                                <TableRow className={classes.row} >
+                                    <CustomTableCell className={classes.cell} component="th" scope="row">
+                                        <Text keyWord={'packet'} /> 
+                                    </CustomTableCell>
+                                    <CustomTableCell numeric>{packetDay} <Text keyWord={'days'} /></CustomTableCell>
+                                </TableRow>
+                                <TableRow className={classes.row} >
+                                    <CustomTableCell className={classes.cell} component="th" scope="row">
+                                        <Text keyWord={'annualized'} /> 
+                                    </CustomTableCell>
+                                    <CustomTableCell numeric>{annualized}</CustomTableCell>
+                                </TableRow>
+                                <TableRow className={classes.row} >
+                                    <CustomTableCell className={classes.cell} component="th" scope="row">
+                                        <Text keyWord={'bonusToday'} /> 
+                                    </CustomTableCell>
+                                    <CustomTableCell numeric>{invest} BCST </CustomTableCell>
+                                </TableRow>
+                                <TableRow className={classes.row} >
+                                    <CustomTableCell className={classes.cell} component="th" scope="row">
+                                        <Text keyWord={'totalToday'} /> 
+                                    </CustomTableCell>
+                                    <CustomTableCell numeric>{sum} BCST</CustomTableCell>
+                                </TableRow>
+                                <TableRow className={classes.row} >
+                                    <CustomTableCell className={classes.cell} component="th" scope="row">
+                                        <Text keyWord={'dateDeposit'} />  
+                                    </CustomTableCell>
+                                    <CustomTableCell numeric>≈ {timeStamp1} CNY : 1 BCST</CustomTableCell>
+                                </TableRow>
+                                <TableRow className={classes.row} >
+                                    <CustomTableCell className={classes.cell} component="th" scope="row">
+                                        <Text keyWord={'now'} />  
+                                    </CustomTableCell>
+                                    <CustomTableCell numeric>≈ {rateNow1} CNY : 1 BCST</CustomTableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
                     </Grid>
-
                     <Grid item xs={12} className={classes.btnContainer} >
                         <Grid container justify="center">
                             <Grid item>

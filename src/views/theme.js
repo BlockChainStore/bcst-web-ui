@@ -9,5 +9,10 @@ export default createMuiTheme({
     },
     custom: {
         drawerWidth: 240
+    },
+    typography:{
+        display2: {
+            fontFamily: 'Montserrat UltraLight'
+        }
     }
 })

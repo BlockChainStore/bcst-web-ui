@@ -20,6 +20,9 @@ import { LinearProgress } from './progress'
 import investmentActions from '../../../ducks/investment/actions'
 import Text from '../../languages'
 
+
+
+
 const styles = theme => ({
     stepContainer: {
         backgroundColor: '#fff',
@@ -29,15 +32,22 @@ const styles = theme => ({
     btnContainer: {
         padding: theme.spacing.unit * 3,
     },
+    warning: {
+        color: '#f44336'
+    },
+    
 })
 
 
-const CheckYouAddressStep = ({ user , }) => {
+const CheckYouAddressStep = ({ user , classes }) => {
     return (
         <Grid container>
             <Grid item xs={12} >
-                <Typography variant="headline" align="center" gutterBottom>
+                <Typography variant="headline" align="center" >
                     <Text keyWord={'makeSure'}/>{user.info.address}
+                </Typography> 
+                <Typography variant="Subheading" align="center" className={classes.warning}>
+                    *You need a bit ETH for send transaction
                 </Typography> 
             </Grid>
         </Grid>
@@ -47,6 +57,7 @@ const CheckYouAddressStep = ({ user , }) => {
 
 const ChooseBCST = ({ user, onChangeBCST, state }) => {
     return (
+        
         <Grid container justify="center">
             <Grid item xs={12} >
                 <Typography align="center">

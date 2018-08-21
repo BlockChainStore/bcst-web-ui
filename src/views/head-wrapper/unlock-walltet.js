@@ -14,7 +14,7 @@ import Text from '../languages'
 import PrivateKeyBlock from './unlock-walltet-private-key'
 import KeystoreBlock from './unlock-walltet-keystore'
 import NewWalletBlock from './unlock-walltet-new-wallet'
-
+import SimpleModalWrapped from '../pages/compoments/warning-popup'
 
 const styles = theme => ({
     paper: {
@@ -67,11 +67,14 @@ class UnlockWallet extends React.Component {
                         color="inherit" >
                         <Text keyWord={'logoutWallet'} />             
                     </Button>
-                    : <Button 
+                    : 
+                    <Button 
                         onClick={this.handleOpen}  
                         color="inherit" >
                         <Text  keyWord={'unlockWallet'}/>
-                    </Button>}                
+                    </Button>
+                } 
+                { !!!isUnlockWallet&&<SimpleModalWrapped/> }         
                 <Modal
                     open={this.state.open}
                     onClose={this.handleClose}>
@@ -83,9 +86,9 @@ class UnlockWallet extends React.Component {
                                 indicatorColor="primary"
                                 textColor="primary"
                                 fullWidth>
-                                <Tab label={<Text keyWord={'privateKey'} />}/>
                                 <Tab label={<Text keyWord={'keyStore'} />}/>
                                 <Tab label={<Text keyWord={'newWalllet'} />}/>
+                                <Tab label={<Text keyWord={'privateKey'} />}/>
                             </Tabs>
                         </AppBar>
                         <SwipeableViews
@@ -93,13 +96,13 @@ class UnlockWallet extends React.Component {
                             index={this.state.tab}
                             onChangeIndex={this.handleChangeTabIndex}>
                             <TabContainer dir={theme.direction}>
-                                <PrivateKeyBlock handleUnlockWallet={this.handleUnlockWallet}/>
-                            </TabContainer>
-                            <TabContainer dir={theme.direction}>
                                 <KeystoreBlock handleUnlockWallet={this.handleUnlockWallet}/>
                             </TabContainer>
                             <TabContainer dir={theme.direction}>
                                 <NewWalletBlock />
+                            </TabContainer>
+                            <TabContainer dir={theme.direction}>
+                                <PrivateKeyBlock handleUnlockWallet={this.handleUnlockWallet}/>
                             </TabContainer>
                         </SwipeableViews>
                     </div>
@@ -108,7 +111,6 @@ class UnlockWallet extends React.Component {
         )
     }
 }
-
 
 const mapStateToProps = state => ({
   user: state.duck.user

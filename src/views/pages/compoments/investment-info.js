@@ -21,6 +21,7 @@ const CustomTableCell = withStyles(theme => ({
     body: {
         fontSize: 16,
         textAlign: 'center',
+        
     },
 }))(TableCell)
 
@@ -31,15 +32,20 @@ const styles = theme => ({
         },
     },
     cell: {
-        backgroundColor: theme.palette.primary.light,
-        color: theme.palette.common.white,
+        // backgroundColor: theme.palette.primary.light,
+        // color: theme.palette.common.white,
     },
     table: {
         width: 0,
         overflowY: 'hidden',
         overflowX: 'auto',
-        marginBottom: 10
+        marginBottom: 30
+    },
+    describe: {
+        marginTop: 30,
+        marginBottom: 30,
     }
+    
 })
 
 
@@ -48,10 +54,10 @@ const CustomizedTable = (props) => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Typography variant="display2" align="center" gutterBottom>
+                <Typography variant="display2" align="center" color='primary'>
                     <Text  keyWord={'project'} />
                 </Typography>
-                <Typography variant="subheading" align="center" gutterBottom>
+                <Typography variant="subheading" align="center" className={classes.describe}>
                     <Text keyWord={'describe'} />
                 </Typography>
             </Grid>

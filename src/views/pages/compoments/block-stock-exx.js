@@ -202,13 +202,7 @@ class BlockStock extends React.Component {
 			<Grid container justify="center">
 				<Grid item  xs={12}>
 					<Typography variant="display2" align="center" gutterBottom>
-						BCST Trade Views On
-						<a href="https://www.exxvip.com/" rel="noopener noreferrer" target="_blank" >
-							<img 
-								alt="logo exx"
-								className={classes.exxLogo} 
-								src={exxLogo} />	
-						</a>
+						BCST Trade Views On Exchage
 					</Typography>
 				</Grid>
 				<Grid item  xs={12}>
