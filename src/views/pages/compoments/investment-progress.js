@@ -76,30 +76,33 @@ class InvestmentProgress extends React.Component {
         this.setState({ isloadding: true })
         investmentActions.withdrawInvestment()
     }
+
     componentDidMount() {
-		const lowwerSymbol = 'bcst_cnyt'
-		const corsURL = 'https://cors-anywhere.herokuapp.com/'
-		const klinesApi = 'https://api.exx.com/data/v1/klines?'
-		const klinesParam = `market=${lowwerSymbol}&type=1day&size=1`
-		const klinesUri = corsURL + klinesApi + klinesParam
-		const headers = { 'X-Requested-With': 'XMLHttpRequest' }
-		axios.get(klinesUri, { headers })
-		.then(klinesRes => klinesRes.data)
-		.then(klinesRes => {
-			let options = null
+        
+        const lowwerSymbol = 'bcst_cnyt'
+        const corsURL = 'https://cors-anywhere.herokuapp.com/'
+        const klinesApi = 'https://api.exx.com/data/v1/klines?'
+        const klinesParam = `market=${lowwerSymbol}&type=1day&size=1`
+        const klinesUri = corsURL + klinesApi + klinesParam
+        const headers = { 'X-Requested-With': 'XMLHttpRequest' }
+        try {
+        axios.get(klinesUri, { headers })
+        .then(klinesRes => klinesRes.data)
+        .then(klinesRes => {
+            let options = null
             let ticker = null
             let rateNow = null
-			try {
-				const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
+            
+                const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
                 console.log('nowww '+lastTicker)
                 rateNow = lastTicker[2]
-			} catch (error) {
-				console.log('[klines res error]', klinesUri, klinesRes)
-			}
-			this.setState({ options, ticker, rateNow })
-        })
-        
-	}
+            
+            this.setState({ options, ticker, rateNow })
+        })} catch (error) {
+            console.log('[klines res error]', klinesUri)
+        }
+    }
+
 
     render() {
         const { classes, investment } = this.props

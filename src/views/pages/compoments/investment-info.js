@@ -39,7 +39,8 @@ const styles = theme => ({
         width: 0,
         overflowY: 'hidden',
         overflowX: 'auto',
-        marginBottom: 30
+        marginBottom: 30,
+        borderRadius: 10,
     },
     describe: {
         marginTop: 30,

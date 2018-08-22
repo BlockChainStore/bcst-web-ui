@@ -12,43 +12,38 @@ import Paper from '@material-ui/core/Paper';
 import Text from '../../languages'
 
 
-function getModalStyle() {
-  const top = 50 
-  const left = 50 
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 function getSteps() {
-    return ['Introduction', 'How To Protect Yourself from Phishers', 'How To Protect Yourself from Loss'];
+    return  [<Text keyWord={'whatIsBCST'} />,
+            <Text keyWord={'needUnderstand'} />,
+            <Text keyWord={'protectPhishers'} />,
+            <Text keyWord={'protectLoss'} />]
 }
   
 function getStepContent(step) {
     switch (step) {
-      case 0:
-        return  <pre><Text keyWord={'whatIsBCST'} /></pre>
-      case 1:
-        return <pre><Text keyWord={'protectPhishers'} /></pre>
-      case 2:
-        return <pre><Text keyWord={'protectLoss'} /></pre>
-      default:
-        return 'Unknown step';
+        case 0:
+            return  <pre><Text keyWord={'desWhatIsBCST'} /></pre>
+        case 1:
+            return  <pre><Text keyWord={'desNeedUnderstand'} /></pre>
+        case 2:
+            return <pre><Text keyWord={'desProtectPhishers'} /></pre>
+        case 3:
+            return <pre><Text keyWord={'desProtectLoss'} /></pre>
+        default:
+            return 'Unknown step';
     }
 }
   
 
 const styles = theme => ({
-  paper: {
-    position: 'center',
-    width: theme.spacing.unit * 50,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-  },
+    paper: {
+        minWidth: 1000,
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        maxHeight: 750 
+    },
 });
 
 class SimpleModal extends React.Component {
@@ -89,12 +84,13 @@ class SimpleModal extends React.Component {
     const { activeStep } = this.state;
     return (
       <div>
-        <Modal
+        <Modal 
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
         >
+            <div className={classes.paper}>
                 <div className={classes.root}>
                 <Stepper activeStep={activeStep} orientation="vertical">
                 {steps.map((label, index) => {
@@ -104,7 +100,6 @@ class SimpleModal extends React.Component {
                         <StepContent>
                         <Typography>{getStepContent(index)}</Typography>
                         <div className={classes.actionsContainer}>
-                            <div>
                             <Button
                                 disabled={activeStep === 0}
                                 onClick={this.handleBack}
@@ -115,13 +110,13 @@ class SimpleModal extends React.Component {
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={this.handleNext}
+                                onClick= {activeStep === steps.length - 1 ? this.handleClose : this.handleNext}
                                 className={classes.button}
                             >
                                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                             </Button>
-                            </div>
                         </div>
+                        
                         </StepContent>
                     </Step>
                     );
@@ -130,11 +125,10 @@ class SimpleModal extends React.Component {
                 {activeStep === steps.length && (
                 <Paper square elevation={0} className={classes.resetContainer}>
                     <Typography>All steps completed - you&quot;re finished</Typography>
-                    <Button onClick={this.handleReset} className={classes.button}>
-                    Reset
-                    </Button>
+
                 </Paper>
                 )}
+                </div>
             </div>
         </Modal>
       </div>

@@ -64,8 +64,8 @@ export default {
             totalToday : ' Total on today',
             dateDeposit : 'On date deposit',
             now : 'Now',
-            whatIsBCST : `What isBCST.io?
-BCSTWallet is a free, open-source, client-side interface.
+            whatIsBCST : `What is BCST.io?`,
+            desWhatIsBCST : `BCSTWallet is a free, open-source, client-side interface.
 We allow you to interact directly with the blockchain while remaining in full control of your keys & your funds.
 You and only you are responsible for your security.
 We cannot recover your funds or freeze your account if you visit a phishing site or lose your private key
@@ -93,10 +93,9 @@ It keeps track of who sent how many coins to whom, and what the balance of every
 It is stored and maintained by thousands of people (miners) across the globe who have special computers.
 The blocks in the blockchain are made up of all the individual transactions sent from MyEtherWallet, MetaMask, Exodus, Mist, Geth, Parity, and everywhere else.
 When you see your balance onBCST.io or view your transactions on etherscan.io, you are seeing data on the blockchain, not in our personal systems.
-Again: we are not a bank
-
-We need you to understand that we cannot...
-Access your account or send your funds for you.
+Again: we are not a bank`,
+            needUnderstand : `We need you to understand that we cannot...`,
+            desNeedUnderstand : `Access your account or send your funds for you.
 Recover or change your private key.
 Recover or reset your password.
 Reverse, cancel, or refund transactions.
@@ -105,16 +104,16 @@ You and only you are responsible for your security.
 Be diligent to keep your private key and password safe. Your private key is sometimes called your mnemonic phrase, keystore file, UTC file, JSON file, wallet file.
 If lose your private key or password, no one can recover it.
 If you enter your private key on a phishing website, you will have all your funds taken.`,
-            protectPhishers : `How To Protect Yourself from Phishers
-Phishers send you a message with a link to a website that looks just like bcst  bcs or your bank, but is not the real website. They steal your information and then steal your money.
+            protectPhishers : `How To Protect Yourself from Phishers`,
+            desProtectPhishers : `Phishers send you a message with a link to a website that looks just like bcst  bcs or your bank, but is not the real website. They steal your information and then steal your money.
             
 Always check the URL: https://www.bcst.io.
 Always make sure the URL bar hasbcst.io  Inc [US] in green.
 Do not trust messages or links sent to you randomly via email, Slack, Reddit, Twitter, etc.
 Always navigate directly to a site before you enter information. Do not enter information after clicking a link from a message or email.
 Install an AdBlocker and do not click ads on your search engine (e.g. Google).`,
-            protectLoss : `How To Protect Yourself from Loss
-If you lose your private key or password, it is gone forever. Don't lose it.
+            protectLoss : `How To Protect Yourself from Loss`,
+            desProtectLoss : `If you lose your private key or password, it is gone forever. Don't lose it.
             
 Make a backup of your private key and password. Do NOT just store it on your computer. Print it out on a piece of paper or save it to a USB drive.
 Store this paper or USB drive in a different physical location. A backup is not useful if it is destroyed by a fire or flood along with your laptop.
@@ -187,26 +186,28 @@ More Security Tips!`,
             totalToday : '总量',
             dateDeposit : '锁定日BCST价格',
             now : '实时价格',
-            whatIsBCST : `什么是BCST.io(锁仓钱包)？
-BCST锁仓钱包是一个免费的开源客户端界面。
-我们允许您直接与区块链进行互动，同时完全控制您的钥匙和资金。
+            whatIsBCST : `什么是BCST.io(锁仓钱包)？`,
+            desWhatIsBCST : `我们允许您直接与区块链进行互动，同时完全控制您的钥匙和资金。
 您和您只负责您的安全。
-如果您访问网上诱骗网站或丢失私钥，我们将无法收回您的资金或冻结您的帐户。`,
-            BCSTNotBank : `BCST.io(锁仓钱包)不是银行
+如果您访问网上诱骗网站或丢失私钥，我们将无法收回您的资金或冻结您的帐户。
+
+BCST.io(锁仓钱包)不是银行
 当您在银行或交易所开立账户时，他们会在您的系统中为您创建一个账户。
 银行会跟踪您的个人信息，帐户密码，余额，交易以及最终的资金。
 银行收取管理您的帐户并提供服务的费用，例如当您的卡被盗时退款交易。
 银行允许您写支票或从您的借记卡中扣款来汇款，上网检查您的余额，重置密码，如果您丢失了借记卡，还可以获得新的借记卡。
-您在银行或交易所拥有一个帐户，他们决定您可以发送多少钱，在哪里发送，以及持有多少可疑存款。全部收费。`,
-            BCSTIsInterface : `BcstWallet是一个接口
+您在银行或交易所拥有一个帐户，他们决定您可以发送多少钱，在哪里发送，以及持有多少可疑存款。全部收费。
+
+BcstWallet是一个接口
 在bcstWallet上创建帐户时，您将生成一组加密数字：您的私钥和公钥（地址）。
 您的密钥的处理完全在您的计算机上，在您的浏览器中进行。
 我们从不传输，接收或存储您的私钥，密码或其他帐户信息。
 我们不收取交易费。
 您只是使用我们的界面直接与区块链进行交互。
 如果您将公钥（地址）发送给某人，他们可以向您发送ETH或令牌。👍
-如果您将私钥发送给某人，他们现在可以完全控制您的帐户。👎`,
-            BCSTIsBlockchain : `等等，bcst是区块链？
+如果您将私钥发送给某人，他们现在可以完全控制您的帐户。👎
+
+等等，bcst是区块链？
 Bcst是基于eth区块链上建立的token资产
 区块链就像一个巨大的，全球性的，分散的电子表格。
 它会跟踪谁向谁发送了多少硬币，以及每个帐户的余额是多少。
@@ -214,8 +215,8 @@ Bcst是基于eth区块链上建立的token资产
 区块链中的区块由从MyEtherWallet，MetaMask，Exodus，Mist，Geth，Parity和其他任何地方发送的所有单个交易组成。
 当您在bcst.io上看到余额或在etherscan.io上查看您的交易时，您会看到区块链上的数据，而不是我们的个人系统中的数据。
 再说一遍：我们不是银行`,
-            youNeedUnderstand : `我们需要你理解我们不能 ......
-访问您的帐户或为您发送资金。
+needUnderstand : `我们需要你理解我们不能 ......`,
+desNeedUnderstand : `访问您的帐户或为您发送资金。
 恢复或更改您的私钥。
 恢复或重置密码。
 反向，取消或退款交易。
@@ -229,8 +230,8 @@ Bcst是基于eth区块链上建立的token资产
 因为这是权力下放和区块链的重点。
 当您想要转移资金时，您不必依赖您的银行，政府或其他任何人。
 您无需依赖交易所或银行的安全性来保证您的资金安全。`,
-            protectPhishers : `如何保护自己免受网络钓鱼者攻击
-网络钓鱼者会向您发送一条消息，其中包含指或您的银行的网站链接，但不是真正的网站。他们窃取你的信息，然后窃取你的钱。
+            protectPhishers : `如何保护自己免受网络钓鱼者攻击`,
+            desProtectPhishers : `网络钓鱼者会向您发送一条消息，其中包含指或您的银行的网站链接，但不是真正的网站。他们窃取你的信息，然后窃取你的钱。
 
 请务必检查网址： https://www.bcst.io 。
 始终确保URL栏bcst.io Inc [US]为绿色。
@@ -240,8 +241,8 @@ Bcst是基于eth区块链上建立的token资产
 
 如何保护自己免受诈骗
 人们会试图让你给他们钱，以换取一切。`,
-            protectLoss : `如何保护自己免受损失
-如果您丢失了私钥或密码，它将永远消失。不要失去它。
+            protectLoss : `如何保护自己免受损失`,
+            desProtectLoss : `如果您丢失了私钥或密码，它将永远消失。不要失去它。
 
 备份您的私钥和密码。不要只是将它存储在您的计算机上。将其打印在一张纸上或将其保存到USB驱动器中。
 将此纸张或USB驱动器存放在不同的物理位置。如果备份与笔记本电脑一起被火灾或洪水摧毁，则该备份无效。
