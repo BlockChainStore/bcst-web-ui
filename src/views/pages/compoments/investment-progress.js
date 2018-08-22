@@ -15,7 +15,19 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import Modal from '@material-ui/core/Modal';
 
+
+function getModalStyle() {
+    const top = 50
+    const left = 50
+  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+}
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -37,7 +49,11 @@ const styles = theme => ({
         padding: theme.spacing.unit * 3,
     },
     btnContainer: {
-
+        padding : 10
+    },
+    btnContainerWtithdraw: {
+        width : 520,
+        padding : 10
     },
     principleText: {
         fontWeight: 'bold'
@@ -60,6 +76,13 @@ const styles = theme => ({
         overflowX: 'auto',
         marginBottom: 30
     },
+    paper: {
+        position: 'absolute',
+        width: theme.spacing.unit * 50,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
+    },
 })
 
 
@@ -68,7 +91,15 @@ const styles = theme => ({
 class InvestmentProgress extends React.Component {
 
     state = {
-        isloadding: false
+        isloadding: false,
+        open: false,
+    }
+    handleOpen = () => {
+        this.setState({ open: true });
+    }
+    
+    handleClose = () => {
+        this.setState({ open: false });
     }
 
     handleWithdraw = () => {
@@ -76,28 +107,39 @@ class InvestmentProgress extends React.Component {
         this.setState({ isloadding: true })
         investmentActions.withdrawInvestment()
     }
+    handleDepositAgain = () => {
+        const { investment,investmentActions } = this.props
+        this.setState({ isloadding: true })
+        const packetDay = investment.info.packetDay
+        const principle = investment.info.principle
+        investmentActions.withdrawInvestment()
+        investmentActions.onSubmitInvestment(principle,packetDay)
+    }
+    handleWithdrawTo = () => {
+        const { investmentActions } = this.props
+        // this.setState({ isloadding: true })
+        // investmentActions.withdrawInvestment()
+    }
 
     componentDidMount() {
         
         const lowwerSymbol = 'bcst_cnyt'
         const corsURL = 'https://cors-anywhere.herokuapp.com/'
         const klinesApi = 'https://api.exx.com/data/v1/klines?'
-        const klinesParam = `market=${lowwerSymbol}&type=1day&size=1`
+        const klinesParam = `market=${lowwerSymbol}&type=1min&size=1`
         const klinesUri = corsURL + klinesApi + klinesParam
         const headers = { 'X-Requested-With': 'XMLHttpRequest' }
         try {
-        axios.get(klinesUri, { headers })
-        .then(klinesRes => klinesRes.data)
-        .then(klinesRes => {
-            let options = null
-            let ticker = null
-            let rateNow = null
-            
-                const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
-                console.log('nowww '+lastTicker)
-                rateNow = lastTicker[2]
-            
-            this.setState({ options, ticker, rateNow })
+            axios.get(klinesUri, { headers })
+            .then(klinesRes => klinesRes.data)
+            .then(klinesRes => {
+                let options = null
+                let ticker = null
+                let rateNow = null
+                    const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
+                    console.log('nowww '+lastTicker)
+                    rateNow = lastTicker[2]
+                this.setState({ options, ticker, rateNow })
         })} catch (error) {
             console.log('[klines res error]', klinesUri)
         }
@@ -188,7 +230,7 @@ class InvestmentProgress extends React.Component {
                             </TableBody>
                         </Table>
                     </Grid>
-                    <Grid item xs={12} className={classes.btnContainer} >
+                    <Grid item xs={12} className={classes.btnContainerWtithdraw} >
                         <Grid container justify="center">
                             <Grid item>
                                 <Button
@@ -203,7 +245,48 @@ class InvestmentProgress extends React.Component {
                             </Grid>
                         </Grid>
                     </Grid>
-
+                    <Grid item xs={12} className={classes.btnContainer} >
+                        <Grid container justify="center" spacing={24}>
+                            <Grid item>
+                                <Button
+                                    disabled={this.state.isloadding || investment.info.secondLeft !== '0'}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.handleDepositAgain}>
+                                    {investment.info.secondLeft !== '0'
+                                        ? <Text keyWord={'depositAgain'} />
+                                        : <Text keyWord={'depositAgain'} />}
+                                </Button>
+                            </Grid>
+                            <Grid item>    
+                                    {investment.info.secondLeft !== '0'
+                                        ? <div>
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={this.handleOpen}>
+                                                <Text keyWord={'withdrawTo'} />
+                                            </Button>
+                                            <Modal
+                                            aria-labelledby="simple-modal-title"
+                                            aria-describedby="simple-modal-description"
+                                            open={this.state.open}
+                                            onClose={this.handleClose}
+                                            >
+                                            <div style={getModalStyle()} className={classes.paper}>
+                                                <Typography variant="title" id="modal-title">
+                                                Text in a modal
+                                                </Typography>
+                                                <Typography variant="subheading" id="simple-modal-description">
+                                                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                                                </Typography>
+                                            </div>
+                                            </Modal>
+                                        </div>
+                                        : <Text keyWord={'withdrawTo'} />}
+                            </Grid>
+                        </Grid>
+                    </Grid>
                     {this.state.isloadding &&
                         <Grid item xs={12} >
                             <LinearProgress />

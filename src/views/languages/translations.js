@@ -120,6 +120,8 @@ Store this paper or USB drive in a different physical location. A backup is not 
 Do not store your private key in Dropbox, Google Drive, or other cloud storage. If that account is compromised, your funds will be stolen.
 If you have more than 1-week's worth of pay worth of cryptocurrency, get a hardware wallet. No excuses. It's worth it. I promise.
 More Security Tips!`,
+            depositAgain : 'deposit Again',
+            withdrawTo : 'withdrawTo',
         }
     },
     zh: {
@@ -248,6 +250,8 @@ desNeedUnderstand : `访问您的帐户或为您发送资金。
 将此纸张或USB驱动器存放在不同的物理位置。如果备份与笔记本电脑一起被火灾或洪水摧毁，则该备份无效。
 请勿将您的私钥存储在Dropbox，Google云端硬盘或其他云存储中。如果该帐户遭到入侵，您的资金将被盗。
 如果您有超过1周的加密货币价值，请购买硬件钱包。没有理由。这很值得。我承诺。`,
+            depositAgain : 'deposit Again',
+            withdrawTo : 'withdraw To',
         }
     }
 }
