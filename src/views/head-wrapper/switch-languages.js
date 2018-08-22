@@ -10,10 +10,29 @@ import userActions from '../../ducks/user/actions'
 
 
 const styles = theme => ({
+    container: {
+        position: 'fixed',
+        zIndex: 1500,
+        top: 0,
+        right: 0,
+        minHeight: 56,
+        [theme.breakpoints.up('sm')]: {
+            minHeight: 64
+        }
+    },
     avatar: {
         color: theme.palette.primary.main,
         fontSize: 'medium',
         backgroundColor: '#fff'
+    },
+    button: {
+        padding: '8px 16px',
+        [theme.breakpoints.up('sm')]: {
+            padding: '12px 16px',
+        }
+    },
+    menu: {
+        zIndex: 1510,
     }
 })
 
@@ -42,11 +61,12 @@ class SwitchLanguages extends React.PureComponent {
         const open = Boolean(anchorEl)
 
         return (
-            <div>
-                <Button onClick={this.handleMenu}>
+            <div className={classes.container}>
+                <Button className={classes.button} onClick={this.handleMenu}>
                    <Avatar className={classes.avatar}>{language}</Avatar>
                 </Button>
                 <Menu
+                    className={classes.menu}
                     anchorEl={anchorEl}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     transformOrigin={{ vertical: 'top', horizontal: 'right' }}

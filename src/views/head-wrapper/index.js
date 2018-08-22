@@ -6,9 +6,9 @@ import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import bcstLogo from '../assets/images/logo-wide.png'
-
 import NavTopBar from './header'
 import MenuList from './menu-list'
+import SwitchLanguages from './switch-languages'
 
 
 const styles = theme => ({
@@ -111,6 +111,7 @@ class MiniDrawer extends React.Component {
 				this.state.open && classes.contentDrawerOpen)}>
 				{this.props.children}
 			</main>
+			<SwitchLanguages />
 		</div>
 		)
 	}

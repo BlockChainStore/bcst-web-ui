@@ -10,11 +10,11 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
 import SimpleModalWrapped from './unlock-walltet' 
 import bcstLogo from '../assets/images/logo-wide-white.png'
-import SwitchLanguages from './switch-languages'
 import Text from '../languages'
 
 const styles = theme => ({
     appBar: {
+        paddingRight: 72,
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
@@ -105,7 +105,7 @@ const NavTopBar = ({
                 <div className={classes.flex}></div>
 
                 <SimpleModalWrapped />
-                <SwitchLanguages />
+                
             </Toolbar>
         </AppBar>
     )
