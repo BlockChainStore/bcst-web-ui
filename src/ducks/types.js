@@ -18,3 +18,8 @@ export const saga = {
     UNLOCK_WALLET_SUCCESS: 'saga/user/UNLOCK_WALLET_SUCCESS',
     LOGOUT_WALLET: 'saga/user/LOGOUT_WALLET',
 }
+
+export const common = {
+    UPDATE_SENDTRANSACTION: 'common/sendTransaction/UPDATE',
+    UPDATE_ALERT: 'common/alert/UPDATE',
+}

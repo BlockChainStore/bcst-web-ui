@@ -16,6 +16,9 @@ import KeystoreBlock from './unlock-walltet-keystore'
 import NewWalletBlock from './unlock-walltet-new-wallet'
 import SimpleModalWrapped from '../pages/compoments/warning-popup'
 
+
+
+
 const styles = theme => ({
     paper: {
         position: 'absolute',

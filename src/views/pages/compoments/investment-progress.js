@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import { LinearProgress } from './progress'
 import investmentActions from '../../../ducks/investment/actions'
@@ -16,7 +15,8 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Modal from '@material-ui/core/Modal';
-
+import TextField from '@material-ui/core/TextField'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 function getModalStyle() {
     const top = 50
@@ -64,11 +64,6 @@ const styles = theme => ({
         
         },
     },
-    cell: {
-        // backgroundColor: theme.palette.primary.light,
-        // color: theme.palette.common.white,
-
-    },
     table: {
         marginTop: 50,
         maxWidth: 400,
@@ -83,6 +78,15 @@ const styles = theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
     },
+    button: {
+        margin: theme.spacing.unit,
+    },
+    progress: {
+        position: 'absolute'
+    },
+    warning: {
+        color: '#f44336'
+    },
 })
 
 
@@ -93,7 +97,9 @@ class InvestmentProgress extends React.Component {
     state = {
         isloadding: false,
         open: false,
+        isInputDisable: false
     }
+    
     handleOpen = () => {
         this.setState({ open: true });
     }
@@ -104,21 +110,20 @@ class InvestmentProgress extends React.Component {
 
     handleWithdraw = () => {
         const { investmentActions } = this.props
-        this.setState({ isloadding: true })
-        investmentActions.withdrawInvestment()
+        this.setState({ isloadding: true, isInputDisable: true })
+        
+        investmentActions.withdrawInvestment({
+            address: null, 
+            amount: null
+        })
     }
-    handleDepositAgain = () => {
-        const { investment,investmentActions } = this.props
-        this.setState({ isloadding: true })
-        const packetDay = investment.info.packetDay
-        const principle = investment.info.principle
-        investmentActions.withdrawInvestment()
-        investmentActions.onSubmitInvestment(principle,packetDay)
-    }
+
     handleWithdrawTo = () => {
         const { investmentActions } = this.props
-        // this.setState({ isloadding: true })
-        // investmentActions.withdrawInvestment()
+        const address = this.inputAddress.value
+        const amount = this.inputAmount.value
+        this.setState({ isloadding: true, isInputDisable: true })
+        investmentActions.withdrawInvestment({address, amount})
     }
 
     componentDidMount() {
@@ -129,20 +134,20 @@ class InvestmentProgress extends React.Component {
         const klinesParam = `market=${lowwerSymbol}&type=1min&size=1`
         const klinesUri = corsURL + klinesApi + klinesParam
         const headers = { 'X-Requested-With': 'XMLHttpRequest' }
-        try {
-            axios.get(klinesUri, { headers })
-            .then(klinesRes => klinesRes.data)
-            .then(klinesRes => {
-                let options = null
-                let ticker = null
-                let rateNow = null
-                    const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
-                    console.log('nowww '+lastTicker)
+        axios.get(klinesUri, { headers })
+		.then(klinesRes => klinesRes.data)
+		.then(klinesRes => {
+			let rateNow = null
+			try {
+				const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
                     rateNow = lastTicker[2]
-                this.setState({ options, ticker, rateNow })
-        })} catch (error) {
-            console.log('[klines res error]', klinesUri)
-        }
+                    console.log('lastTicker  '+ lastTicker)
+            }catch (error) {
+                        console.log('[klines res error]', klinesUri, klinesRes)
+                    }
+                console.log('rateNow  '+ rateNow)
+                this.setState({ rateNow })
+            })
     }
 
 
@@ -231,6 +236,11 @@ class InvestmentProgress extends React.Component {
                         </Table>
                     </Grid>
                     <Grid item xs={12} className={classes.btnContainerWtithdraw} >
+                        <Grid container justify="center" className={classes.warning}>
+                            <Text keyWord={'waringEth'} />
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12} className={classes.btnContainerWtithdraw} >
                         <Grid container justify="center">
                             <Grid item>
                                 <Button
@@ -247,7 +257,7 @@ class InvestmentProgress extends React.Component {
                     </Grid>
                     <Grid item xs={12} className={classes.btnContainer} >
                         <Grid container justify="center" spacing={24}>
-                            <Grid item>
+                            {/* <Grid item>
                                 <Button
                                     disabled={this.state.isloadding || investment.info.secondLeft !== '0'}
                                     variant="contained"
@@ -257,33 +267,61 @@ class InvestmentProgress extends React.Component {
                                         ? <Text keyWord={'depositAgain'} />
                                         : <Text keyWord={'depositAgain'} />}
                                 </Button>
-                            </Grid>
+                            </Grid> */}
                             <Grid item>    
                                     {investment.info.secondLeft !== '0'
-                                        ? <div>
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={this.handleOpen}>
-                                                <Text keyWord={'withdrawTo'} />
-                                            </Button>
-                                            <Modal
-                                            aria-labelledby="simple-modal-title"
-                                            aria-describedby="simple-modal-description"
-                                            open={this.state.open}
-                                            onClose={this.handleClose}
-                                            >
+                                        ? ''
+                                        : <div>
+                                        <Button
+                                            disabled={this.state.isloadding || investment.info.secondLeft !== '0'}
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={this.handleOpen}>
+                                            <Text keyWord={'withdrawToAddress'} />
+                                        </Button>
+                                        <Modal
+                                        aria-labelledby="simple-modal-title"
+                                        aria-describedby="simple-modal-description"
+                                        open={this.state.open}
+                                        onClose={this.handleClose}
+                                        >
                                             <div style={getModalStyle()} className={classes.paper}>
-                                                <Typography variant="title" id="modal-title">
-                                                Text in a modal
-                                                </Typography>
-                                                <Typography variant="subheading" id="simple-modal-description">
-                                                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                                                </Typography>
+                                                <Text keyWord={'withdrawTo'} />
+                                            <TextField
+                                                id="with-placeholder"
+                                                label={<Text keyWord={'addressTransfer'} />}
+                                                placeholder="eg. 0x8267bc95786355106d56b28a172b1af30d8cf7a7"
+                                                className={classes.textField}
+                                                inputRef={ref1 => this.inputAddress = ref1}
+                                                margin="normal"
+                                                fullWidth
+                                                />
+                                            <TextField
+                                                id="with-placeholder"
+                                                label={<Text keyWord={'amount'} />}
+                                                placeholder="BCST"
+                                                className={classes.textField}
+                                                inputRef={ref2 => this.inputAmount = ref2}
+                                                margin="normal"
+                                                fullWidth
+                                                />
+                                            <Grid container justify='flex-end'>
+                                                <Grid item>
+                                                    <Button
+                                                        onClick={this.handleWithdrawTo}
+                                                        className={classes.button}
+                                                        disabled={this.state.isInputDisable}
+                                                        variant="contained" 
+                                                        color="primary">
+                                                        {this.state.isInputDisable && 
+                                                            <CircularProgress size={25} className={classes.progress} />}
+                                                        <Text  keyWord={'enter'}/>
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
                                             </div>
-                                            </Modal>
-                                        </div>
-                                        : <Text keyWord={'withdrawTo'} />}
+                                        </Modal>
+                                    </div>}
                             </Grid>
                         </Grid>
                     </Grid>

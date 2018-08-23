@@ -34,7 +34,7 @@ const Home = (props) => {
             <Grid item xs={12} className={classes.block}>
                 <Grid container justify="center">
                     <Grid item xs={12} lg={10}>
-                        {investment.info.principle !== '0'
+                        {investment.info.principle !== '0' || !!!investment.info.principle
                         ? <InvestmentProgress />
                         : <InvestmentStep />}
                     </Grid>

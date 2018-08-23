@@ -19,6 +19,7 @@ import Paper from '@material-ui/core/Paper'
 import { LinearProgress } from './progress'
 import investmentActions from '../../../ducks/investment/actions'
 import Text from '../../languages'
+import AlertSnackbar from './alert'
 
 
 
@@ -46,8 +47,9 @@ const CheckYouAddressStep = ({ user , classes }) => {
                 <Typography variant="headline" align="center" >
                     <Text keyWord={'makeSure'}/>{user.info.address}
                 </Typography> 
-                <Typography variant="Subheading" align="center" className={classes.warning}>
-                    *You need a bit ETH for send transaction
+                <Typography variant="subheading" align="center" className={classes.warning}>
+                    <Text keyWord={'waringEth'} />
+                    
                 </Typography> 
             </Grid>
         </Grid>
@@ -182,7 +184,6 @@ const getSteps = () => {
 class InvestmentStep extends React.Component {
     state = {
         activeStep: 0,
-        isloadding: false,
         bcstInputErr: false,
         bcst: 0,
         dayInputErr: false,
@@ -242,12 +243,12 @@ class InvestmentStep extends React.Component {
     handleConfirm = () => {
         const { investmentActions } = this.props
         investmentActions.onSubmitInvestment(this.state.bcst, this.state.day)
-        this.setState({ isloadding: true })
+
     }
     
     render() {
         const steps = getSteps()
-        const { classes, user } = this.props
+        const { classes, user, common } = this.props
         const { activeStep } = this.state
         const Component = steps[activeStep].component
         return (
@@ -281,7 +282,7 @@ class InvestmentStep extends React.Component {
                                 </Button>
                                 {activeStep === steps.length - 1 
                                     ? <Button
-                                        disabled={this.state.isloadding}
+                                        disabled={common.sendTransaction.loading}
                                         variant="contained"
                                         color="primary"
                                         onClick={this.handleConfirm}
@@ -300,7 +301,7 @@ class InvestmentStep extends React.Component {
                         </Grid>
                     </Grid>
 
-                    {this.state.isloadding &&
+                    {common.sendTransaction.loading &&
                         <Grid item xs={12} >
                             <LinearProgress />
                         </Grid>}
@@ -312,7 +313,8 @@ class InvestmentStep extends React.Component {
 
 const mapStateToProps = state => ({
     user: state.duck.user,
-    investment: state.duck.investment
+    investment: state.duck.investment,
+    common: state.common
 })
 
 const mapDispatchToProps = dispatch => ({

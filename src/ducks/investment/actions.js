@@ -8,8 +8,14 @@ actions.onSubmitInvestment = (amount, packetDay) => ({
     payload: { amount, packetDay }
 })
 
-actions.withdrawInvestment = () => ({
+actions.withdrawInvestment = (address, amount) => ({
     type: saga.WITHDRAW_INVESTMENT,
+    payload: { address, amount }
+})
+
+actions.withdrawTo = (address, amount) => ({
+    type: saga.WITHDRAW_TO,
+    payload: { address, amount }
 })
 
 export default actions

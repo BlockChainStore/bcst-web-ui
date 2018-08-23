@@ -10,7 +10,7 @@ import commonSaga from './common/saga'
 
 const reducer = combineReducers({
     user: userReducers,
-    investment: investmentReducers
+    investment: investmentReducers,
 })
 
 function* rootSaga() {

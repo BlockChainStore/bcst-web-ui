@@ -12,6 +12,7 @@ import Home from '../views/pages/home'
 import Dashboard from '../views/pages/dashboard'
 import Investment from '../views/pages/investment.js'
 import PageNotFound from '../views/pages/page-not-found'
+import AlertSnackbar from '../views/pages/compoments/alert'
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
 				<BrowserRouter>
 					<ConnectedRouter history={history}>
 						<HeadWrapper>
+							<AlertSnackbar/>
 							<Switch>
 								<Route 
 									exact
@@ -36,7 +38,6 @@ const App = () => {
 										path='/investment' 
 										component={pageTransition(Investment)} />}
 								<Route component={PageNotFound} />
-
 							</Switch>
 						</HeadWrapper>
 					</ConnectedRouter>

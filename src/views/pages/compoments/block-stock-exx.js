@@ -10,7 +10,6 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import AppBar from '@material-ui/core/AppBar'
 import axios from 'axios'
-import exxLogo from '../../assets/images/logo-exx.png'
 
 
 const styles = theme => ({
@@ -197,7 +196,6 @@ class BlockStock extends React.Component {
 	}
   
 	render() {
-		const { classes } = this.props
 		return (
 			<Grid container justify="center">
 				<Grid item  xs={12}>
