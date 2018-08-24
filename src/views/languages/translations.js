@@ -64,13 +64,13 @@ export default {
             totalToday : ' Total on today',
             dateDeposit : 'On date deposit',
             now : 'Now',
-            whatIsBCST : `What is BCST.io?`,
+            whatIsBCST : `What is bcst.bcshchain.io?`,
             desWhatIsBCST : `BCSTWallet is a free, open-source, client-side interface.
 We allow you to interact directly with the blockchain while remaining in full control of your keys & your funds.
 You and only you are responsible for your security.
 We cannot recover your funds or freeze your account if you visit a phishing site or lose your private key
             
-BCST.IO is not a Bank
+bcst.bcshchain.io is not a Bank
 When you open an account with a bank or exchange, they create an account for you in their system.
 The bank keeps track of your personal information, account passwords, balances, transactions and ultimately your money.
 The bank charge fees to manage your account and provide services, like refunding transactions when your card gets stolen.
@@ -78,7 +78,7 @@ The bank allows you to write a check or charge your debit card to send money, go
 You have an account with the bank or exchange and they decide how much money you can send, where you can send it, and how long to hold on a suspicious deposit. All for a fee.
             
 BCST is an Interface
-When you create an account on BCST.IO you are generating a cryptographic set of numbers: your private key and your public key (address).
+When you create an account on bcst.bcshchain.io you are generating a cryptographic set of numbers: your private key and your public key (address).
 The handling of your keys happens entirely on your computer, inside your browser.
 We never transmit, receive or store your private key, password, or other account information.
 We do not charge a transaction fee.
@@ -107,7 +107,7 @@ If you enter your private key on a phishing website, you will have all your fund
             protectPhishers : `How To Protect Yourself from Phishers`,
             desProtectPhishers : `Phishers send you a message with a link to a website that looks just like bcst  bcs or your bank, but is not the real website. They steal your information and then steal your money.
             
-Always check the URL: https://www.bcst.io.
+Always check the URL: https://bcst.bcshchain.io.
 Always make sure the URL bar hasbcst.io  Inc [US] in green.
 Do not trust messages or links sent to you randomly via email, Slack, Reddit, Twitter, etc.
 Always navigate directly to a site before you enter information. Do not enter information after clicking a link from a message or email.
@@ -207,12 +207,12 @@ More Security Tips!`,
             totalToday : '总量',
             dateDeposit : '锁定日BCST价格',
             now : '实时价格',
-            whatIsBCST : `什么是BCST.io(锁仓钱包)？`,
+            whatIsBCST : `什么是bcst.bcshchain.io(锁仓钱包)？`,
             desWhatIsBCST : `我们允许您直接与区块链进行互动，同时完全控制您的钥匙和资金。
 您和您只负责您的安全。
 如果您访问网上诱骗网站或丢失私钥，我们将无法收回您的资金或冻结您的帐户。
 
-BCST.io(锁仓钱包)不是银行
+bcst.bcshchain.io (锁仓钱包)不是银行
 当您在银行或交易所开立账户时，他们会在您的系统中为您创建一个账户。
 银行会跟踪您的个人信息，帐户密码，余额，交易以及最终的资金。
 银行收取管理您的帐户并提供服务的费用，例如当您的卡被盗时退款交易。
@@ -234,7 +234,7 @@ Bcst是基于eth区块链上建立的token资产
 它会跟踪谁向谁发送了多少硬币，以及每个帐户的余额是多少。
 它由全球数千名拥有特殊计算机的人（矿工）存储和维护。
 区块链中的区块由从MyEtherWallet，MetaMask，Exodus，Mist，Geth，Parity和其他任何地方发送的所有单个交易组成。
-当您在bcst.io上看到余额或在etherscan.io上查看您的交易时，您会看到区块链上的数据，而不是我们的个人系统中的数据。
+当您在bcst.bcshchain.io上看到余额或在etherscan.io上查看您的交易时，您会看到区块链上的数据，而不是我们的个人系统中的数据。
 再说一遍：我们不是银行`,
 needUnderstand : `我们需要你理解我们不能 ......`,
 desNeedUnderstand : `访问您的帐户或为您发送资金。
@@ -245,17 +245,17 @@ desNeedUnderstand : `访问您的帐户或为您发送资金。
 您和您只负责您的安全。
 努力保持您的私钥和密码安全。您的私钥有时称为助记短语，密钥库文件，UTC文件，JSON文件，钱包文件。
 如果丢失您的私钥或密码，没有人可以恢复它。
-如果您在网上诱骗网站上输入私钥，您将获得所有资金。
+如果您在网上钓鱼网站上输入私钥，您将丢失您所有资产。
 
-如果bcst.io不能做那些事情，重点是什么？
+如果bcst.bcshchain.io不能做那些事情，重点是什么？
 因为这是权力下放和区块链的重点。
 当您想要转移资金时，您不必依赖您的银行，政府或其他任何人。
 您无需依赖交易所或银行的安全性来保证您的资金安全。`,
             protectPhishers : `如何保护自己免受网络钓鱼者攻击`,
             desProtectPhishers : `网络钓鱼者会向您发送一条消息，其中包含指或您的银行的网站链接，但不是真正的网站。他们窃取你的信息，然后窃取你的钱。
 
-请务必检查网址： https://www.bcst.io 。
-始终确保URL栏bcst.io Inc [US]为绿色。
+请务必检查网址： https://bcst.bcshchain.io 。
+始终确保URL栏bcst.bcshchain.io Inc [US]为绿色。
 不要信任通过电子邮件，Slack，Reddit，Twitter等随机发送给您的邮件或链接。
 在输入信息之前，始终直接导航到站点。单击邮件或电子邮件中的链接后，请勿输入信息。
 安装AdBlocker，不要点击搜索引擎上的广告（例如Google）。

@@ -76,7 +76,7 @@ const CustomizedTable = (props) => {
                     <TableBody>
                         <TableRow className={classes.row} >
                             <CustomTableCell className={classes.cell} component="th" scope="row">
-                                10001 BCST
+                                10,001 BCST
                             </CustomTableCell>
                             <CustomTableCell numeric>0.5%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>1.5%<Text keyWord={'annualized'}/></CustomTableCell>
@@ -84,7 +84,7 @@ const CustomizedTable = (props) => {
                         </TableRow>
                         <TableRow className={classes.row} >
                             <CustomTableCell className={classes.cell} component="th" scope="row">
-                                50001 BCST
+                                50,001 BCST
                             </CustomTableCell>
                             <CustomTableCell numeric>1.5%<Text keyWord={'annualized'}/></CustomTableCell>
                             <CustomTableCell numeric>2.5%<Text keyWord={'annualized'}/></CustomTableCell>
@@ -99,10 +99,10 @@ const CustomizedTable = (props) => {
                     <TableHead>
                         <TableRow>
                             <CustomTableCell>BCST</CustomTableCell>
-                            <CustomTableCell numeric>300000</CustomTableCell>
-                            <CustomTableCell numeric>500000</CustomTableCell>
-                            <CustomTableCell numeric>800000</CustomTableCell>
-                            <CustomTableCell numeric>1000000</CustomTableCell>
+                            <CustomTableCell numeric>300,000</CustomTableCell>
+                            <CustomTableCell numeric>500,000</CustomTableCell>
+                            <CustomTableCell numeric>800,000</CustomTableCell>
+                            <CustomTableCell numeric>1,000,000</CustomTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
