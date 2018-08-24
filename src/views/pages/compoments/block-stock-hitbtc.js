@@ -42,25 +42,24 @@ const styles = theme => ({
 })
 
 const symbolPair = {
-	'BCST/CNYT': 'bcst_cnyt',
-	'BCST/BTC': 'bcst_btc',
-	'BCST/ETH': 'bcst_eth'
+	'BCST/USDT': 'BCSTUSD',
+	'BCST/BTC': 'BCSTBTC',
+	'BCST/ETH': 'BCSTETH'
 }
 
 const symbolPairArray = Object.keys(symbolPair)
 
-const buildOptions = (data) => {
+const buildOptions = (data, symbol) => {
 	// [datetime, open, high, low, close, volum ]
-	const trickData = data.datas.data
-	const moneyType = data.datas.moneyType
-	const contractUnit = data.datas.contractUnit
+	const trickData = data
+	const moneyType = symbol.split("/")[1]
 	const groupingUnits = [
 		[ 'week', [1] ], 
 		[ 'month', [1, 2, 3, 4, 6] ],
 	]
 	return {
 		rangeSelector: { selected: 0 },
-		title: { text: `${contractUnit}/${moneyType}` },
+		title: { text: symbol },
 		yAxis: [
 			{
 				labels: { align: 'right', x: -3 },
@@ -83,14 +82,22 @@ const buildOptions = (data) => {
 			{
 				type: 'candlestick',
 				name: 'AAPL',
-				data: trickData.map(item => [item[0], item[1], 
-					item[2], item[3], item[4]]),
+				data: trickData.map(item => [
+					Date.parse(item.timestamp), 
+					parseFloat(item.open), 
+					parseFloat(item.max), 
+					parseFloat(item.min), 
+					parseFloat(item.close)
+				]),
 				dataGrouping: { units: groupingUnits }
 			},
 			{
 				type: 'column',
 				name: 'Volume',
-				data: trickData.map(item => [item[0], item[5]]),
+				data: trickData.map(item => [
+					Date.parse(item.timestamp), 
+					parseFloat(item.volume)
+				]),
 				yAxis: 1,
 				dataGrouping: { units: groupingUnits }
 			}
@@ -105,10 +112,10 @@ class BlockStockEXXComponent extends React.Component {
 
 	componentDidMount() {
 		const { symbol } = this.props
-		const lowwerSymbol = symbolPair[symbol]
+		const symbolParam = symbolPair[symbol]
 		const corsURL = 'https://cors-anywhere.herokuapp.com/'
-		const klinesApi = 'https://api.exx.com/data/v1/klines?'
-		const klinesParam = `market=${lowwerSymbol}&type=1day&size=1000`
+		const klinesApi = `https://api.hitbtc.com/api/2/public/candles/${symbolParam}?`
+		const klinesParam = 'limit=1000&period=D1'
 		const klinesUri = corsURL + klinesApi + klinesParam
 		
 		const headers = { 'X-Requested-With': 'XMLHttpRequest' }
@@ -118,13 +125,13 @@ class BlockStockEXXComponent extends React.Component {
 			let options = null
 			let ticker = null
 			try {
-				options = buildOptions(klinesRes)
-				const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
+				options = buildOptions(klinesRes, symbol)
+				const lastTicker = klinesRes[klinesRes.length - 1]
 				ticker = {
-					open: lastTicker[1],
-					high: lastTicker[2],
-					low: lastTicker[3],
-					volumes: lastTicker[5],
+					open: lastTicker.open,
+					high: lastTicker.max,
+					low: lastTicker.min,
+					volumes: lastTicker.volume,
 				}
 			} catch (error) {
 				console.log('[klines res error]', klinesUri, klinesRes)

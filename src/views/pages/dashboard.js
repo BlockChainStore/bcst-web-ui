@@ -6,7 +6,7 @@ import BlockCurrency from './compoments/block-currency'
 import BlockAddress from './compoments/block-address'
 import ehtLogo from '../assets/images/currency/eth.png'
 import bcstLogo from '../assets/images/currency/bcst.png'
-import BlockStockEXX from './compoments/block-stock-exx'
+import BlockStock from './compoments/block-stock'
 
 
 const styles = theme => ({
@@ -60,7 +60,7 @@ const Dashboard = (props) => {
             <Grid item xs={12} className={classes.block}>
                 <Grid container justify="center">
                     <Grid item  xs={12} lg={10}>
-                        <BlockStockEXX />
+                        <BlockStock />
                     </Grid>
                 </Grid>
             </Grid>
