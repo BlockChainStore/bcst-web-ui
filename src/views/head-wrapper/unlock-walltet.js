@@ -27,6 +27,7 @@ const styles = theme => ({
         boxShadow: theme.shadows[5],
         top: '50%',
         left: '50%',
+        transform: 'translate(-50%, -50%)',
     }
 })
 
