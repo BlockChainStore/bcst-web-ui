@@ -153,12 +153,12 @@ class InvestmentProgress extends React.Component {
 
     render() {
         const { classes, investment } = this.props
-        const annualized = investment.info.annualized/10+'%'
+        const annualized = investment.info.annualized / 10 + '%'
         const secondLeftDays = parseInt(investment.info.secondLeft / ( 60 * 60 * 24) , 10)
         const secondLeftHrs = Math.ceil((investment.info.secondLeft / ( 60 * 60)) % 24 , 10)
         const packetDay = investment.info.packetDay
         const depositDay= packetDay-secondLeftDays
-        const principle = investment.info.principle / Math.pow(10, 8)
+        const principle = investment.info.principle 
         const invest = (((principle * investment.info.annualized * packetDay / 365000)) * depositDay / packetDay).toFixed(8)
         const sum = parseFloat(principle) + parseFloat(invest)
         const timeStamp1 = investment.info.rateCNYdeposit
@@ -257,17 +257,6 @@ class InvestmentProgress extends React.Component {
                     </Grid>
                     <Grid item xs={12} className={classes.btnContainer} >
                         <Grid container justify="center" spacing={24}>
-                            {/* <Grid item>
-                                <Button
-                                    disabled={this.state.isloadding || investment.info.secondLeft !== '0'}
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={this.handleDepositAgain}>
-                                    {investment.info.secondLeft !== '0'
-                                        ? <Text keyWord={'depositAgain'} />
-                                        : <Text keyWord={'depositAgain'} />}
-                                </Button>
-                            </Grid> */}
                             <Grid item>    
                                     {investment.info.secondLeft !== '0'
                                         ? ''

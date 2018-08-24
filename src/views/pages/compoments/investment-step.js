@@ -19,7 +19,6 @@ import Paper from '@material-ui/core/Paper'
 import { LinearProgress } from './progress'
 import investmentActions from '../../../ducks/investment/actions'
 import Text from '../../languages'
-import AlertSnackbar from './alert'
 
 
 
