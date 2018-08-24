@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import InvestmentInfo from './compoments/investment-info'
 import InvestmentStep from './compoments/investment-step'
+import DescribeLockPlan from './compoments/describeLockPlan'
 import InvestmentProgress from './compoments/investment-progress'
 import investmentActions from '../../ducks/investment/actions'
 
@@ -27,7 +28,7 @@ const Home = (props) => {
             <Grid item xs={12} className={classes.firstBlock}>
                 <Grid container justify="center">
                     <Grid item xs={12} lg={10}>
-                        <InvestmentInfo />
+                        <DescribeLockPlan />
                     </Grid>
                 </Grid>
             </Grid>
