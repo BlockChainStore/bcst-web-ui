@@ -190,9 +190,10 @@ class InvestmentStep extends React.Component {
     }
 
     handleNext = () => {
+        const maxVal = this.state.bcst > 300000 ? parseInt(this.state.bcst) : 300000
         switch (this.state.activeStep) {
             case 1:
-                const validator = Joi.number().min(10001).max(this.props.user.bcst)
+                const validator = Joi.number().min(10001).max(maxVal)
                 const result = Joi.validate(this.state.bcst, validator)
 
                 if(!!result.error) {
@@ -229,7 +230,7 @@ class InvestmentStep extends React.Component {
             bcst: e.target.value
         })
 
-        const validator = Joi.number().min(10001).max(100000)
+        const validator = Joi.number().min(10001).max(300000)
         const result = Joi.validate(e.target.value, validator)
         console.log(result)
 

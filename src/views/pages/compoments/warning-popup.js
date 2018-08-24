@@ -112,7 +112,7 @@ class SimpleModal extends React.Component {
                                 onClick={this.handleBack}
                                 className={classes.button}
                             >
-                                Back
+                                <Text keyWord={'back'}/>
                             </Button>
                             <Button
                                 variant="contained"
@@ -120,21 +120,14 @@ class SimpleModal extends React.Component {
                                 onClick= {activeStep === steps.length - 1 ? this.handleClose : this.handleNext}
                                 className={classes.button}
                             >
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                {activeStep === steps.length - 1 ? <Text keyWord={'confirm'}/> : <Text keyWord={'next'}/>}
                             </Button>
                         </div>
-                        
                         </StepContent>
                     </Step>
                     );
                 })}
                 </Stepper>
-                {activeStep === steps.length && (
-                <Paper square elevation={0} className={classes.resetContainer}>
-                    <Typography>All steps completed - you&quot;re finished</Typography>
-
-                </Paper>
-                )}
                 </div>
             </div>
         </Modal>
