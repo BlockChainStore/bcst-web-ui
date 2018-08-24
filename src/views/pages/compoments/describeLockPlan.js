@@ -1,29 +1,10 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
 import Grid from '@material-ui/core/Grid'
-
 import Text from '../../languages'
 
 
-const CustomTableCell = withStyles(theme => ({
-    head: {
-        backgroundColor: theme.palette.primary.light,
-        color: theme.palette.common.white,
-        textAlign: 'center',
-        fontSize: 18,
-    },
-    body: {
-        fontSize: 16,
-        textAlign: 'center',
-        
-    },
-}))(TableCell)
 
 const styles = theme => ({
     row: {
