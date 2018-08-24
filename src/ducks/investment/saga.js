@@ -90,7 +90,7 @@ function *fetchStatus() {
         const investmentContract = new InvestmentContract(privateKey)
         const investmentStatus = yield call(investmentContract.checkStatus)
         console.log('[checkStatus]', investmentStatus)
-        let lastTigger = 0 
+        let lastTigger = null 
         let principle = 0
         try {
             principle = (investmentStatus.principle.toString() / Math.pow(10, 8)).toString()
@@ -98,13 +98,11 @@ function *fetchStatus() {
             const corsURL = 'https://cors-anywhere.herokuapp.com/'
             const klinesApi = 'https://api.exx.com/data/v1/klines?'
             const callDate = investmentStatus.timestampDeposit - ( 60 * 60 * 24 )
-            const klinesParam = `market=${lowwerSymbol}&type=1day&size=1000&since=${callDate}000`
+            const klinesParam = `market=${lowwerSymbol}&type=1day&size=200&since=${callDate}000`
             const klinesUri = corsURL + klinesApi + klinesParam
             const headers = { 'X-Requested-With': 'XMLHttpRequest' }
             const klinesRes = yield call(axios.get, klinesUri, { headers })
             lastTigger = klinesRes.data.datas.data[0][2]
-            
-             
             console.log('yerterday '+ klinesRes.data.datas.data[0])
 
         } catch (error) {
