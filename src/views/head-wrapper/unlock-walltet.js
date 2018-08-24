@@ -22,12 +22,11 @@ import SimpleModalWrapped from '../pages/compoments/warning-popup'
 const styles = theme => ({
     paper: {
         position: 'absolute',
-        width: theme.spacing.unit * 80,
+        width: '80%',
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -50%)'
     }
 })
 

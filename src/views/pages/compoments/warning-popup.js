@@ -37,12 +37,19 @@ function getStepContent(step) {
 
 const styles = theme => ({
     paper: {
-        minWidth: 1000,
+        width: '100%',
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        maxHeight: 750 
+        overflow: 'auto',
+        maxHeight: 750,
+        [theme.breakpoints.up('sm')]: {
+            width: '80%'
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '60%'
+        },
     },
 });
 
