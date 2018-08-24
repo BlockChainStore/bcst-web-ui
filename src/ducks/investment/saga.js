@@ -72,6 +72,7 @@ function *withdrawInvestment() {
         yield call(investmentContract.send)
         
         if(!!address) {
+            debugger
             const bcstContract = new BCSTContract(privateKey)
             bcstContract.transfer(address, amount)
             yield call(bcstContract.send)

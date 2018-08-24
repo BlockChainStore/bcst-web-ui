@@ -112,10 +112,7 @@ class InvestmentProgress extends React.Component {
         const { investmentActions } = this.props
         this.setState({ isloadding: true, isInputDisable: true })
         
-        investmentActions.withdrawInvestment({
-            address: null, 
-            amount: null
-        })
+        investmentActions.withdrawInvestment()
     }
 
     handleWithdrawTo = () => {
@@ -123,7 +120,7 @@ class InvestmentProgress extends React.Component {
         const address = this.inputAddress.value
         const amount = this.inputAmount.value
         this.setState({ isloadding: true, isInputDisable: true })
-        investmentActions.withdrawInvestment({address, amount})
+        investmentActions.withdrawInvestment(address, amount)
     }
 
     componentDidMount() {
