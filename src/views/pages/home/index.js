@@ -1,7 +1,7 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import InvestmentInfo from './compoments/investment-info'
+import InvestmentInfo from '../investment/investment-info'
 
 
 const styles = theme => ({

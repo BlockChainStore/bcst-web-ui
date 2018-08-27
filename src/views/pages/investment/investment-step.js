@@ -16,7 +16,7 @@ import FormLabel from '@material-ui/core/FormLabel'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Paper from '@material-ui/core/Paper'
-import { LinearProgress } from './progress'
+import { LinearProgress } from '../compoments/progress'
 import investmentActions from '../../../ducks/investment/actions'
 import Text from '../../languages'
 

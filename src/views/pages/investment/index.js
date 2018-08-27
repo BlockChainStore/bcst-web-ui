@@ -3,10 +3,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import InvestmentStep from './compoments/investment-step'
-import DescribeLockPlan from './compoments/describeLockPlan'
-import InvestmentProgress from './compoments/investment-progress'
-import investmentActions from '../../ducks/investment/actions'
+import InvestmentStep from './investment-step'
+import DescribeLockPlan from './describe-lock-plan'
+import InvestmentProgress from './investment-progress'
+import investmentActions from '../../../ducks/investment/actions'
 
 
 const styles = theme => ({

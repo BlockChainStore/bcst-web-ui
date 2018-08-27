@@ -1,14 +1,11 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-import { LinearProgress } from './progress'
-import investmentActions from '../../../ducks/investment/actions'
-import Text from '../../languages'
-import axios from 'axios'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -17,6 +14,11 @@ import TableRow from '@material-ui/core/TableRow'
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { LinearProgress } from '../compoments/progress'
+import investmentActions from '../../../ducks/investment/actions'
+import Text from '../../languages'
+
+
 
 function getModalStyle() {
     const top = 50

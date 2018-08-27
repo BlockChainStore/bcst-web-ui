@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
@@ -8,7 +7,7 @@ import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import StepContent from '@material-ui/core/StepContent'
-import Text from '../../languages'
+import Text from '../languages'
 
 
 const getSteps = () => {
@@ -64,11 +63,11 @@ class SimpleModal extends React.Component {
     }
 
     handleOpen = () => {
-        this.setState({ open: true });
+        this.setState({ open: true })
     }
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({ open: false })
     }
 
     handleNext = () => {
@@ -80,19 +79,19 @@ class SimpleModal extends React.Component {
     handleBack = () => {
         this.setState(state => ({
             activeStep: state.activeStep - 1,
-        }));
-    };
+        }))
+    }
 
     handleReset = () => {
         this.setState({
             activeStep: 0,
-        });
-    };
+        })
+    }
 
     render() {
-        const { classes } = this.props;
-        const steps = getSteps();
-        const { activeStep } = this.state;
+        const { classes } = this.props
+        const steps = getSteps()
+        const { activeStep } = this.state
         return (
             <div>
                 <Modal

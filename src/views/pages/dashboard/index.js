@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import BlockCurrency from './compoments/block-currency'
-import BlockAddress from './compoments/block-address'
-import ehtLogo from '../assets/images/currency/eth.png'
-import bcstLogo from '../assets/images/currency/bcst.png'
-import BlockStock from './compoments/block-stock'
+import BlockCurrency from '../compoments/block-currency'
+import BlockAddress from '../compoments/block-address'
+import ehtLogo from '../../assets/images/currency/eth.png'
+import bcstLogo from '../../assets/images/currency/bcst.png'
+import BlockStock from '../compoments/block-stock'
 
 
 const styles = theme => ({

@@ -14,7 +14,7 @@ import Text from '../languages'
 import PrivateKeyBlock from './unlock-walltet-private-key'
 import KeystoreBlock from './unlock-walltet-keystore'
 import NewWalletBlock from './unlock-walltet-new-wallet'
-import SimpleModalWrapped from '../pages/compoments/warning-popup'
+import WarningPopup from './warning-popup'
 
 
 const styles = theme => ({
@@ -74,7 +74,7 @@ class UnlockWallet extends React.Component {
                         <Text  keyWord={'unlockWallet'}/>
                     </Button>
                 } 
-                { !!!isUnlockWallet&&<SimpleModalWrapped/> }         
+                { !!!isUnlockWallet && <WarningPopup/> }         
                 <Modal
                     open={this.state.open}
                     onClose={this.handleClose}>
