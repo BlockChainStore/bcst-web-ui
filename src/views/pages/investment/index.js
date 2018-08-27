@@ -1,12 +1,8 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import InvestmentStep from './investment-step'
 import DescribeLockPlan from './describe-lock-plan'
-import InvestmentProgress from './investment-progress'
-import investmentActions from '../../../ducks/investment/actions'
+import InvestmentBlock from './investment-block'
 
 
 const styles = theme => ({
@@ -20,8 +16,8 @@ const styles = theme => ({
     },
 })
 
-const Home = (props) => {
-    const { classes, investment } = props
+const Investment = (props) => {
+    const { classes } = props
     return (
         <Grid container>
             <Grid item xs={12} className={classes.firstBlock}>
@@ -34,9 +30,7 @@ const Home = (props) => {
             <Grid item xs={12} className={classes.block}>
                 <Grid container justify="center">
                     <Grid item xs={12} lg={10}>
-                        {investment.info.principle !== '0' || !!!investment.info.principle
-                        ? <InvestmentProgress />
-                        : <InvestmentStep />}
+                        <InvestmentBlock />
                     </Grid>
                 </Grid>
             </Grid>
@@ -44,15 +38,4 @@ const Home = (props) => {
     )
 }
 
-const mapStateToProps = state => ({
-    investment: state.duck.investment
-})
-
-const mapDispatchToProps = dispatch => ({
-    investmentActions: bindActionCreators(investmentActions, dispatch)
-})
-  
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withStyles(styles)(Home))
+export default withStyles(styles)(Investment)

@@ -4,7 +4,7 @@ import { investment } from '../types'
 
 /* State Shape
 {
-    info: {
+    personal: {
         annualized: string,
         packetDay: string,
         principle: string,
@@ -13,10 +13,23 @@ import { investment } from '../types'
         dateDeposit: string,
         rateCNYdeposit: string
     },
+    community: {
+        page: int,
+        total: int,
+        packetDay: string
+        data: [
+            annualized: string,
+            principle: string,
+            returnInvestment: string,
+            secondLeft: string,
+            dateDeposit: string,
+            rateCNYdeposit: string
+        ]
+    }
 }
 */
 
-const initInfoState  = { 
+const initPersonalState  = { 
     annualized: null, 
     packetDay: null, 
     principle: null,
@@ -26,7 +39,7 @@ const initInfoState  = {
     rateCNYdeposit: null,
 }
 
-export const infoReducer = (state = initInfoState, action) => {
+export const personalReducer = (state = initPersonalState, action) => {
     switch(action.type) {
         case investment.UPDATE_INFO:
             return { 
@@ -43,8 +56,23 @@ export const infoReducer = (state = initInfoState, action) => {
     }
 }
 
+const initCommunityState = {
+    page: null,
+    total: null,
+    packetDay: null,
+    data: []
+}
+
+export const communityReducer = (state = initCommunityState, action) => {
+    switch(action.type) {
+        default:
+            return state
+    }
+}
+
 const reducers = combineReducers({
-    info: infoReducer,
+    personal: personalReducer,
+    community: communityReducer,
 })
  
 export default reducers
