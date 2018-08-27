@@ -11,7 +11,7 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import Modal from '@material-ui/core/Modal';
+import Modal from '@material-ui/core/Modal'
 import TextField from '@material-ui/core/TextField'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { LinearProgress } from '../compoments/progress'
@@ -19,16 +19,15 @@ import investmentActions from '../../../ducks/investment/actions'
 import Text from '../../languages'
 
 
-
-function getModalStyle() {
+const getModalStyle = () => {
     const top = 50
     const left = 50
   
     return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    }
 }
 
 const CustomTableCell = withStyles(theme => ({
@@ -103,11 +102,11 @@ class InvestmentProgress extends React.Component {
     }
     
     handleOpen = () => {
-        this.setState({ open: true });
+        this.setState({ open: true })
     }
     
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({ open: false })
     }
 
     handleWithdraw = () => {
@@ -126,7 +125,6 @@ class InvestmentProgress extends React.Component {
     }
 
     componentDidMount() {
-        
         const lowwerSymbol = 'bcst_cnyt'
         const corsURL = 'https://cors-anywhere.herokuapp.com/'
         const klinesApi = 'https://api.exx.com/data/v1/klines?'
@@ -139,12 +137,10 @@ class InvestmentProgress extends React.Component {
 			let rateNow = null
 			try {
 				const lastTicker = klinesRes.datas.data[klinesRes.datas.data.length - 1]
-                    rateNow = lastTicker[2]
-                    console.log('lastTicker  '+ lastTicker)
-            }catch (error) {
-                        console.log('[klines res error]', klinesUri, klinesRes)
-                    }
-                console.log('rateNow  '+ rateNow)
+                rateNow = lastTicker[2]
+            } catch (error) {
+                 console.log('[klines res error]', klinesUri, klinesRes)
+            }
                 this.setState({ rateNow })
             })
     }
@@ -169,7 +165,6 @@ class InvestmentProgress extends React.Component {
                 :<Text  keyWord={'daysAndHoursLeft'} params={{days:secondLeftDays,hours:secondLeftHrs}}/>}
             </span>
             )
-        console.log('rateNow1 ' + rateNow1)
         return (
             <Paper elevation={2}>
                 <Grid container justify="center">
@@ -177,7 +172,11 @@ class InvestmentProgress extends React.Component {
                         <Table >
                             <TableHead>
                                 <TableRow>
-                                    <CustomTableCell>{investment.info.secondLeft !== '0'  ? <Text keyWord={'statusPending'} /> : <Text keyWord={'statusReady'} />}</CustomTableCell>
+                                    <CustomTableCell>
+                                        {investment.info.secondLeft !== '0'  
+                                            ? <Text keyWord={'statusPending'} /> 
+                                            : <Text keyWord={'statusReady'} />}
+                                    </CustomTableCell>
                                 </TableRow>
                             </TableHead>
                         </Table >
@@ -257,9 +256,8 @@ class InvestmentProgress extends React.Component {
                     <Grid item xs={12} className={classes.btnContainer} >
                         <Grid container justify="center" spacing={24}>
                             <Grid item>    
-                                    {investment.info.secondLeft !== '0'
-                                        ? ''
-                                        : <div>
+                                {investment.info.secondLeft === '0' &&
+                                    <div>
                                         <Button
                                             disabled={this.state.isloadding || investment.info.secondLeft !== '0'}
                                             variant="contained"
@@ -268,45 +266,40 @@ class InvestmentProgress extends React.Component {
                                             <Text keyWord={'withdrawToAddress'} />
                                         </Button>
                                         <Modal
-                                        aria-labelledby="simple-modal-title"
-                                        aria-describedby="simple-modal-description"
-                                        open={this.state.open}
-                                        onClose={this.handleClose}
-                                        >
+                                            aria-labelledby="simple-modal-title"
+                                            aria-describedby="simple-modal-description"
+                                            open={this.state.open}
+                                            onClose={this.handleClose}>
                                             <div style={getModalStyle()} className={classes.paper}>
                                                 <Text keyWord={'withdrawTo'} />
-                                            <TextField
-                                                id="with-placeholder"
-                                                label={<Text keyWord={'addressTransfer'} />}
-                                                placeholder="eg. 0x8267bc95786355106d56b28a172b1af30d8cf7a7"
-                                                className={classes.textField}
-                                                inputRef={ref1 => this.inputAddress = ref1}
-                                                margin="normal"
-                                                fullWidth
-                                                />
-                                            <TextField
-                                                id="with-placeholder"
-                                                label={<Text keyWord={'amount'} />}
-                                                placeholder="BCST"
-                                                className={classes.textField}
-                                                inputRef={ref2 => this.inputAmount = ref2}
-                                                margin="normal"
-                                                fullWidth
-                                                />
-                                            <Grid container justify='flex-end'>
-                                                <Grid item>
-                                                    <Button
-                                                        onClick={this.handleWithdrawTo}
-                                                        className={classes.button}
-                                                        disabled={this.state.isInputDisable}
-                                                        variant="contained" 
-                                                        color="primary">
-                                                        {this.state.isInputDisable && 
-                                                            <CircularProgress size={25} className={classes.progress} />}
-                                                        <Text  keyWord={'enter'}/>
-                                                    </Button>
+                                                <TextField
+                                                    label={<Text keyWord={'addressTransfer'} />}
+                                                    placeholder="eg. 0x8267bc95786355106d56b28a172b1af30d8cf7a7"
+                                                    className={classes.textField}
+                                                    inputRef={ref1 => this.inputAddress = ref1}
+                                                    margin="normal"
+                                                    fullWidth/>
+                                                <TextField
+                                                    label={<Text keyWord={'amount'} />}
+                                                    placeholder="BCST"
+                                                    className={classes.textField}
+                                                    inputRef={ref2 => this.inputAmount = ref2}
+                                                    margin="normal"
+                                                    fullWidth/>
+                                                <Grid container justify='flex-end'>
+                                                    <Grid item>
+                                                        <Button
+                                                            onClick={this.handleWithdrawTo}
+                                                            className={classes.button}
+                                                            disabled={this.state.isInputDisable}
+                                                            variant="contained" 
+                                                            color="primary">
+                                                            {this.state.isInputDisable && 
+                                                                <CircularProgress size={25} className={classes.progress} />}
+                                                            <Text  keyWord={'enter'}/>
+                                                        </Button>
+                                                    </Grid>
                                                 </Grid>
-                                            </Grid>
                                             </div>
                                         </Modal>
                                     </div>}

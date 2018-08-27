@@ -21,8 +21,6 @@ import investmentActions from '../../../ducks/investment/actions'
 import Text from '../../languages'
 
 
-
-
 const styles = theme => ({
     stepContainer: {
         backgroundColor: '#fff',
@@ -194,9 +192,7 @@ class InvestmentStep extends React.Component {
         switch (this.state.activeStep) {
             case 1:
                 const validator = Joi.number().min(10001).max(300000)
-                debugger
                 const result = Joi.validate(this.state.bcst, validator)
-
                 if(!!result.error) {
                     this.setState({ bcstInputErr: true })
                 }
