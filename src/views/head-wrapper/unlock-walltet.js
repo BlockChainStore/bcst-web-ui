@@ -17,12 +17,9 @@ import NewWalletBlock from './unlock-walltet-new-wallet'
 import SimpleModalWrapped from '../pages/compoments/warning-popup'
 
 
-
-
 const styles = theme => ({
     paper: {
         position: 'absolute',
-        width: '80%',
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         top: '50%',
@@ -31,13 +28,13 @@ const styles = theme => ({
     }
 })
 
-function TabContainer({ children, dir }) {
+const TabContainer = ({ children, dir }) => {
     return (
       <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
         {children}
       </Typography>
-    );
-  }
+    )
+}
 
 class UnlockWallet extends React.Component {
     state = { open: false, tab: 0}
@@ -88,6 +85,7 @@ class UnlockWallet extends React.Component {
                                 onChange={this.handleChangeTab}
                                 indicatorColor="primary"
                                 textColor="primary"
+                                centered
                                 fullWidth>
                                 <Tab label={<Text keyWord={'keyStore'} />}/>
                                 <Tab label={<Text keyWord={'newWalllet'} />}/>
