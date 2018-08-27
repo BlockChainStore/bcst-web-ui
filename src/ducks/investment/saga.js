@@ -19,7 +19,7 @@ function *submitInvest() {
         const investmentContract = new InvestmentContract(privateKey)
         const bcstContract = new BCSTContract(privateKey)
         
-        try{
+        try {
             bcstContract.approve(investmentContract.getContractAddress(), amount)
             const resApprove = yield call(bcstContract.send)
             console.log('[resApprove]', resApprove)
@@ -42,6 +42,7 @@ function *submitInvest() {
 
             yield put({ type: saga.FETCH_STATUS_INVESTMENT })
         } catch(e){
+            console.log(e)
             yield put({ 
                 type: common.UPDATE_ALERT, 
                 payload: {
@@ -72,7 +73,6 @@ function *withdrawInvestment() {
         yield call(investmentContract.send)
         
         if(!!address) {
-            debugger
             const bcstContract = new BCSTContract(privateKey)
             bcstContract.transfer(address, amount)
             yield call(bcstContract.send)

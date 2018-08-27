@@ -1,6 +1,6 @@
 export const contractAddress = process.env.NODE_ENV === 'production'
 	? '0xefcafd4a1e76d392d683d4a79cd0e4a751d0be75'
-	: '0xb230dd1ed4fe9089466718b6d1eec69ec3482abd'
+	: '0xc4a310e60daa39b0915536993ddb427840db5d47'
 
 export const abi = [
 	{
