@@ -28,6 +28,7 @@ const styles = theme => ({
     }
 })
 
+
 const TabContainer = ({ children, dir }) => {
     return (
       <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
@@ -35,6 +36,7 @@ const TabContainer = ({ children, dir }) => {
       </Typography>
     )
 }
+
 
 class UnlockWallet extends React.Component {
     state = { open: false, tab: 0}
