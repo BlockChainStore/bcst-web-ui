@@ -91,8 +91,6 @@ const styles = theme => ({
 })
 
 
-
-
 class InvestmentProgress extends React.Component {
 
     state = {
