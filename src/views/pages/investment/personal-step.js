@@ -240,7 +240,7 @@ class InvestmentStep extends React.Component {
 
     handleConfirm = () => {
         const { investmentActions } = this.props
-        investmentActions.onSubmitInvestment(this.state.bcst, this.state.day)
+        investmentActions.onSubmitPersonalInvestment(this.state.bcst, this.state.day)
 
     }
     
@@ -279,7 +279,8 @@ class InvestmentStep extends React.Component {
                             </Button>
                             {activeStep === steps.length - 1 
                                 ? <Button
-                                    disabled={common.sendTransaction.loading}
+                                    disabled={common.sendTransaction.loading 
+                                        && common.sendTransaction.name === 'SUBMIT_PERSONAL_INVESTMENT' }
                                     variant="contained"
                                     color="primary"
                                     onClick={this.handleConfirm}
@@ -298,8 +299,9 @@ class InvestmentStep extends React.Component {
                     </Grid>
                 </Grid>
 
-                {common.sendTransaction.loading &&
-                    <Grid item xs={12} >
+                {common.sendTransaction.loading 
+                    && common.sendTransaction.name === 'SUBMIT_PERSONAL_INVESTMENT' 
+                    && <Grid item xs={12} >
                         <LinearProgress />
                     </Grid>}
             </Grid>

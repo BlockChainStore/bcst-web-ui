@@ -3,18 +3,28 @@ import { saga } from '../types'
 
 let actions = {}
 
-actions.onSubmitInvestment = (amount, packetDay) => ({
-    type: saga.SUBMIT_INVESTMENT,
+actions.onSubmitPersonalInvestment = (amount, packetDay) => ({
+    type: saga.SUBMIT_PERSONAL_INVESTMENT,
     payload: { amount, packetDay }
 })
 
-actions.withdrawInvestment = (address, amount) => ({
-    type: saga.WITHDRAW_INVESTMENT,
+actions.withdrawPersonalInvestment = (address, amount) => ({
+    type: saga.WITHDRAW_PERSONAL_INVESTMENT,
     payload: { address, amount }
 })
 
-actions.withdrawTo = (address, amount) => ({
-    type: saga.WITHDRAW_TO,
+actions.onSubmitCommunityInvestment = (amount, packetDay) => ({
+    type: saga.SUBMIT_COMMUNITY_INVESTMENT,
+    payload: { amount, packetDay }
+})
+
+actions.onAddonCommunityInvestment = (amount) => ({
+    type: saga.ADDON_COMMUNITY_INVESTMENT,
+    payload: { amount }
+})
+
+actions.withdrawCommunityInvestment = (address, amount) => ({
+    type: saga.WITHDRAW_COMMUNITY_INVESTMENT,
     payload: { address, amount }
 })
 

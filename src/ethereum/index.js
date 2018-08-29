@@ -1,7 +1,7 @@
 import BCSTContract from './bcst-contract'
-import InvestmentContract from './investment-contract'
+import PersonalInvestmentContract from './investment-contract'
 import eth from './ethereum-node'
 
 
-export { BCSTContract, InvestmentContract }
+export { BCSTContract, PersonalInvestmentContract }
 export default eth

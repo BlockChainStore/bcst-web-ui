@@ -1,5 +1,6 @@
 export const investment = {
-    UPDATE_INFO: 'investment/info/UPDATE'
+    PERSONAL_UPDATE_INFO: 'investment/info/PERSONAL_UPDATE',
+    COMMUNITY_UPDATE_INFO: 'investment/info/COMMUNITY_UPDATE',
 }
 
 export const user = {
@@ -10,8 +11,11 @@ export const user = {
 }
 
 export const saga = {
-    SUBMIT_INVESTMENT: 'saga/investment/SUBMIT_INVESTMENT',
-    WITHDRAW_INVESTMENT: 'saga/investment/WITHDRAW_INVESTMENT',
+    SUBMIT_PERSONAL_INVESTMENT: 'saga/investment/SUBMIT_PERSONAL_INVESTMENT',
+    WITHDRAW_PERSONAL_INVESTMENT: 'saga/investment/WITHDRAW_PERSONAL_INVESTMENT',
+    SUBMIT_COMMUNITY_INVESTMENT: 'saga/investment/SUBMIT_COMMUNITY_INVESTMENT',
+    ADDON_COMMUNITY_INVESTMENT: 'saga/investment/ADDON_COMMUNITY_INVESTMENT',
+    WITHDRAW_COMMUNITY_INVESTMENT: 'saga/investment/WITHDRAW_COMMUNITY_INVESTMENT',
     FETCH_STATUS_INVESTMENT: 'saga/investment/FETCH_STATUS_INVESTMENT',
 
     UNLOCK_WALLET: 'saga/user/UNLOCK_WALLET',

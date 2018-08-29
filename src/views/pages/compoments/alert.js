@@ -23,7 +23,7 @@ class PositionedSnackbar extends React.Component {
                     }}
                     message={
                     <span id="message-id">
-                        {this.props.alert.type}: {this.props.alert.message}
+                        {this.props.alert.type}, {this.props.alert.message}
                     </span>}/>
             </div>
         )

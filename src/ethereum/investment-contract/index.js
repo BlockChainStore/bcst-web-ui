@@ -6,7 +6,7 @@ import { abi, contractAddress } from './config'
 const contract = new eth.Contract(abi, contractAddress)
 const cm = contract.methods
 
-export default class InvestmentContract {
+export default class PersonalInvestmentContract {
     constructor(privateKey) {
         this.fromAddress = eth.accounts
             .privateKeyToAccount(privateKey).address

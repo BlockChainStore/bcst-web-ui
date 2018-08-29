@@ -16,9 +16,9 @@ import { investment } from '../types'
     community: {
         page: int,
         total: int,
-        packetDay: string
+        packetDay: string,
+        annualized: string,
         data: [
-            annualized: string,
             principle: string,
             returnInvestment: string,
             secondLeft: string,
@@ -41,7 +41,7 @@ const initPersonalState  = {
 
 export const personalReducer = (state = initPersonalState, action) => {
     switch(action.type) {
-        case investment.UPDATE_INFO:
+        case investment.PERSONAL_UPDATE_INFO:
             return { 
                 annualized: action.payload.annualized, 
                 packetDay: action.payload.packetDay, 
@@ -60,11 +60,25 @@ const initCommunityState = {
     page: null,
     total: null,
     packetDay: null,
+    annualized: null,
     data: []
 }
 
 export const communityReducer = (state = initCommunityState, action) => {
     switch(action.type) {
+        case investment.COMMUNITY_UPDATE_INFO:
+            return {
+                page: action.payload.page,
+                total: action.payload.total,
+                packetDay: action.payload.packetDay,
+                annualized: action.payload.annualized,
+                data: action.payload.data.map(item => ({
+                    principle: item.principle,
+                    returnInvestment: item.returnInvestment,
+                    secondLeft: item.secondLeft,
+                    dateDeposit: item.dateDeposit,
+                }))
+            }
         default:
             return state
     }

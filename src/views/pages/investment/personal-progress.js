@@ -10,25 +10,12 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import Modal from '@material-ui/core/Modal'
-import TextField from '@material-ui/core/TextField'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
 import { LinearProgress } from '../compoments/progress'
+import ModalWithdrawTo from '../compoments/modal-withdraw-to'
 import investmentActions from '../../../ducks/investment/actions'
 import Text from '../../languages'
 
-
-const getModalStyle = () => {
-    const top = 50
-    const left = 50
-  
-    return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-    }
-}
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -41,13 +28,13 @@ const CustomTableCell = withStyles(theme => ({
         fontSize: 12,
         textAlign: 'center',
         
-    },
+    }
 }))(TableCell)
 
 
 const styles = theme => ({
     btnContainer: {
-        margin: theme.spacing.unit * 3,
+        margin: theme.spacing.unit,
     },
     row: {
         '&:nth-of-type(odd)': {
@@ -60,6 +47,9 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
+        top: '50%',
+        left: '50%',
+        transform: `translate(-50%, -50%)`
     },
     button: {
         margin: theme.spacing.unit,
@@ -89,16 +79,14 @@ class InvestmentProgress extends React.Component {
     handleWithdraw = () => {
         const { investmentActions } = this.props
         this.setState({ isloadding: true, isInputDisable: true })
-        
-        investmentActions.withdrawInvestment()
+        investmentActions.withdrawPersonalInvestment()
     }
 
-    handleWithdrawTo = () => {
+    handleWithdrawTo = (address, amount) => {
+        debugger
         const { investmentActions } = this.props
-        const address = this.inputAddress.value
-        const amount = this.inputAmount.value
         this.setState({ isloadding: true, isInputDisable: true })
-        investmentActions.withdrawInvestment(address, amount)
+        investmentActions.withdrawPersonalInvestment(address, amount)
     }
 
     componentDidMount() {
@@ -207,7 +195,7 @@ class InvestmentProgress extends React.Component {
                         </TableBody>
                     </Table>
                 </Grid>
-                <Grid item xs={12} >
+                <Grid item xs={12} className={classes.btnContainer}>
                     <Typography variant="subheading" align="center" color="error">
                         <Text keyWord={'waringEth'} />
                     </Typography>
@@ -231,52 +219,9 @@ class InvestmentProgress extends React.Component {
                     <Grid container justify="center">
                         <Grid item>    
                             {investment.personal.secondLeft === '0' &&
-                                <div>
-                                    <Button
-                                        disabled={this.state.isloadding || investment.personal.secondLeft !== '0'}
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={this.handleOpen}>
-                                        <Text keyWord={'withdrawToAddress'} />
-                                    </Button>
-                                    <Modal
-                                        aria-labelledby="simple-modal-title"
-                                        aria-describedby="simple-modal-description"
-                                        open={this.state.open}
-                                        onClose={this.handleClose}>
-                                        <div style={getModalStyle()} className={classes.paper}>
-                                            <Text keyWord={'withdrawTo'} />
-                                            <TextField
-                                                label={<Text keyWord={'addressTransfer'} />}
-                                                placeholder="eg. 0x8267bc95786355106d56b28a172b1af30d8cf7a7"
-                                                className={classes.textField}
-                                                inputRef={ref1 => this.inputAddress = ref1}
-                                                margin="normal"
-                                                fullWidth/>
-                                            <TextField
-                                                label={<Text keyWord={'amount'} />}
-                                                placeholder="BCST"
-                                                className={classes.textField}
-                                                inputRef={ref2 => this.inputAmount = ref2}
-                                                margin="normal"
-                                                fullWidth/>
-                                            <Grid container justify='flex-end'>
-                                                <Grid item>
-                                                    <Button
-                                                        onClick={this.handleWithdrawTo}
-                                                        className={classes.button}
-                                                        disabled={this.state.isInputDisable}
-                                                        variant="contained" 
-                                                        color="primary">
-                                                        {this.state.isInputDisable && 
-                                                            <CircularProgress size={25} className={classes.progress} />}
-                                                        <Text  keyWord={'enter'}/>
-                                                    </Button>
-                                                </Grid>
-                                            </Grid>
-                                        </div>
-                                    </Modal>
-                                </div>}
+                                <ModalWithdrawTo
+                                    disabled={this.state.isloadding || investment.personal.secondLeft !== '0'}
+                                    onEnter={this.handleWithdrawTo} />}
                         </Grid>
                     </Grid>
                 </Grid>

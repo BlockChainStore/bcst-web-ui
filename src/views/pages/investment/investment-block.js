@@ -11,6 +11,7 @@ import IconGroup from '@material-ui/icons/Group'
 import PersonalStep from './personal-step'
 import PersonalProgress from './personal-progress'
 import CommunityStep from './community-step'
+import CommunityProgress from './community-progress'
 
 
 const styles = theme => ({
@@ -37,7 +38,6 @@ class InvestmentBlock extends React.Component {
 
     render() {
         const { classes, theme, investment } = this.props
-
         return (
             <Paper square>
                 <div className={classes.root}>
@@ -58,12 +58,14 @@ class InvestmentBlock extends React.Component {
                         index={this.state.value}
                         onChangeIndex={this.handleChangeIndex}>
                         <div className={classes.tabContainer}>
-                            {investment.personal.principle !== '0' || !!!investment.personal.principle
-                                ? <PersonalProgress />
-                                : <PersonalStep />}
+                            {investment.personal.principle === '0' || !!!investment.personal.principle
+                                ? <PersonalStep />
+                                : <PersonalProgress /> }
                         </div>
                         <div className={classes.tabContainer}>
-                            <CommunityStep />
+                            {investment.community.packetDay === '0' || !!!investment.community.packetDay
+                                ? <CommunityStep />
+                                : <CommunityProgress />  }
                         </div>
                     </SwipeableViews>
                 </div>
