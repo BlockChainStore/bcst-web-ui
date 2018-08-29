@@ -20,7 +20,7 @@ const styles = theme => ({
 const BlockCurrency = (props) => {
 	const { classes, avatar, amount, symbol } = props
 	return (
-		<Paper elevation={1} className={classes.paper}>
+		<Paper square className={classes.paper}>
 			<List>
 				<ListItem>
 					<Avatar

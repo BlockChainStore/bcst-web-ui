@@ -56,6 +56,11 @@ const styles = theme => ({
     },
     progress: {
         position: 'absolute'
+    },
+    linearProgress: {
+        position: 'absolute',
+        width: '100%',
+        bottom: 0
     }
 })
 
@@ -226,9 +231,9 @@ class InvestmentProgress extends React.Component {
                     </Grid>
                 </Grid>
                 {this.state.isloadding &&
-                    <Grid item xs={12} >
+                    <div className={classes.linearProgress}>
                         <LinearProgress />
-                    </Grid>}
+                    </div>}
             </Grid>
         )
     }

@@ -204,7 +204,7 @@ class BlockStock extends React.Component {
   
 	render() {
 		return (
-			<Paper elevation={1}>
+			<Paper square>
 				<AppBar position="static" color="default">
 					<Tabs
 						value={this.state.value}

@@ -64,6 +64,11 @@ const styles = theme => ({
     progress: {
         position: 'absolute'
     },
+    linearProgress: {
+        position: 'absolute',
+        width: '100%',
+        bottom: 0
+    },
     extendedIcon: {
         marginRight: theme.spacing.unit,
     }
@@ -110,10 +115,10 @@ class InvestmentProgress extends React.Component {
         investmentActions.withdrawCommunityInvestment(address, amount)
     }
 
-    handleDepositAddOn = () => {
-        const aa = this.inputAddOn.value
-        debugger
-
+    handleOnAddOn = () => {
+        const amount = this.inputAddOn.value
+        const { investmentActions } = this.props
+        investmentActions.onAddonCommunityInvestment(amount)
     }
 
     render() {
@@ -127,7 +132,8 @@ class InvestmentProgress extends React.Component {
         ]
         const firstSecondLeft = '0'
         const isloadding = common.sendTransaction.loading 
-            && common.sendTransaction.name === 'WITHDRAW_COMMUNITY_INVESTMENT'
+            && ( common.sendTransaction.name === 'WITHDRAW_COMMUNITY_INVESTMENT' 
+                || common.sendTransaction.name === 'ADDON_COMMUNITY_INVESTMENT')
 
         return (
             <Grid container justify="center">
@@ -150,12 +156,14 @@ class InvestmentProgress extends React.Component {
                                 <Input
                                     id="input-deposit"
                                     inputRef={ref => this.inputAddOn = ref}
+                                    disabled={isloadding}
                                     endAdornment={
                                         <Button
                                             className={classes.buttonDeposit}
                                             variant="extendedFab" 
                                             color="primary"
-                                            onClick={this.handleDepositAddOn}>
+                                            disabled={isloadding}
+                                            onClick={this.handleOnAddOn}>
                                             <NavigationIcon 
                                                 className={classes.extendedIcon} />
                                             Deposit
@@ -217,9 +225,9 @@ class InvestmentProgress extends React.Component {
                     </Grid>
                 </Grid>
                 {isloadding && 
-                    <Grid item xs={12} >
+                    <div className={classes.linearProgress} >
                         <LinearProgress />
-                    </Grid>}
+                    </div>}
             </Grid>
         )
     }

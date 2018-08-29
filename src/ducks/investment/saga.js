@@ -41,12 +41,12 @@ function *submitPersonalInvest() {
                 }
             })
 
-            yield put({ type: saga.FETCH_STATUS_INVESTMENT })
+            yield put({ type: saga.FETCH_PERSONAL_INVESTMENT })
         } catch(e){
             yield put({ 
                 type: common.UPDATE_ALERT, 
                 payload: {
-                    type: 'error', 
+                    type: 'Error', 
                     message: e.toString() 
                 }
             })
@@ -78,10 +78,9 @@ function *withdrawPersonalInvestment() {
             yield call(bcstContract.send)
         }
 
-        yield put({ type: saga.FETCH_STATUS_INVESTMENT })
+        yield put({ type: saga.FETCH_PERSONAL_INVESTMENT })
     }
 }
-
 
 function *submitCommunityInvest() {
     while(true) {
@@ -126,7 +125,7 @@ function *submitCommunityInvest() {
             yield put({ 
                 type: common.UPDATE_ALERT, 
                 payload: {
-                    type: 'error', 
+                    type: 'Error', 
                     message: e.toString() 
                 }
             })
@@ -153,6 +152,8 @@ function *addonCommunityInvestment() {
                 name: 'ADDON_COMMUNITY_INVESTMENT' 
             }
         })
+
+        yield call(delay, 1000)
         // const store = yield select()
         // const privateKey = store.duck.user.info.privateKey
         // const communityInvestmentContract = new CommunityInvestmentContract(privateKey)
@@ -165,14 +166,14 @@ function *addonCommunityInvestment() {
             // communityInvestmentContract.deposit(amount, packetDay)
             // const resDeposit = yield call(communityInvestmentContract.send)
             // console.log('[resDeposit]', resDeposit)
-
+            amount.asd.asda.asdasd
 
             // yield put({ type: saga.FETCH_STATUS_INVESTMENT })
         } catch(e){
             yield put({ 
                 type: common.UPDATE_ALERT, 
                 payload: {
-                    type: 'error', 
+                    type: 'Error', 
                     message: e.toString() 
                 }
             })
@@ -187,7 +188,6 @@ function *addonCommunityInvestment() {
         
     }
 }
-
 
 function *withdrawCommunityInvestment() {
     while(true) {
@@ -231,10 +231,36 @@ function *withdrawCommunityInvestment() {
     }
 }
 
-
-function *fetchStatus() {
+function *fetchCommunity() {
     while(true) {
-        yield take(saga.FETCH_STATUS_INVESTMENT)
+        yield take(saga.FETCH_COMMUNITY_INVESTMENT)
+        const store = yield select()
+        const privateKey = store.duck.user.info.privateKey
+        // const personalInvestmentContract = new PersonalInvestmentContract(privateKey)
+        // const investmentStatus = yield call(personalInvestmentContract.checkStatus)
+
+        // yield put({
+        //     type: investment.COMMUNITY_UPDATE_INFO, 
+        //     payload: {
+        //         page: null,
+        //         total: null,
+        //         packetDay: packetDay,
+        //         annualized: null,
+        //         data: [{
+        //             principle: amount,
+        //             returnInvestment: '',
+        //             secondLeft: '',
+        //             dateDeposit: ''
+        //         }]
+        //     }
+        // })
+
+    }
+}
+
+function *fetchPersonal() {
+    while(true) {
+        yield take(saga.FETCH_PERSONAL_INVESTMENT)
         const store = yield select()
         const privateKey = store.duck.user.info.privateKey
         const personalInvestmentContract = new PersonalInvestmentContract(privateKey)
@@ -280,7 +306,8 @@ function *init() {
     const privateKey = store.duck.user.info.privateKey
 
     if(!!privateKey) {
-        yield put({ type: saga.FETCH_STATUS_INVESTMENT })
+        yield put({ type: saga.FETCH_PERSONAL_INVESTMENT })
+        yield put({ type: saga.FETCH_COMMUNITY_INVESTMENT })
     }
 
 }   
@@ -292,7 +319,8 @@ export default function* investmentSaga() {
         submitCommunityInvest(),
         addonCommunityInvestment(),
         withdrawCommunityInvestment(),
-        fetchStatus(),
+        fetchPersonal(),
+        fetchCommunity(),
         init(),
     ]
 }

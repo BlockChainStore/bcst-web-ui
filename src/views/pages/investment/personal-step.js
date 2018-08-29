@@ -28,6 +28,11 @@ const styles = theme => ({
     },
     btnContainer: {
         margin: theme.spacing.unit * 3,
+    },
+    linearProgress: {
+        position: 'absolute',
+        width: '100%',
+        bottom: 0
     }
 })
 
@@ -249,6 +254,8 @@ class InvestmentStep extends React.Component {
         const { classes, user, common } = this.props
         const { activeStep } = this.state
         const Component = steps[activeStep].component
+        const isLoading = common.sendTransaction.loading 
+            && common.sendTransaction.name === 'SUBMIT_PERSONAL_INVESTMENT' 
         return (
             <Grid container>
                 <Grid item xs={12} >
@@ -279,8 +286,7 @@ class InvestmentStep extends React.Component {
                             </Button>
                             {activeStep === steps.length - 1 
                                 ? <Button
-                                    disabled={common.sendTransaction.loading 
-                                        && common.sendTransaction.name === 'SUBMIT_PERSONAL_INVESTMENT' }
+                                    disabled={isLoading}
                                     variant="contained"
                                     color="primary"
                                     onClick={this.handleConfirm}
@@ -299,11 +305,10 @@ class InvestmentStep extends React.Component {
                     </Grid>
                 </Grid>
 
-                {common.sendTransaction.loading 
-                    && common.sendTransaction.name === 'SUBMIT_PERSONAL_INVESTMENT' 
-                    && <Grid item xs={12} >
+                {isLoading && 
+                    <div className={classes.linearProgress}> 
                         <LinearProgress />
-                    </Grid>}
+                    </div>}
             </Grid>
         )
     }

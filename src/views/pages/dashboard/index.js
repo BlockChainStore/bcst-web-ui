@@ -40,13 +40,13 @@ const Dashboard = (props) => {
                 <Grid container justify="center">
                     <Grid item xs={12} lg={10} className={classes.block}>
                         <Grid container spacing={spacing} >
-                            <Grid item xs={12} lg={4}>
+                            <Grid item xs={12} md={6}>
                                 <BlockCurrency 
                                     avatar={bcstLogo} 
                                     amount={user.bcst} 
                                     symbol={'BCST'}/>
                             </Grid>
-                            <Grid item xs={12} lg={4}>
+                            <Grid item xs={12} md={6}>
                                 <BlockCurrency 
                                     avatar={ehtLogo} 
                                     amount={user.eth} 
