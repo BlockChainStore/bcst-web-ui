@@ -138,9 +138,12 @@ class InvestmentProgress extends React.Component {
         const isloadding = common.sendTransaction.loading 
             && ( common.sendTransaction.name === 'WITHDRAW_COMMUNITY_INVESTMENT' 
                 || common.sendTransaction.name === 'SUBMIT_COMMUNITY_INVESTMENT')
-
         const isCanWithdrow = investment.community.data
             .filter(item => item.secondLeft === '0').length !== 0
+        const sumPrinciple = investment.community.data
+            .reduce((sum, item) => sum + parseFloat(item.principle), 0)
+        const sumProfit = investment.community.data
+        .reduce((sum, item) => sum + parseFloat(item.returnInvestment), 0)
 
         return (
             <Grid container justify="center">
@@ -183,6 +186,28 @@ class InvestmentProgress extends React.Component {
                                         Please enter corrent bcs
                                     </FormHelperText>}
                             </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                            {investment.community.data.length !== 0 &&
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <CustomTableCell>Sum of principle</CustomTableCell>
+                                            <CustomTableCell>Sum of profit</CustomTableCell>
+                                            <CustomTableCell>Max annualized</CustomTableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                            <CustomTableCell>{sumPrinciple} </CustomTableCell>
+                                            <CustomTableCell>{sumProfit} </CustomTableCell>
+                                            <CustomTableCell>
+                                                {investment.community.data[investment.community.data.length - 1].annualized}
+                                            </CustomTableCell>
+                                        </TableRow>
+
+                                    </TableBody>
+                                </Table>}
                         </Grid>
                     </Grid>
                     <Table >
