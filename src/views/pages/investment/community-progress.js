@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 import FormControl from '@material-ui/core/FormControl'
+import FormHelperText from '@material-ui/core/FormHelperText'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import NavigationIcon from '@material-ui/icons/Navigation'
@@ -34,9 +35,6 @@ const CustomTableCell = withStyles(theme => ({
 
 
 const styles = theme => ({
-    btnContainer: {
-        margin: theme.spacing.unit
-    },
     paper: {
         position: 'absolute',
         width: theme.spacing.unit * 50,
@@ -52,6 +50,9 @@ const styles = theme => ({
     },
     buttonDeposit: {
         marginBottom: 4
+    },
+    btnWithdraw: {
+        margin: theme.spacing.unit * 2
     },
     containerHeader: {
         marginTop: theme.spacing.unit,
@@ -94,7 +95,8 @@ const DateFormat = (props) => {
 class InvestmentProgress extends React.Component {
 
     state = {
-        open: false
+        open: false,
+        isSubmitErr: false
     }
     
     handleOpen = () => {
@@ -115,25 +117,30 @@ class InvestmentProgress extends React.Component {
         investmentActions.withdrawCommunityInvestment(address, amount)
     }
 
-    handleOnAddOn = () => {
+    handleSubmitComminityInvestment = () => {
         const amount = this.inputAddOn.value
-        const { investmentActions } = this.props
-        investmentActions.onAddonCommunityInvestment(amount)
+        const { investmentActions, investment } = this.props
+        const count = investment.community.data.length
+        const availble = investment.community.data.filter(item => item.secondLeft === '0').length
+
+        if((count === availble) && parseInt(amount, 10) < 300000) {
+            this.setState({ isSubmitErr: true })
+        }   
+        else {
+            investmentActions.onSubmitCommunityInvestment(amount, investment.community.packetDay)
+        }
     }
 
     render() {
         const { classes, investment, common } = this.props 
-        const investmentData = [
-            {principle: 30000, return: 30010, timeLeft: 635465, dateDeposit: 1000},
-            {principle: 30000, return: 30010, timeLeft: 321232, dateDeposit: 1000},
-            {principle: 30000, return: 30010, timeLeft: 20000, dateDeposit: 1000},
-            {principle: 30000, return: 30010, timeLeft: 12312, dateDeposit: 1000},
-            {principle: 30000, return: 30010, timeLeft: 1000, dateDeposit: 1000},
-        ]
         const firstSecondLeft = '0'
+
         const isloadding = common.sendTransaction.loading 
             && ( common.sendTransaction.name === 'WITHDRAW_COMMUNITY_INVESTMENT' 
-                || common.sendTransaction.name === 'ADDON_COMMUNITY_INVESTMENT')
+                || common.sendTransaction.name === 'SUBMIT_COMMUNITY_INVESTMENT')
+
+        const isCanWithdrow = investment.community.data
+            .filter(item => item.secondLeft === '0').length !== 0
 
         return (
             <Grid container justify="center">
@@ -144,9 +151,9 @@ class InvestmentProgress extends React.Component {
                             <Typography variant="display1" align="center" className={classes.headerText}>
                                 Packet {investment.community.packetDay} days
                             </Typography>
-                            <Typography variant="headline" align="center">
+                            {/* <Typography variant="headline" align="center">
                                 Annualized {investment.community.annualized}%
-                            </Typography>
+                            </Typography> */}
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <FormControl fullWidth >
@@ -154,6 +161,7 @@ class InvestmentProgress extends React.Component {
                                     Enter add-on community investment
                                 </InputLabel>
                                 <Input
+                                    error={this.state.isSubmitErr}
                                     id="input-deposit"
                                     inputRef={ref => this.inputAddOn = ref}
                                     disabled={isloadding}
@@ -163,13 +171,17 @@ class InvestmentProgress extends React.Component {
                                             variant="extendedFab" 
                                             color="primary"
                                             disabled={isloadding}
-                                            onClick={this.handleOnAddOn}>
+                                            onClick={this.handleSubmitComminityInvestment}>
                                             <NavigationIcon 
                                                 className={classes.extendedIcon} />
                                             Deposit
                                         </Button>
                                     }
                                 />
+                                {this.state.isSubmitErr && 
+                                    <FormHelperText error id="input-deposit">
+                                        Please enter corrent bcs
+                                    </FormHelperText>}
                             </FormControl>
                         </Grid>
                     </Grid>
@@ -177,18 +189,20 @@ class InvestmentProgress extends React.Component {
                         <TableHead>
                             <TableRow>
                                 <CustomTableCell>Principle</CustomTableCell>
-                                <CustomTableCell>Return</CustomTableCell>
+                                <CustomTableCell>Annualized</CustomTableCell>
+                                <CustomTableCell>Profit</CustomTableCell>
                                 <CustomTableCell>Date Deposit</CustomTableCell>
                                 <CustomTableCell>Time Left</CustomTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {investmentData.map((item, i) => (
+                            {investment.community.data.map((item, i) => (
                                 <TableRow key={i} >
                                     <CustomTableCell component="th" scope="row">{item.principle}</CustomTableCell>
-                                    <CustomTableCell>{item.return}</CustomTableCell>
-                                    <CustomTableCell>{item.dateDeposit}</CustomTableCell>
-                                    <CustomTableCell><DateFormat secondLeft={item.timeLeft}/></CustomTableCell>
+                                    <CustomTableCell>{item.annualized}</CustomTableCell>
+                                    <CustomTableCell>{item.returnInvestment}</CustomTableCell>
+                                    <CustomTableCell>{new Date(parseInt(item.dateDeposit, 10)).toUTCString()}</CustomTableCell>
+                                    <CustomTableCell><DateFormat secondLeft={item.secondLeft}/></CustomTableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -199,31 +213,31 @@ class InvestmentProgress extends React.Component {
                         <Text keyWord={'waringEth'} />
                     </Typography>
                 </Grid>
-                <Grid item xs={12} className={classes.btnContainer}>
-                    <Grid container justify="center">
-                        <Grid item>
-                            <Button
-                                disabled={isloadding}
-                                variant="contained"
-                                color="primary"
-                                onClick={this.handleWithdraw}>
-                                {firstSecondLeft !== '0'
-                                    ? <DateFormat secondLeft={firstSecondLeft}/>
-                                    : <Text keyWord={'withdraw'} />}
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={12} className={classes.btnContainer}>
-                    <Grid container justify="center">
-                        <Grid item>    
-                            {firstSecondLeft === '0' &&
-                                <ModalWithdrawTo
+                
+                {isCanWithdrow &&              
+                    <Grid item xs={12}>
+                        <Grid container direction="column" alignItems="center">
+                            <Grid item>
+                                <Button
+                                    className={classes.btnWithdraw}
                                     disabled={isloadding}
-                                    onEnter={this.handleWithdrawTo} />}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.handleWithdraw}>
+                                    {firstSecondLeft !== '0'
+                                        ? <DateFormat secondLeft={firstSecondLeft}/>
+                                        : <Text keyWord={'withdraw'} />}
+                                </Button>
+                            </Grid>
+                            <Grid item>    
+                                {firstSecondLeft === '0' &&
+                                    <ModalWithdrawTo
+                                        disabled={isloadding}
+                                        onEnter={this.handleWithdrawTo} />}
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Grid>
+                    </Grid>}
+
                 {isloadding && 
                     <div className={classes.linearProgress} >
                         <LinearProgress />

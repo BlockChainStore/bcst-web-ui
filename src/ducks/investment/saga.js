@@ -1,6 +1,9 @@
 import { take, put, call, select } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
-import { BCSTContract, PersonalInvestmentContract } from '../../ethereum'
+import { 
+    BCSTContract, 
+    PersonalInvestmentContract, 
+    CommunityInvestmentContract
+} from '../../ethereum'
 import { saga , investment , common } from '../types'
 import axios from 'axios'
 
@@ -92,35 +95,20 @@ function *submitCommunityInvest() {
                 name: 'SUBMIT_COMMUNITY_INVESTMENT' 
             }
         })
-        // const store = yield select()
-        // const privateKey = store.duck.user.info.privateKey
-        // const communityInvestmentContract = new CommunityInvestmentContract(privateKey)
-        // const bcstContract = new BCSTContract(privateKey)
+
+        const store = yield select()
+        const privateKey = store.duck.user.info.privateKey
+        const communityInvestmentContract = new CommunityInvestmentContract(privateKey)
+        const bcstContract = new BCSTContract(privateKey)
         
         try {
-            // bcstContract.approve(communityInvestmentContract.getContractAddress(), amount)
-            // const resApprove = yield call(bcstContract.send)
-            // console.log('[resApprove]', resApprove)
-            // communityInvestmentContract.deposit(amount, packetDay)
-            // const resDeposit = yield call(communityInvestmentContract.send)
-            // console.log('[resDeposit]', resDeposit)
-
-            yield put({
-                type: investment.COMMUNITY_UPDATE_INFO, 
-                payload: {
-                    page: null,
-                    total: null,
-                    packetDay: packetDay,
-                    annualized: null,
-                    data: [{
-                        principle: amount,
-                        returnInvestment: '',
-                        secondLeft: '',
-                        dateDeposit: ''
-                    }]
-                }
-            })
-            // yield put({ type: saga.FETCH_STATUS_INVESTMENT })
+            bcstContract.approve(communityInvestmentContract.getContractAddress(), amount)
+            const resApprove = yield call(bcstContract.send)
+            console.log('[resApprove]', resApprove)
+            communityInvestmentContract.deposit(amount, packetDay)
+            const resDeposit = yield call(communityInvestmentContract.send)
+            console.log('[resDeposit]', resDeposit)
+            yield put({ type: saga.FETCH_COMMUNITY_INVESTMENT })
         } catch(e){
             yield put({ 
                 type: common.UPDATE_ALERT, 
@@ -137,55 +125,13 @@ function *submitCommunityInvest() {
                 name: null 
             }
         })
-        
-    }
-}
-
-
-function *addonCommunityInvestment() {
-    while(true) {
-        const { payload: { amount } } = yield take(saga.ADDON_COMMUNITY_INVESTMENT) 
         yield put({ 
-            type: common.UPDATE_SENDTRANSACTION , 
-            payload : {
-                loading: true, 
-                name: 'ADDON_COMMUNITY_INVESTMENT' 
-            }
-        })
-
-        yield call(delay, 1000)
-        // const store = yield select()
-        // const privateKey = store.duck.user.info.privateKey
-        // const communityInvestmentContract = new CommunityInvestmentContract(privateKey)
-        // const bcstContract = new BCSTContract(privateKey)
-        
-        try {
-            // bcstContract.approve(communityInvestmentContract.getContractAddress(), amount)
-            // const resApprove = yield call(bcstContract.send)
-            // console.log('[resApprove]', resApprove)
-            // communityInvestmentContract.deposit(amount, packetDay)
-            // const resDeposit = yield call(communityInvestmentContract.send)
-            // console.log('[resDeposit]', resDeposit)
-            amount.asd.asda.asdasd
-
-            // yield put({ type: saga.FETCH_STATUS_INVESTMENT })
-        } catch(e){
-            yield put({ 
-                type: common.UPDATE_ALERT, 
-                payload: {
-                    type: 'Error', 
-                    message: e.toString() 
-                }
-            })
-        }
-        yield put({ 
-            type: common.UPDATE_SENDTRANSACTION, 
+            type: common.UPDATE_ALERT, 
             payload: {
-                loading: false, 
-                name: null 
+                type: 'Success', 
+                message: 'Deposit success'
             }
         })
-        
     }
 }
 
@@ -203,17 +149,17 @@ function *withdrawCommunityInvestment() {
             }
         })
 
-        yield call(delay, 1000)
-        // const personalInvestmentContract = new PersonalInvestmentContract(privateKey)
-        // personalInvestmentContract.withdraw()
-        // yield call(personalInvestmentContract.send)
+        const communityInvestmentContract = new CommunityInvestmentContract(privateKey)
+        communityInvestmentContract.withdraw()
+        yield call(communityInvestmentContract.send)
+
         if(!!address) {
-            // const bcstContract = new BCSTContract(privateKey)
-            // bcstContract.transfer(address, amount)
-            // yield call(bcstContract.send)
+            const bcstContract = new BCSTContract(privateKey)
+            bcstContract.transfer(address, amount)
+            yield call(bcstContract.send)
         }
 
-        // yield put({ type: saga.FETCH_STATUS_INVESTMENT })
+        yield put({ type: saga.FETCH_COMMUNITY_INVESTMENT })
         yield put({ 
             type: common.UPDATE_SENDTRANSACTION, 
             payload: {
@@ -236,24 +182,30 @@ function *fetchCommunity() {
         yield take(saga.FETCH_COMMUNITY_INVESTMENT)
         const store = yield select()
         const privateKey = store.duck.user.info.privateKey
-        // const personalInvestmentContract = new PersonalInvestmentContract(privateKey)
-        // const investmentStatus = yield call(personalInvestmentContract.checkStatus)
-
-        // yield put({
-        //     type: investment.COMMUNITY_UPDATE_INFO, 
-        //     payload: {
-        //         page: null,
-        //         total: null,
-        //         packetDay: packetDay,
-        //         annualized: null,
-        //         data: [{
-        //             principle: amount,
-        //             returnInvestment: '',
-        //             secondLeft: '',
-        //             dateDeposit: ''
-        //         }]
-        //     }
-        // })
+        const communityInvestmentContract = new CommunityInvestmentContract(privateKey)
+        const packetDay = yield call(communityInvestmentContract.getPacketDay)
+        if(packetDay === '0') {
+            yield put({
+                type: investment.COMMUNITY_UPDATE_INFO, 
+                payload: { packetDay: null, data: [] }
+            })
+        }
+        else {
+            const info = yield call(communityInvestmentContract.getInfo)
+            yield put({
+                type: investment.COMMUNITY_UPDATE_INFO, 
+                payload: {
+                    packetDay: packetDay,
+                    data: info.map(item => ({
+                        annualized: item.annualized,
+                        principle: item.principle,
+                        returnInvestment: item.profitReturn,
+                        secondLeft: item.secondLeft,
+                        dateDeposit: item.timestampDeposit
+                    }))
+                }
+            })
+        }
 
     }
 }
@@ -265,7 +217,6 @@ function *fetchPersonal() {
         const privateKey = store.duck.user.info.privateKey
         const personalInvestmentContract = new PersonalInvestmentContract(privateKey)
         const investmentStatus = yield call(personalInvestmentContract.checkStatus)
-        console.log('[checkStatus]', investmentStatus)
         let lastTigger = null 
         let principle = '0'
         if(investmentStatus.principle !== '0') {
@@ -317,7 +268,6 @@ export default function* investmentSaga() {
         submitPersonalInvest(),
         withdrawPersonalInvestment(),
         submitCommunityInvest(),
-        addonCommunityInvestment(),
         withdrawCommunityInvestment(),
         fetchPersonal(),
         fetchCommunity(),

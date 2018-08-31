@@ -18,11 +18,6 @@ actions.onSubmitCommunityInvestment = (amount, packetDay) => ({
     payload: { amount, packetDay }
 })
 
-actions.onAddonCommunityInvestment = (amount) => ({
-    type: saga.ADDON_COMMUNITY_INVESTMENT,
-    payload: { amount }
-})
-
 actions.withdrawCommunityInvestment = (address, amount) => ({
     type: saga.WITHDRAW_COMMUNITY_INVESTMENT,
     payload: { address, amount }

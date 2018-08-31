@@ -19,7 +19,8 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
     },
     tabContainer: {
-        paddingTop: theme.spacing.unit * 2
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 4
     }
 })
 

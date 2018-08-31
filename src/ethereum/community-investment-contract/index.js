@@ -6,7 +6,7 @@ import { abi, contractAddress } from './config'
 const contract = new eth.Contract(abi, contractAddress)
 const cm = contract.methods
 
-export default class PersonalInvestmentContract {
+export default class CommunityInvestmentContract {
     constructor(privateKey) {
         this.fromAddress = eth.accounts
             .privateKeyToAccount(privateKey).address
@@ -18,18 +18,31 @@ export default class PersonalInvestmentContract {
 
     getContractAddress = () => this.contractAddress
 
-    getinfo = () => cm.info(this.fromAddress).call()
+    getPacketDay = () => cm.getPacketDay(this.fromAddress).call()
+    
+    getInfo = async () => {
+        const { count } = await cm.getAvailable(this.fromAddress).call()
+        if(count !== '0') {
+            const infoFromIndex = await Promise.all(
+                Array.apply(null, {length: parseInt(count, 10)})
+                    .map((item, index) => cm.info(this.fromAddress, index).call())
+            )
+            return infoFromIndex.map(item => ({
+                annualized: item.annualized / 1000,
+                packetDays: item.packetDays,
+                principle: item.principle / Math.pow(10, this.tokenDigit),
+                secondLeft: item.secondLeft,
+                profitReturn: item.profitReturn / Math.pow(10, this.tokenDigit),
+                timestampDeposit: item.timestampDeposit
+            }))
+        }
+        return []
+    }
 
     deposit = (amount, packetDay) => {
         this.data = cm.deposit(
             Web3.utils.toHex(amount * Math.pow(10, this.tokenDigit)), 
             Web3.utils.toHex(packetDay), 
-        ).encodeABI()
-    }
-
-    addOn = (amount) => {
-        this.data = cm.addOn(
-            Web3.utils.toHex(amount * Math.pow(10, this.tokenDigit)), 
         ).encodeABI()
     }
 

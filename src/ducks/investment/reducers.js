@@ -57,10 +57,7 @@ export const personalReducer = (state = initPersonalState, action) => {
 }
 
 const initCommunityState = {
-    page: null,
-    total: null,
     packetDay: null,
-    annualized: null,
     data: []
 }
 
@@ -68,11 +65,9 @@ export const communityReducer = (state = initCommunityState, action) => {
     switch(action.type) {
         case investment.COMMUNITY_UPDATE_INFO:
             return {
-                page: action.payload.page,
-                total: action.payload.total,
                 packetDay: action.payload.packetDay,
-                annualized: action.payload.annualized,
                 data: action.payload.data.map(item => ({
+                    annualized: item.annualized,
                     principle: item.principle,
                     returnInvestment: item.returnInvestment,
                     secondLeft: item.secondLeft,
