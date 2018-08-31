@@ -123,7 +123,7 @@ class InvestmentProgress extends React.Component {
         const count = investment.community.data.length
         const availble = investment.community.data.filter(item => item.secondLeft === '0').length
 
-        if((count === availble) && parseInt(amount, 10) < 300000) {
+        if((amount === '' || (count === availble) && parseInt(amount, 10) < 300000)) {
             this.setState({ isSubmitErr: true })
         }   
         else {
@@ -201,7 +201,7 @@ class InvestmentProgress extends React.Component {
                                     <CustomTableCell component="th" scope="row">{item.principle}</CustomTableCell>
                                     <CustomTableCell>{item.annualized}</CustomTableCell>
                                     <CustomTableCell>{item.returnInvestment}</CustomTableCell>
-                                    <CustomTableCell>{new Date(parseInt(item.dateDeposit, 10)).toUTCString()}</CustomTableCell>
+                                    <CustomTableCell>{new Date(parseInt(item.dateDeposit + '000', 10)).toUTCString()}</CustomTableCell>
                                     <CustomTableCell><DateFormat secondLeft={item.secondLeft}/></CustomTableCell>
                                 </TableRow>
                             ))}
