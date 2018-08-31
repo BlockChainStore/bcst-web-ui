@@ -138,10 +138,7 @@ More Security Tips!`,
             desBCSTLock3 : '3. BCST time deposit plan is in a smart contract based on the blockchain. Once your deposit is selected, it cannot be changed until the contract period is completed. ' ,
             eg : 'Example: ',
             desBCSTLock3_1 : '(1) You want to deposit 500,000 BCST. The deposit period is 60 days. Once you confirm to deposit, the smart contract is activated. You must wait until the contract expires before you can perform other operations. ' ,
-            desBCSTLock3_2 : '(2) If you want to deposit again, please use bcst.bcschian.io to open a new wallet address again (please take care of your password information, key file) and save it again. ' ,
-            desBCSTLock3_3 : '(3)Time deposit plan rewards according to the order form, which can only be stored in one order, single time, and does not support the renewal interest. ' ,
-            desBCSTLock3_4 : '(4) Community time deposit, please rename and save the keystore file! If you lose it, you will never be able to get your token back! ' ,
-        }
+            desBCSTLock3_2 : '(2) If you want to deposit again, please use COMMUNITY to deposit again'  }
     },
     zh: {
         locale: 'zh',
@@ -287,9 +284,7 @@ desNeedUnderstand : `访问您的帐户或为您发送资金。
             desBCSTLock3 : '3. Bcst锁仓是建立在区块链上的智能合约锁仓，您的存入一旦选定将无法更改，直到合约期完成。',
             eg : '例如：',
             desBCSTLock3_1 : '(1) 您想存入50万bcst 存入期为60天 一旦您确定存入，智能合约激活,您必须要等到合约期满，才可进行其他操作。' ,
-            desBCSTLock3_2 : '(2) 如果您想再次存入，请利用bcst.bcschian.io 再次开设新的钱包地址，（请注意保管好自己的密码信息，密钥文件）便可再次存入新的资产。',
-            desBCSTLock3_3 : '(3) 锁仓奖励按照订单形式锁仓，只能单笔、单次存储，不支持续存计息。',
-            desBCSTLock3_4 : '(4) 社区锁仓请做好keystore 文件的重命名和保存工作！如有丢失将永久无法找回。',
+            desBCSTLock3_2 : '(2) 如果您想再次存入，请利用COMMUNITY再次存入.',
         }
     }
 }
