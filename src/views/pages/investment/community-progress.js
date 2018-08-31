@@ -143,7 +143,7 @@ class InvestmentProgress extends React.Component {
         const sumPrinciple = investment.community.data
             .reduce((sum, item) => sum + parseFloat(item.principle), 0)
         const sumProfit = investment.community.data
-        .reduce((sum, item) => sum + parseFloat(item.returnInvestment), 0)
+            .reduce((sum, item) => sum + parseFloat(item.returnInvestment), 0)
 
         return (
             <Grid container justify="center">
