@@ -16,12 +16,13 @@ export const sendDataToContract = async (
     const fromAddress = eth.accounts.privateKeyToAccount(privateKey).address
     const privateKeyBuffer = Buffer.from(privateKey.substring(2), 'hex')
     const transactionCount = await eth.getTransactionCount(fromAddress)
-    const gasPriceInput = gasPrice || await eth.getGasPrice() 
+    const gasPriceInput = gasPrice || await eth.getGasPrice()
+    const addGweiGasPriceInput = parseInt(gasPriceInput) + 3*10**9
     const gasLimitInput = gasLimit || 300000
 
     const rawTransaction = {
         "nonce": Web3.utils.toHex(transactionCount),
-        "gasPrice": Web3.utils.toHex(gasPriceInput),
+        "gasPrice": Web3.utils.toHex(addGweiGasPriceInput),
         "gasLimit": Web3.utils.toHex(gasLimitInput),
         "to": contractAddress,
         "value": "0x00",
