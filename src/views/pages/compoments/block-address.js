@@ -139,13 +139,13 @@ class BlockCurrency extends React.Component {
 									size="small"
 									color="primary"
 									onClick={this.handlePrivateKeyClickOpen}>
-									Backup wellet as private Key
+									<Text  keyWord={'backupPK'} />
 									<VpnKeyIcon className={classes.extendedIcon} />
 								</Button>
 								<Dialog
 									open={this.state.privateKeyOpen}
 									onClose={this.handlePrivateKeyClose}>
-									<DialogTitle>Backup wellet as private Key</DialogTitle>
+									<DialogTitle><Text  keyWord={'backupPK'} /></DialogTitle>
 									<DialogContent>
 										<Typography  variant="subheading" gutterBottom className={classes.boldText}>
 											<Text keyWord={'waringShowPK1'} />
@@ -173,8 +173,8 @@ class BlockCurrency extends React.Component {
 													className={classes.button}
 													onClick={this.handleIsTogglePKOpen}>
 													{this.state.isShowPK
-													? 'HIDE' 
-													: 'SHOW'}
+													? <Text keyWord={'hide'} />
+													: <Text keyWord={'show'} />}
 												</Button>
 											</Grid>
 										</Grid>
@@ -194,10 +194,10 @@ class BlockCurrency extends React.Component {
 										<Button
 											onClick={this.handlePrivateKeyCopyToClipboard} 
 											color="primary">
-											{this.state.privateKeyCopied ? 'copied' : 'Copy'} to clipboard
+											{this.state.privateKeyCopied ? <Text keyWord={'copiedToClipboard'} /> : <Text keyWord={'copyToClipboard'} />}
 										</Button>
 										<Button onClick={this.handlePrivateKeyDownloadFile} color="primary" autoFocus>
-											Download as file
+											<Text keyWord={'downloadAsFile'} />
 										</Button>
 									</DialogActions>}
 								</Dialog>
@@ -207,13 +207,13 @@ class BlockCurrency extends React.Component {
 									size="small"
 									color="primary"
 									onClick={this.handleKeystoreClickOpen}>
-									Backup wellet as keystore
+									<Text  keyWord={'backupKeystore'} />
 									<InsertDriveFileIcon className={classes.extendedIcon} />
 								</Button>
 								<Dialog
 									open={this.state.keystoreOpen}
 									onClose={this.handleKeystoreClose}>
-									<DialogTitle>Backup wellet as keystore</DialogTitle>
+									<DialogTitle><Text  keyWord={'backupKeystore'} /></DialogTitle>
 									<DialogContent>
 										<FormControl fullWidth>
 											<InputLabel><Text keyWord={'enterPW'} /></InputLabel>
@@ -235,7 +235,7 @@ class BlockCurrency extends React.Component {
 									</DialogContent>
 									<DialogActions>
 										<Button onClick={this.handleKeystoreDownload} color="primary" >
-											Download
+										<Text  keyWord={'download'} />
 										</Button>
 									</DialogActions>
 								</Dialog>

@@ -12,6 +12,7 @@ import PersonalStep from './personal-step'
 import PersonalProgress from './personal-progress'
 import CommunityStep from './community-step'
 import CommunityProgress from './community-progress'
+import Text from '../../languages'
 
 
 const styles = theme => ({
@@ -50,8 +51,8 @@ class InvestmentBlock extends React.Component {
                             textColor="primary"
                             fullWidth
                             centered>
-                            <Tab label="Personal" icon={<IconPerson />} />
-                            <Tab label="Community" icon={<IconGroup />}  />
+                            <Tab label={<Text keyWord={'personal'} />} icon={<IconPerson />} />
+                            <Tab label={<Text keyWord={'community'} />} icon={<IconGroup />}  />
                         </Tabs>
                     </AppBar>
                     <SwipeableViews
