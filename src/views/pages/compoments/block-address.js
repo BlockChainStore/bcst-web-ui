@@ -23,6 +23,7 @@ import Text from '../../languages'
 import eth from '../../../ethereum'
 
 
+
 const styles = theme => ({
 	wordBreak: {
 		wordBreak: 'break-all'
@@ -40,6 +41,12 @@ const styles = theme => ({
 	privateKeyText: {
 		width: 550,
 		fontSize: 15
+	},
+	wordWrapText: {
+		wordWrap: 'break-word'
+	},
+	boldText: {
+		fontWeight: 'bold',
 	}
 })
 
@@ -51,10 +58,15 @@ class BlockCurrency extends React.Component {
 		privateKeyCopied: false,
 		keystoreOpen: false,
 		showPassword: false,
+		isShowPK: false,
 	}
 	
 	handlePrivateKeyClickOpen = () => {
 		this.setState({ privateKeyOpen: true })
+	}
+
+	handleIsTogglePKOpen = () => {
+		this.setState({ isShowPK: !this.state.isShowPK })
 	}
 	
 	handlePrivateKeyClose = () => {
@@ -104,6 +116,7 @@ class BlockCurrency extends React.Component {
 
 	render() {
 		const { classes, user } = this.props
+
 		return (
 			<Paper square>
 				<Grid container>
@@ -134,14 +147,49 @@ class BlockCurrency extends React.Component {
 									onClose={this.handlePrivateKeyClose}>
 									<DialogTitle>Backup wellet as private Key</DialogTitle>
 									<DialogContent>
+										<Typography  variant="subheading" gutterBottom className={classes.boldText}>
+											<Text keyWord={'waringShowPK1'} />
+										</Typography>
+										<Typography variant="subheading" gutterBottom className={classes.preText}>
+											<Text keyWord={'waringShowPK2_1'} />
+										</Typography>
+										<Typography variant="subheading" gutterBottom className={classes.preText}>
+											<Text keyWord={'waringShowPK2_2'} />
+										</Typography>
+										<Typography variant="subheading" gutterBottom className={classes.boldText}>
+											<Text keyWord={'waringShowPK3'} />
+										</Typography>
+										<Typography variant="subheading" gutterBottom className={classes.preText}>
+											<Text keyWord={'waringShowPK4_1'} />
+										</Typography>
+										<Typography variant="subheading" gutterBottom className={classes.preText}>
+											<Text keyWord={'waringShowPK4_2'} />
+										</Typography>
+										<Grid container justify='center'>
+                    						<Grid item>
+												<Button 
+													variant="contained" 
+													color="primary"
+													className={classes.button}
+													onClick={this.handleIsTogglePKOpen}>
+													{this.state.isShowPK
+													? 'HIDE' 
+													: 'SHOW'}
+												</Button>
+											</Grid>
+										</Grid>
+										{this.state.isShowPK && 
+										<div>
 										<Typography variant="subheading" gutterBottom>
-											Your private key
+											<Text keyWord={'yourPK'} />
 										</Typography>
 										<Input
 											value={user.info.privateKey}
 											inputRef={ref => this.privateKey = ref}
 											className={classes.privateKeyText}/>
+										</div>}
 									</DialogContent>
+									{this.state.isShowPK && 
 									<DialogActions>
 										<Button
 											onClick={this.handlePrivateKeyCopyToClipboard} 
@@ -151,7 +199,7 @@ class BlockCurrency extends React.Component {
 										<Button onClick={this.handlePrivateKeyDownloadFile} color="primary" autoFocus>
 											Download as file
 										</Button>
-									</DialogActions>
+									</DialogActions>}
 								</Dialog>
 							</Grid>
 							<Grid item>

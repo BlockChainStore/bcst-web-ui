@@ -18,7 +18,7 @@ export const sendDataToContract = async (
     const transactionCount = await eth.getTransactionCount(fromAddress)
     const gasPriceInput = gasPrice || await eth.getGasPrice()
     const addGweiGasPriceInput = parseInt(gasPriceInput) + 3*10**9
-    const gasLimitInput = gasLimit || 300000
+    const gasLimitInput = gasLimit || 3000000
 
     const rawTransaction = {
         "nonce": Web3.utils.toHex(transactionCount),
