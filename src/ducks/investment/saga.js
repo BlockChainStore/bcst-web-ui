@@ -109,6 +109,14 @@ function *submitCommunityInvest() {
             const resDeposit = yield call(communityInvestmentContract.send)
             console.log('[resDeposit]', resDeposit)
             yield put({ type: saga.FETCH_COMMUNITY_INVESTMENT })
+            
+            yield put({ 
+                type: common.UPDATE_ALERT, 
+                payload: {
+                    type: 'Success', 
+                    message: 'Deposit success'
+                }
+            })
         } catch(e){
             yield put({ 
                 type: common.UPDATE_ALERT, 
@@ -125,13 +133,7 @@ function *submitCommunityInvest() {
                 name: null 
             }
         })
-        yield put({ 
-            type: common.UPDATE_ALERT, 
-            payload: {
-                type: 'Success', 
-                message: 'Deposit success'
-            }
-        })
+
     }
 }
 
