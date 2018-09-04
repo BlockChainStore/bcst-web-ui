@@ -103,6 +103,13 @@ class BlockStockEXXComponent extends React.Component {
 
 	state = { options: null, ticker: null}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		if(nextProps.symbol === this.props.symbol && !!this.state.ticker) {
+			return false
+		}
+		return true
+	}
+
 	componentDidMount() {
 		const { symbol } = this.props
 		const lowwerSymbol = symbolPair[symbol]
