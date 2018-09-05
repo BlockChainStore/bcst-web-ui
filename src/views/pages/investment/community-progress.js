@@ -145,6 +145,12 @@ class InvestmentProgress extends React.Component {
         const sumProfit = investment.community.data
             .reduce((sum, item) => sum + parseFloat(item.returnInvestment), 0)
 
+        const sumProfitToday = investment.community.data
+            .map(item => parseFloat(item.returnInvestment * 
+                (investment.community.packetDay - parseInt(item.secondLeft/86400,10)))
+                /investment.community.packetDay)
+            .reduce((sum, item) => sum + item, 0) 
+
         return (
             <Grid container justify="center">
             
@@ -195,6 +201,7 @@ class InvestmentProgress extends React.Component {
                                             <CustomTableCell><Text keyWord={'sumPrinciple'}/></CustomTableCell>
                                             <CustomTableCell><Text keyWord={'sumProfit'}/></CustomTableCell>
                                             <CustomTableCell><Text keyWord={'maxAnnualized'}/></CustomTableCell>
+                                            <CustomTableCell><Text keyWord={'sumProfitToday'}/></CustomTableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -204,6 +211,7 @@ class InvestmentProgress extends React.Component {
                                             <CustomTableCell>
                                                 {investment.community.data[investment.community.data.length - 1].annualized}
                                             </CustomTableCell>
+                                            <CustomTableCell>{sumProfitToday} </CustomTableCell>
                                         </TableRow>
 
                                     </TableBody>

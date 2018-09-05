@@ -163,7 +163,7 @@ More Security Tips!`,
             downloadAsFile: 'DOWNLOAD AS FILE',
             download: 'DOWNLOAD',
             copiedToClipboard: 'COPIED TO CLIPBOARD',
-
+            sumProfitToday: 'Sum profit today',
         }
     },
     zh: {
@@ -228,7 +228,7 @@ More Security Tips!`,
             logtime : '锁定时长',
             bonusToday : '今日奖励',
             totalToday : '总量',
-            dateDeposit : '锁定日BCST价格',
+            dateDeposit : '锁定时间',
             now : '实时价格',
             whatIsBCST : `什么是bcst.bcshchain.io(锁仓钱包)？`,
             desWhatIsBCST : `我们允许您直接与区块链进行互动，同时完全控制您的钥匙和资金。
@@ -335,6 +335,7 @@ desNeedUnderstand : `访问您的帐户或为您发送资金。
             downloadAsFile: '以文件形式下载',
             download: '下载',
             copiedToClipboard: '复制到剪切板',
+            sumProfitToday: '截至今日利息总额',
         }
     }
 }
