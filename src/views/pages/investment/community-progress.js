@@ -123,7 +123,7 @@ class InvestmentProgress extends React.Component {
         const count = investment.community.data.length
         const availble = investment.community.data.filter(item => item.secondLeft === '0').length
 
-        if((amount === '' || (count === availble) && parseInt(amount, 10) < 300000)) {
+        if((amount === '' || (count === availble)) && (parseInt(amount, 10) < 300000)) {
             this.setState({ isSubmitErr: true })
         }   
         else {
