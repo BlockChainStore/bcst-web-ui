@@ -3,13 +3,13 @@ const localStateKey = 'duck'
 export const localState = {
     store: (state) => {
         const stateStringify = JSON.stringify(state.duck)    
-        localStorage.setItem(localStateKey, stateStringify)
+        sessionStorage.setItem(localStateKey, stateStringify)
     },
     clear: (state) => {  
-        localStorage.clear()
+        sessionStorage.clear()
     },
     get: () => {
-        const duck = localStorage.getItem(localStateKey)
+        const duck = sessionStorage.getItem(localStateKey)
         return JSON.parse(duck || '{}')
     }
 }
