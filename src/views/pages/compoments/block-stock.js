@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import BlockStockEXX from './block-stock-exx'
 import BlockStockHitbtc from './block-stock-hitbtc'
+import Text from '../../languages'
+
 
 const styles = theme => ({
 	block: {
@@ -18,7 +20,7 @@ class BlockStock extends React.Component {
 			<Grid container justify="center">
 				<Grid item  xs={12}>
 					<Typography variant="display2" align="center" gutterBottom>
-						BCST Trade Views On Exchage
+					<Text  keyWord={'viewOnExchage'} />
 					</Typography>
 				</Grid>
 				<Grid className={classes.block} item  xs={12}>

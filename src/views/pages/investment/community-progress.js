@@ -152,7 +152,7 @@ class InvestmentProgress extends React.Component {
                     <Grid container justify="center" className={classes.containerHeader}>
                         <Grid item xs={12}>
                             <Typography variant="display1" align="center" className={classes.headerText}>
-                                Packet {investment.community.packetDay} days
+                                <Text keyWord={'packet'}/> {investment.community.packetDay}<Text keyWord={'days'}/>
                             </Typography>
                             {/* <Typography variant="headline" align="center">
                                 Annualized {investment.community.annualized}%
@@ -161,7 +161,7 @@ class InvestmentProgress extends React.Component {
                         <Grid item xs={12} md={6}>
                             <FormControl fullWidth >
                                 <InputLabel htmlFor="input-deposit">
-                                    Enter add-on community investment
+                                    <Text keyWord={'addOnCommu'}/>
                                 </InputLabel>
                                 <Input
                                     error={this.state.isSubmitErr}
@@ -177,7 +177,7 @@ class InvestmentProgress extends React.Component {
                                             onClick={this.handleSubmitComminityInvestment}>
                                             <NavigationIcon 
                                                 className={classes.extendedIcon} />
-                                            Deposit
+                                            <Text keyWord={'deposit'}/>
                                         </Button>
                                     }
                                 />
@@ -192,9 +192,9 @@ class InvestmentProgress extends React.Component {
                                 <Table>
                                     <TableHead>
                                         <TableRow>
-                                            <CustomTableCell>Sum of principle</CustomTableCell>
-                                            <CustomTableCell>Sum of profit</CustomTableCell>
-                                            <CustomTableCell>Max annualized</CustomTableCell>
+                                            <CustomTableCell><Text keyWord={'sumPrinciple'}/></CustomTableCell>
+                                            <CustomTableCell><Text keyWord={'sumProfit'}/></CustomTableCell>
+                                            <CustomTableCell><Text keyWord={'maxAnnualized'}/></CustomTableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -213,11 +213,11 @@ class InvestmentProgress extends React.Component {
                     <Table >
                         <TableHead>
                             <TableRow>
-                                <CustomTableCell>Principle</CustomTableCell>
-                                <CustomTableCell>Annualized</CustomTableCell>
-                                <CustomTableCell>Profit</CustomTableCell>
-                                <CustomTableCell>Date Deposit</CustomTableCell>
-                                <CustomTableCell>Time Left</CustomTableCell>
+                                <CustomTableCell><Text keyWord={'principle'}/></CustomTableCell>
+                                <CustomTableCell><Text keyWord={'annualized'}/></CustomTableCell>
+                                <CustomTableCell><Text keyWord={'profit'}/></CustomTableCell>
+                                <CustomTableCell><Text keyWord={'dateDeposit'}/></CustomTableCell>
+                                <CustomTableCell><Text keyWord={'timeLeft'}/></CustomTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
