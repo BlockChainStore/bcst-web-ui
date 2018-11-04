@@ -21,6 +21,8 @@ export const saga = {
     UNLOCK_WALLET: 'saga/user/UNLOCK_WALLET',
     UNLOCK_WALLET_SUCCESS: 'saga/user/UNLOCK_WALLET_SUCCESS',
     LOGOUT_WALLET: 'saga/user/LOGOUT_WALLET',
+
+    TRANSFER_BCST: 'saga/bcst/TRANSFER',
 }
 
 export const common = {

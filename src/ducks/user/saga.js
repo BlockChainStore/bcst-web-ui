@@ -1,7 +1,7 @@
 import web3 from 'web3'
 import { take, put, call, select} from 'redux-saga/effects'
 import eth, { BCSTContract } from '../../ethereum'
-import { saga, user } from '../types'
+import { saga, user, common } from '../types'
 import { localState } from '../ulits'
 
 
@@ -71,6 +71,51 @@ function *fetchUserdata() {
     }
 }
 
+function *transerBCST() {
+    while(true) {
+        console.log("Tranfer!!!")
+        const { payload: { address, amount } } = yield take(saga.TRANSFER_BCST)
+        const store = yield select()
+        const privateKey = store.duck.user.info.privateKey
+
+        if(!!privateKey) {
+            const bcstContract = new BCSTContract(privateKey)
+
+            yield put({
+                type: common.UPDATE_SENDTRANSACTION , 
+                payload : {
+                    loading: true, 
+                    name: 'TRANSFER_BCST'
+                }
+            })
+            if(!!address) {
+                bcstContract.transfer(address, amount)
+                yield call(bcstContract.send)
+            }
+
+            yield put({ 
+                type: common.UPDATE_SENDTRANSACTION, 
+                payload: {
+                    loading: false, 
+                    name: null 
+                }
+            })
+            yield put({ 
+                type: common.UPDATE_ALERT, 
+                payload: {
+                    type: 'Success', 
+                    message: 'Transfer success'
+                }
+            })
+
+            const bcstBalance = yield call(bcstContract.balance)
+            yield put({ 
+                type: user.UPDATE_BCST, 
+                payload: bcstBalance
+            })
+        }
+    }
+}
 
 
 export default function* userSaga() {
@@ -79,5 +124,6 @@ export default function* userSaga() {
         unlockWalletSuccess(),
         logoutWallet(),
         fetchUserdata(),
+        transerBCST(),
     ]
 }

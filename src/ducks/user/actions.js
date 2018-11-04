@@ -17,4 +17,9 @@ actions.onChangeLanguage = (language) => ({
     payload: language
 })
 
+actions.transferBCST = (address, amount) => ({
+    type: saga.TRANSFER_BCST,
+    payload: { address, amount }
+})
+
 export default actions
