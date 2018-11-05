@@ -17,7 +17,7 @@ export const sendDataToContract = async (
     const privateKeyBuffer = Buffer.from(privateKey.substring(2), 'hex')
     const transactionCount = await eth.getTransactionCount(fromAddress)
     const gasPriceInput = gasPrice || await eth.getGasPrice()
-    const addGweiGasPriceInput = parseInt(gasPriceInput) + 3*10**9
+    const addGweiGasPriceInput = parseInt(gasPriceInput, 10) + 3*10**9
     const gasLimitInput = gasLimit || 3000000
 
     const rawTransaction = {

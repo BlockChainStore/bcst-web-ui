@@ -1,4 +1,5 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
@@ -8,6 +9,8 @@ import ehtLogo from '../../assets/images/currency/eth.png'
 import bcstLogo from '../../assets/images/currency/bcst.png'
 import BlockStock from '../compoments/block-stock'
 
+import ModelTransferTo from '../compoments/modal-transfer-to'
+import userActions from '../../../ducks/user/actions'
 
 const styles = theme => ({
     firstBlock: {
@@ -25,8 +28,13 @@ const styles = theme => ({
 })
 
 const Dashboard = (props) => {
-    const { classes, user } = props
+    const { classes, user, userActions } = props
     const spacing = 24
+
+    const tranferTo = (address, amount) => {
+        userActions.transferBCST(address, amount)
+    }
+
     return (
         <Grid container>
             <Grid item xs={12}>
@@ -54,6 +62,9 @@ const Dashboard = (props) => {
                             </Grid>
                         </Grid>
                     </Grid>
+                    <Grid item xs={12} md={10}>
+                        {<ModelTransferTo onEnter={tranferTo}/>}
+                    </Grid>
                 </Grid>
             </Grid>
 
@@ -72,7 +83,11 @@ const mapStateToProps = state => ({
     user: state.duck.user
 })
 
+const mapDispatchToProps = dispatch => ({
+    userActions: bindActionCreators(userActions, dispatch)
+})
+
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(withStyles(styles)(Dashboard))
