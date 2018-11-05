@@ -73,7 +73,7 @@ function *fetchUserdata() {
 
 function *transerBCST() {
     while(true) {
-        console.log("Tranfer!!!")
+        // console.log("Tranfer!!!")
         const { payload: { address, amount } } = yield take(saga.TRANSFER_BCST)
         const store = yield select()
         const privateKey = store.duck.user.info.privateKey

@@ -295,7 +295,7 @@ desNeedUnderstand : `访问您的帐户或为您发送资金。
 如果您有超过1周的加密货币价值，请购买硬件钱包。没有理由。这很值得。我承诺。`,
             depositAgain : '再次存入',
             withdrawToAddress : '提现',
-            transferToAddress: 'Transfer to',
+            transferToAddress: '转出BCST',
             addressTransfer : '请输入您要提现的地址',
             amount : '数量',
             withdrawTo : '提现到',

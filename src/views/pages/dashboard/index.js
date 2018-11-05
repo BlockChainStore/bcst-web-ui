@@ -61,10 +61,12 @@ const Dashboard = (props) => {
                                     symbol={'ETH'}/>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid item xs={12} md={10}>
+            </Grid>
+            <Grid item xs={12} md={10}>
+	    <Grid container justify="center">
                         {<ModelTransferTo onEnter={tranferTo}/>}
-                    </Grid>
+        </Grid>
+	    </Grid>
                 </Grid>
             </Grid>
 
