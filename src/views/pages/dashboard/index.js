@@ -28,7 +28,7 @@ const styles = theme => ({
 })
 
 const Dashboard = (props) => {
-    const { classes, user } = props
+    const { classes, user, userActions } = props
     const spacing = 24
 
     const tranferTo = (address, amount) => {
